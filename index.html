@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code Mastery — Interactive Video Learning</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0f0f0f;
+    --surface: #1a1a1a;
+    --surface2: #252525;
+    --border: #333;
+    --text: #e8e8e8;
+    --text2: #999;
+    --accent: #7c5cfc;
+    --accent-dim: rgba(124,92,252,0.15);
+    --seekbar-bg: #333;
+    --seekbar-fill: #7c5cfc;
+    --sidebar-width: 380px;
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); height: 100vh; overflow: hidden; }
+
+  /* Layout */
+  .app { display: grid; grid-template-columns: 1fr 5px var(--sidebar-width); grid-template-rows: 1fr; height: 100vh; }
+  .main { display: flex; flex-direction: column; overflow: hidden; min-height: 0; }
+  .sidebar { background: var(--surface); display: flex; flex-direction: column; overflow: hidden; }
+
+  /* Player area — fills remaining space */
+  .player-wrap { position: relative; width: 100%; background: #000; flex: 1; min-height: 200px; }
+  .player-wrap iframe, .player-wrap .yt-placeholder { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+  .yt-placeholder { display: flex; align-items: center; justify-content: center; background: #111; color: var(--text2); font-size: 15px; }
+  .video-switch-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; z-index: 10; }
+  .video-switch-overlay .spinner { width: 36px; height: 36px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
+  .video-switch-overlay span { color: var(--text2); font-size: 13px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Custom controls */
+  .controls { padding: 12px 16px; background: var(--surface); border-top: 1px solid var(--border); flex-shrink: 0; }
+  .controls-row { display: flex; align-items: center; gap: 12px; }
+  .btn { background: none; border: none; color: var(--text); cursor: pointer; padding: 6px; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+  .btn:hover { background: var(--surface2); }
+  .btn svg { width: 20px; height: 20px; fill: currentColor; }
+  .play-btn svg { width: 24px; height: 24px; }
+
+  /* Seekbar */
+  .seekbar-wrap { flex: 1; position: relative; height: 24px; display: flex; align-items: center; cursor: pointer; }
+  .seekbar-track { width: 100%; height: 4px; background: var(--seekbar-bg); border-radius: 2px; position: relative; overflow: visible; }
+  .seekbar-fill { height: 100%; background: var(--seekbar-fill); border-radius: 2px; width: 0%; transition: width 0.1s linear; }
+  .seekbar-thumb { position: absolute; top: 50%; width: 12px; height: 12px; background: #fff; border-radius: 50%; transform: translate(-50%, -50%); left: 0%; transition: left 0.1s linear; opacity: 0; }
+  .seekbar-wrap:hover .seekbar-thumb { opacity: 1; }
+  .segment-marker { position: absolute; top: -2px; width: 2px; height: 8px; background: rgba(255,255,255,0.3); transform: translateX(-50%); pointer-events: none; }
+
+  .time-display { font-size: 12px; color: var(--text2); white-space: nowrap; min-width: 90px; text-align: center; }
+  .segment-label-bar { font-size: 12px; color: var(--text2); margin-top: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .segment-label-bar .current-seg { color: var(--accent); font-weight: 500; }
+  .segment-label-bar .video-tag { color: var(--text2); font-size: 11px; background: var(--surface2); padding: 1px 6px; border-radius: 3px; margin-right: 6px; }
+
+  /* Mode buttons */
+  .mode-btns { display: flex; gap: 6px; margin-left: auto; }
+  .mode-btn { font-size: 11px; padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border); background: none; color: var(--text2); cursor: pointer; white-space: nowrap; }
+  .mode-btn.active { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
+
+  /* Resize handle — vertical (sidebar width) — own grid column */
+  .resize-handle-v { cursor: ew-resize; background: var(--border); }
+  .resize-handle-v:hover, .resize-handle-v.dragging { background: var(--accent); }
+
+  /* Sidebar tabs */
+  .sidebar-tabs { display: flex; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+  .sidebar-tab { flex: 1; padding: 10px 16px; font-size: 13px; font-weight: 500; color: var(--text2); background: none; border: none; cursor: pointer; text-align: center; position: relative; transition: color 0.15s; }
+  .sidebar-tab:hover { color: var(--text); background: var(--surface2); }
+  .sidebar-tab.active { color: var(--accent); }
+  .sidebar-tab.active::after { content: ''; position: absolute; bottom: 0; left: 16px; right: 16px; height: 2px; background: var(--accent); border-radius: 1px; }
+
+  /* Sidebar search */
+  .panel-header { padding: 12px 16px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+  .search-wrap { position: relative; }
+  .search-box { width: 100%; padding: 6px 28px 6px 10px; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; color: var(--text); font-size: 13px; outline: none; }
+  .search-box:focus { border-color: var(--accent); }
+  .search-box::placeholder { color: var(--text2); }
+  .search-clear { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text2); cursor: pointer; font-size: 16px; line-height: 1; padding: 2px 4px; border-radius: 3px; display: none; }
+  .search-clear:hover { color: var(--text); background: var(--surface2); }
+  .search-wrap.has-query .search-clear { display: block; }
+
+  /* Sidebar tab content */
+  .tab-content { flex: 1; overflow-y: auto; min-height: 0; }
+  .tab-pane { display: none; height: 100%; overflow-y: auto; }
+  .tab-pane.active { display: block; }
+
+  /* Transcript list */
+  .transcript-list { padding: 8px 0; }
+  .transcript-chunk { padding: 6px 16px; font-size: 13px; line-height: 1.5; cursor: pointer; border-left: 3px solid transparent; transition: background 0.15s; }
+  .transcript-chunk:hover { background: var(--surface2); }
+  .transcript-chunk.active { background: var(--accent-dim); border-left-color: var(--accent); }
+  .transcript-chunk .tc-time { font-size: 11px; color: var(--text2); margin-right: 6px; }
+  .transcript-chunk.hidden { display: none; }
+  .no-results { padding: 20px 16px; color: var(--text2); font-size: 13px; text-align: center; }
+
+  /* Segment list in sidebar */
+  .segment-list { padding: 4px 0; }
+  .seg-card { padding: 10px 16px; cursor: pointer; border-left: 3px solid transparent; transition: background 0.15s; }
+  .seg-card:hover { background: var(--surface2); }
+  .seg-card.active { background: var(--accent-dim); border-left-color: var(--accent); }
+  .seg-card .seg-header { display: flex; align-items: baseline; gap: 8px; }
+  .seg-card .seg-num { font-size: 11px; color: var(--text2); flex-shrink: 0; }
+  .seg-card .seg-title { font-size: 13px; font-weight: 500; }
+  .seg-card .seg-meta { font-size: 11px; color: var(--text2); margin-top: 3px; display: flex; align-items: center; gap: 8px; }
+  .seg-card .seg-video-tag { font-size: 10px; background: var(--surface2); padding: 1px 5px; border-radius: 3px; }
+  .seg-card.active .seg-video-tag { background: rgba(124,92,252,0.25); }
+  .seg-card .seg-bullets { margin-top: 5px; padding-left: 0; list-style: none; }
+  .seg-card .seg-bullets li { font-size: 11px; color: var(--text2); line-height: 1.5; padding-left: 12px; position: relative; }
+  .seg-card .seg-bullets li::before { content: '·'; position: absolute; left: 2px; color: var(--text2); font-weight: bold; }
+  .seg-card.hidden { display: none; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #555; }
+
+  /* Loading state */
+  .loading { display: flex; align-items: center; justify-content: center; height: 100vh; flex-direction: column; gap: 16px; }
+  .loading .spinner { width: 40px; height: 40px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
+
+  /* Prevent text selection and iframe mouse capture during resize */
+  body.resizing { user-select: none; -webkit-user-select: none; }
+  body.resizing .player-wrap::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 50; }
+</style>
+</head>
+<body>
+<div id="app" class="loading">
+  <div class="spinner"></div>
+  <span style="color:var(--text2);font-size:14px">Loading topic data...</span>
+</div>
+
+<script>
+// ============================================================
+// YouTubeAdapter
+// ============================================================
+class YouTubeAdapter {
+  constructor(containerId, videoId, startTime) {
+    this._containerId = containerId;
+    this._videoId = videoId;
+    this._startTime = startTime || 0;
+    this._player = null;
+    this._pollId = null;
+    this._onTimeUpdate = null;
+    this._onStateChange = null;
+    this._ready = false;
+    this._readyPromise = new Promise(r => this._resolveReady = r);
+  }
+  init() {
+    this._player = new YT.Player(this._containerId, {
+      videoId: this._videoId,
+      playerVars: { controls: 0, disablekb: 1, modestbranding: 1, rel: 0, iv_load_policy: 3, fs: 0, playsinline: 1, start: Math.floor(this._startTime), enablejsapi: 1, origin: window.location.origin },
+      events: {
+        onReady: () => { this._ready = true; this._resolveReady(); this._startPoll(); },
+        onStateChange: (e) => {
+          const map = { [-1]: 'unstarted', 0: 'ended', 1: 'playing', 2: 'paused', 3: 'buffering', 5: 'cued' };
+          if (this._onStateChange) this._onStateChange(map[e.data] || 'unknown');
+        }
+      }
+    });
+    return this._readyPromise;
+  }
+  _startPoll() {
+    this._pollId = setInterval(() => {
+      if (this._player && this._ready && typeof this._player.getCurrentTime === 'function') {
+        if (this._onTimeUpdate) this._onTimeUpdate(this._player.getCurrentTime());
+      }
+    }, 100);
+  }
+  play() { if (this._player && this._ready) this._player.playVideo(); }
+  pause() { if (this._player && this._ready) this._player.pauseVideo(); }
+  seekTo(s) { if (this._player && this._ready) this._player.seekTo(s, true); }
+  getTime() { return (this._player && this._ready && typeof this._player.getCurrentTime === 'function') ? this._player.getCurrentTime() : 0; }
+  onTimeUpdate(cb) { this._onTimeUpdate = cb; }
+  onStateChange(cb) { this._onStateChange = cb; }
+  destroy() {
+    if (this._pollId) clearInterval(this._pollId);
+    this._pollId = null; this._ready = false;
+    if (this._player && typeof this._player.destroy === 'function') { try { this._player.destroy(); } catch(e) {} }
+    this._player = null;
+  }
+}
+
+// ============================================================
+// SegmentEngine
+// ============================================================
+class SegmentEngine {
+  constructor(segments, videos) {
+    this.segments = segments;
+    this.videos = videos;
+    this._videoMap = {};
+    videos.forEach(v => this._videoMap[v.id] = v);
+    this.currentIndex = 0;
+    this.mode = 'all';
+    this._buildVirtualTimeline();
+  }
+  _buildVirtualTimeline() {
+    this._virtualOffsets = [];
+    let offset = 0;
+    for (const seg of this.segments) { this._virtualOffsets.push(offset); offset += (seg.end - seg.start); }
+    this.totalDuration = offset;
+  }
+  get current() { return this.segments[this.currentIndex]; }
+  virtualToAbsolute(vt) {
+    let accum = 0;
+    for (let i = 0; i < this.segments.length; i++) {
+      const dur = this.segments[i].end - this.segments[i].start;
+      if (vt < accum + dur + 0.01) return { segIndex: i, segment: this.segments[i], absTime: this.segments[i].start + (vt - accum) };
+      accum += dur;
+    }
+    const last = this.segments[this.segments.length - 1];
+    return { segIndex: this.segments.length - 1, segment: last, absTime: last.end };
+  }
+  absoluteToVirtual(segIndex, absTime) {
+    const seg = this.segments[segIndex];
+    return this._virtualOffsets[segIndex] + Math.max(0, Math.min(absTime - seg.start, seg.end - seg.start));
+  }
+  getVirtualOffset(i) { return this._virtualOffsets[i]; }
+  getYoutubeId(videoId) { return this._videoMap[videoId]?.youtubeId; }
+  getVideoTitle(videoId) { return this._videoMap[videoId]?.title || ''; }
+  hasNext() { return this.currentIndex < this.segments.length - 1; }
+  goTo(i) { this.currentIndex = Math.max(0, Math.min(i, this.segments.length - 1)); return this.current; }
+}
+
+// ============================================================
+// App
+// ============================================================
+class App {
+  constructor(data) {
+    this.data = data;
+    this.engine = new SegmentEngine(data.segments, data.videos);
+    this.adapter = null;
+    this._playing = false;
+    this._seeking = false;
+    this._switchingVideo = false;
+    this._currentVideoId = null;
+    this._snapbackActive = true;
+    this._lastHighlightedSeg = -1;
+    this._lastHighlightedTranscript = null;
+    this._activeTab = 'segments';
+  }
+
+  async start() {
+    this._renderShell();
+    this._bindControls();
+    this._renderSegmentList();
+    this._renderTranscript();
+    this._bindResizeHandles();
+    await this._loadYTApi();
+    await this._loadSegment(0, true);
+  }
+
+  _loadYTApi() {
+    return new Promise((resolve) => {
+      if (window.YT && window.YT.Player) { resolve(); return; }
+      window.onYouTubeIframeAPIReady = resolve;
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      document.head.appendChild(tag);
+    });
+  }
+
+  async _loadSegment(index, autoPlay) {
+    const seg = this.engine.goTo(index);
+    const ytId = this.engine.getYoutubeId(seg.videoId);
+    const needsSwitch = this._currentVideoId !== seg.videoId;
+    if (needsSwitch) {
+      this._switchingVideo = true;
+      this._showSwitchOverlay(true);
+      if (this.adapter) { this.adapter.destroy(); this.adapter = null; }
+      const wrap = document.getElementById('player-wrap');
+      const old = document.getElementById('yt-player');
+      if (old) old.remove();
+      const div = document.createElement('div'); div.id = 'yt-player'; wrap.appendChild(div);
+      this.adapter = new YouTubeAdapter('yt-player', ytId, seg.start);
+      this.adapter.onTimeUpdate(t => this._onTimeUpdate(t));
+      this.adapter.onStateChange(s => this._onStateChange(s));
+      await this.adapter.init();
+      this._currentVideoId = seg.videoId;
+      this._switchingVideo = false;
+      this._showSwitchOverlay(false);
+      this.adapter.seekTo(seg.start);
+      if (autoPlay) { setTimeout(() => this.adapter.play(), 300); this._playing = true; }
+    } else {
+      this.adapter.seekTo(seg.start);
+      if (autoPlay) { this.adapter.play(); this._playing = true; }
+    }
+    this._updateUI();
+    // Center the first transcript chunk of this segment
+    this._centerTranscriptForSegment(index);
+  }
+
+  _onTimeUpdate(absTime) {
+    if (this._seeking || this._switchingVideo) return;
+    const seg = this.engine.current;
+    const idx = this.engine.currentIndex;
+    if (this._snapbackActive && (absTime < seg.start - 0.5 || absTime > seg.end + 0.5)) { this.adapter.seekTo(seg.start); return; }
+    if (absTime >= seg.end - 0.15) {
+      if (this.engine.mode === 'single') { this.adapter.pause(); this._playing = false; this._updatePlayBtn(); return; }
+      if (this.engine.hasNext()) { this._loadSegment(this.engine.currentIndex + 1, true); return; }
+      else { this.adapter.pause(); this._playing = false; this._updatePlayBtn(); return; }
+    }
+    const vt = this.engine.absoluteToVirtual(idx, absTime);
+    this._updateSeekbar(vt);
+    this._updateTimeDisplay(vt);
+    this._highlightTranscript(absTime, seg.videoId);
+    this._highlightSegCard(idx);
+  }
+
+  _onStateChange(state) {
+    if (state === 'playing') { this._playing = true; this._updatePlayBtn(); }
+    else if (state === 'paused') { this._playing = false; this._updatePlayBtn(); }
+  }
+
+  // ---- Rendering ----
+
+  _renderShell() {
+    const app = document.getElementById('app');
+    app.className = 'app';
+    app.innerHTML = `
+      <div class="main">
+        <div class="player-wrap" id="player-wrap">
+          <div id="yt-player" class="yt-placeholder">Loading player...</div>
+          <div class="video-switch-overlay" id="switch-overlay" style="display:none">
+            <div class="spinner"></div>
+            <span>Switching video...</span>
+          </div>
+        </div>
+        <div class="controls">
+          <div class="controls-row">
+            <button class="btn play-btn" id="play-btn" title="Play/Pause">
+              <svg viewBox="0 0 24 24"><polygon points="6,4 20,12 6,20"/></svg>
+            </button>
+            <button class="btn" id="prev-btn" title="Previous segment">
+              <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+            </button>
+            <button class="btn" id="next-btn" title="Next segment">
+              <svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zm-10 6l8.5 6V6z" transform="scale(-1,1) translate(-24,0)"/></svg>
+            </button>
+            <div class="seekbar-wrap" id="seekbar-wrap">
+              <div class="seekbar-track" id="seekbar-track">
+                <div class="seekbar-fill" id="seekbar-fill"></div>
+                <div class="seekbar-thumb" id="seekbar-thumb"></div>
+              </div>
+            </div>
+            <div class="time-display" id="time-display">0:00 / 0:00</div>
+            <div class="mode-btns">
+              <button class="mode-btn active" id="mode-all">Play All</button>
+              <button class="mode-btn" id="mode-single">Single</button>
+            </div>
+          </div>
+          <div class="segment-label-bar" id="segment-label-bar"></div>
+        </div>
+      </div>
+      <div class="resize-handle-v" id="resize-v"></div>
+      <div class="sidebar" id="sidebar">
+        <div class="sidebar-tabs">
+          <button class="sidebar-tab active" data-tab="segments">Segments</button>
+          <button class="sidebar-tab" data-tab="transcript">Transcript</button>
+        </div>
+        <div class="panel-header">
+          <div class="search-wrap" id="search-wrap">
+            <input type="text" class="search-box" id="search-box" placeholder="Search segments...">
+            <button class="search-clear" id="search-clear" title="Clear search">&times;</button>
+          </div>
+        </div>
+        <div class="tab-content">
+          <div class="tab-pane" id="tab-transcript">
+            <div class="transcript-list" id="transcript-list"></div>
+          </div>
+          <div class="tab-pane active" id="tab-segments">
+            <div class="segment-list" id="segment-list"></div>
+          </div>
+        </div>
+      </div>
+    `;
+    this._addSegmentMarkers();
+  }
+
+  _addSegmentMarkers() {
+    const track = document.getElementById('seekbar-track');
+    for (let i = 1; i < this.engine.segments.length; i++) {
+      const pct = (this.engine.getVirtualOffset(i) / this.engine.totalDuration) * 100;
+      const marker = document.createElement('div');
+      marker.className = 'segment-marker';
+      marker.style.left = pct + '%';
+      track.appendChild(marker);
+    }
+  }
+
+  _renderSegmentList() {
+    const list = document.getElementById('segment-list');
+    list.innerHTML = this.engine.segments.map((seg, i) => {
+      const dur = seg.end - seg.start;
+      const shortVideo = seg.videoId === 'vid-1' ? 'Video 1' : 'Video 2';
+      const startStr = this._formatTime(seg.start);
+      const endStr = this._formatTime(seg.end);
+      const durStr = this._formatDuration(dur);
+      const bulletsHtml = (seg.bullets && seg.bullets.length)
+        ? `<ul class="seg-bullets">${seg.bullets.map(b => `<li>${this._escHtml(b)}</li>`).join('')}</ul>`
+        : '';
+      return `<div class="seg-card" data-index="${i}" id="seg-card-${i}">
+        <div class="seg-header">
+          <span class="seg-num">#${i + 1}</span>
+          <span class="seg-title">${this._escHtml(seg.label)}</span>
+        </div>
+        <div class="seg-meta">
+          <span class="seg-video-tag">${shortVideo}</span>
+          <span>${startStr} – ${endStr} (${durStr})</span>
+        </div>
+        ${bulletsHtml}
+      </div>`;
+    }).join('');
+  }
+
+  _renderTranscript() {
+    const list = document.getElementById('transcript-list');
+    let html = '';
+    for (let i = 0; i < this.engine.segments.length; i++) {
+      const seg = this.engine.segments[i];
+      const chunks = (this.data.transcripts[seg.videoId] || []).filter(c =>
+        c.start >= seg.start - 0.5 && c.start < seg.end + 0.5
+      );
+      for (const c of chunks) {
+        html += `<div class="transcript-chunk" data-seg="${i}" data-vid="${seg.videoId}" data-start="${c.start}" data-end="${c.end}">
+          <span class="tc-time">${this._formatTime(c.start)}</span>
+          <span class="tc-text">${this._escHtml(c.text)}</span>
+        </div>`;
+      }
+    }
+    list.innerHTML = html || '<div class="no-results">No transcript data available.</div>';
+  }
+
+  _bindControls() {
+    document.getElementById('play-btn').addEventListener('click', () => this._togglePlay());
+    document.getElementById('prev-btn').addEventListener('click', () => {
+      if (this.engine.currentIndex > 0) this._loadSegment(this.engine.currentIndex - 1, this._playing);
+    });
+    document.getElementById('next-btn').addEventListener('click', () => {
+      if (this.engine.hasNext()) this._loadSegment(this.engine.currentIndex + 1, this._playing);
+    });
+
+    // Seekbar
+    const seekWrap = document.getElementById('seekbar-wrap');
+    const onSeek = (e) => {
+      const rect = seekWrap.getBoundingClientRect();
+      const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      const vt = pct * this.engine.totalDuration;
+      const { segIndex, absTime } = this.engine.virtualToAbsolute(vt);
+      this._seeking = true;
+      if (segIndex !== this.engine.currentIndex || this.engine.segments[segIndex].videoId !== this._currentVideoId) {
+        this._loadSegment(segIndex, this._playing).then(() => { this.adapter.seekTo(absTime); this._seeking = false; });
+      } else {
+        this.engine.goTo(segIndex);
+        this.adapter.seekTo(absTime);
+        setTimeout(() => { this._seeking = false; }, 200);
+      }
+      this._updateSeekbar(vt);
+    };
+    let dragging = false;
+    seekWrap.addEventListener('mousedown', (e) => { dragging = true; onSeek(e); });
+    document.addEventListener('mousemove', (e) => { if (dragging) onSeek(e); });
+    document.addEventListener('mouseup', () => { dragging = false; });
+    seekWrap.addEventListener('click', onSeek);
+
+    // Mode buttons
+    document.getElementById('mode-all').addEventListener('click', () => {
+      this.engine.mode = 'all';
+      document.getElementById('mode-all').classList.add('active');
+      document.getElementById('mode-single').classList.remove('active');
+    });
+    document.getElementById('mode-single').addEventListener('click', () => {
+      this.engine.mode = 'single';
+      document.getElementById('mode-single').classList.add('active');
+      document.getElementById('mode-all').classList.remove('active');
+    });
+
+    // Segment cards
+    document.getElementById('segment-list').addEventListener('click', (e) => {
+      const card = e.target.closest('.seg-card');
+      if (!card) return;
+      this._loadSegment(parseInt(card.dataset.index), true);
+    });
+
+    // Transcript click — center the clicked chunk
+    document.getElementById('transcript-list').addEventListener('click', (e) => {
+      const chunk = e.target.closest('.transcript-chunk');
+      if (!chunk) return;
+      const segIdx = parseInt(chunk.dataset.seg);
+      const start = parseFloat(chunk.dataset.start);
+      // Force re-center by resetting tracker
+      this._lastHighlightedTranscript = null;
+      if (segIdx === this.engine.currentIndex) { this.adapter.seekTo(start); }
+      else { this._loadSegment(segIdx, true).then(() => { this.adapter.seekTo(start); }); }
+    });
+
+    // Sidebar tabs
+    document.querySelectorAll('.sidebar-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        this._activeTab = tab.dataset.tab;
+        document.querySelectorAll('.sidebar-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+        document.getElementById(`tab-${tab.dataset.tab}`).classList.add('active');
+        // Update search placeholder and re-apply
+        const sb = document.getElementById('search-box');
+        sb.placeholder = this._activeTab === 'transcript' ? 'Search transcript...' : 'Search segments...';
+        this._applySearch(sb.value);
+      });
+    });
+
+    // Search — works for both tabs
+    const searchBox = document.getElementById('search-box');
+    const searchWrap = document.getElementById('search-wrap');
+    searchBox.addEventListener('input', (e) => {
+      searchWrap.classList.toggle('has-query', e.target.value.length > 0);
+      this._applySearch(e.target.value);
+    });
+    document.getElementById('search-clear').addEventListener('click', () => {
+      searchBox.value = '';
+      searchWrap.classList.remove('has-query');
+      this._applySearch('');
+      searchBox.focus();
+    });
+
+    // Keyboard
+    document.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT') return;
+      if (e.code === 'Space') { e.preventDefault(); this._togglePlay(); }
+      if (e.code === 'ArrowRight' || e.code === 'ArrowLeft') e.preventDefault();
+    });
+  }
+
+  _bindResizeHandles() {
+    // Vertical resize — sidebar width
+    const resizeV = document.getElementById('resize-v');
+    const appEl = document.querySelector('.app');
+    let startX, startW;
+    resizeV.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      startX = e.clientX;
+      startW = document.getElementById('sidebar').offsetWidth;
+      resizeV.classList.add('dragging');
+      document.body.classList.add('resizing');
+      const onMove = (ev) => {
+        const delta = startX - ev.clientX;
+        const newW = Math.max(250, Math.min(window.innerWidth - 400, startW + delta));
+        appEl.style.gridTemplateColumns = `1fr 5px ${newW}px`;
+      };
+      const onUp = () => {
+        document.removeEventListener('mousemove', onMove);
+        document.removeEventListener('mouseup', onUp);
+        resizeV.classList.remove('dragging');
+        document.body.classList.remove('resizing');
+      };
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup', onUp);
+    });
+  }
+
+  _togglePlay() {
+    if (this._playing) { this.adapter.pause(); this._playing = false; }
+    else { this.adapter.play(); this._playing = true; }
+    this._updatePlayBtn();
+  }
+
+  _updatePlayBtn() {
+    const btn = document.getElementById('play-btn');
+    btn.innerHTML = this._playing
+      ? '<svg viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>'
+      : '<svg viewBox="0 0 24 24"><polygon points="6,4 20,12 6,20"/></svg>';
+    btn.title = this._playing ? 'Pause' : 'Play';
+  }
+
+  _updateSeekbar(vt) {
+    const pct = (vt / this.engine.totalDuration) * 100;
+    document.getElementById('seekbar-fill').style.width = pct + '%';
+    document.getElementById('seekbar-thumb').style.left = pct + '%';
+  }
+
+  _updateTimeDisplay(vt) {
+    document.getElementById('time-display').textContent =
+      `${this._formatTime(Math.floor(vt))} / ${this._formatTime(this.engine.totalDuration)}`;
+  }
+
+  _updateUI() {
+    const seg = this.engine.current;
+    const idx = this.engine.currentIndex;
+    const shortVideo = seg.videoId === 'vid-1' ? 'Video 1' : 'Video 2';
+    document.getElementById('segment-label-bar').innerHTML =
+      `<span class="video-tag">${shortVideo}</span> <span class="current-seg">#${idx + 1}: ${seg.label}</span>`;
+    this._highlightSegCard(idx);
+    this._updatePlayBtn();
+  }
+
+  _highlightSegCard(idx) {
+    if (this._lastHighlightedSeg === idx) return;
+    this._lastHighlightedSeg = idx;
+    document.querySelectorAll('.seg-card.active').forEach(c => c.classList.remove('active'));
+    const card = document.getElementById(`seg-card-${idx}`);
+    if (card) {
+      card.classList.add('active');
+      card.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
+  }
+
+  _highlightTranscript(absTime, videoId) {
+    const chunks = document.querySelectorAll('.transcript-chunk');
+    let activeChunk = null;
+    let activeKey = null;
+    chunks.forEach(c => {
+      c.classList.remove('active');
+      if (c.dataset.vid === videoId) {
+        const s = parseFloat(c.dataset.start);
+        const e = parseFloat(c.dataset.end);
+        if (absTime >= s - 0.1 && absTime < e + 0.1) { c.classList.add('active'); activeChunk = c; activeKey = `${c.dataset.vid}-${c.dataset.start}`; }
+      }
+    });
+    // Only scroll when the active chunk changes, and center it
+    if (activeChunk && this._lastHighlightedTranscript !== activeKey) {
+      this._lastHighlightedTranscript = activeKey;
+      activeChunk.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    }
+  }
+
+  _centerTranscriptForSegment(segIndex) {
+    // Find first transcript chunk for this segment and center it
+    const chunk = document.querySelector(`.transcript-chunk[data-seg="${segIndex}"]`);
+    if (chunk) {
+      this._lastHighlightedTranscript = null; // force re-center
+      chunk.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    }
+  }
+
+  // ---- Search (word-boundary preference) ----
+
+  _isWordMatch(text, query) {
+    const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`(?:^|[\\s,;.!?'"\`()\\[\\]{}/\\-])${escaped}(?:$|[\\s,;.!?'"\`()\\[\\]{}/\\-])`, 'i');
+    return regex.test(text);
+  }
+
+  _applySearch(query) {
+    if (this._activeTab === 'transcript') {
+      this._filterTranscript(query);
+    } else {
+      this._filterSegments(query);
+    }
+  }
+
+  _filterTranscript(query) {
+    const q = query.trim();
+    const chunks = document.querySelectorAll('.transcript-chunk');
+    const noResults = document.querySelector('#tab-transcript .no-results');
+    if (noResults) noResults.remove();
+
+    if (!q) {
+      chunks.forEach(c => c.classList.remove('hidden'));
+      return;
+    }
+
+    const ql = q.toLowerCase();
+    let wordMatches = [];
+    let substringMatches = [];
+
+    chunks.forEach(c => {
+      const text = c.querySelector('.tc-text').textContent;
+      if (this._isWordMatch(text, q)) { wordMatches.push(c); }
+      else if (text.toLowerCase().includes(ql)) { substringMatches.push(c); }
+      else { c.classList.add('hidden'); }
+    });
+
+    // Show word matches; only show substring matches if no word matches
+    if (wordMatches.length > 0) {
+      wordMatches.forEach(c => c.classList.remove('hidden'));
+      substringMatches.forEach(c => c.classList.add('hidden'));
+    } else {
+      substringMatches.forEach(c => c.classList.remove('hidden'));
+    }
+
+    const anyVisible = wordMatches.length > 0 || substringMatches.length > 0;
+    if (!anyVisible) {
+      const msg = document.createElement('div');
+      msg.className = 'no-results';
+      msg.textContent = `No results for "${query}"`;
+      document.getElementById('transcript-list').appendChild(msg);
+    }
+  }
+
+  _filterSegments(query) {
+    const q = query.trim();
+    const cards = document.querySelectorAll('.seg-card');
+    const noResults = document.querySelector('#tab-segments .no-results');
+    if (noResults) noResults.remove();
+
+    if (!q) {
+      cards.forEach(c => c.classList.remove('hidden'));
+      return;
+    }
+
+    const ql = q.toLowerCase();
+    let wordMatches = [];
+    let substringMatches = [];
+
+    cards.forEach(c => {
+      const i = parseInt(c.dataset.index);
+      const seg = this.engine.segments[i];
+      // Build searchable text: title + bullets + times
+      const startStr = this._formatTime(seg.start);
+      const endStr = this._formatTime(seg.end);
+      const bulletsText = (seg.bullets || []).join(' ');
+      const searchText = `${seg.label} ${bulletsText} ${startStr} ${endStr}`;
+
+      if (this._isWordMatch(searchText, q)) { wordMatches.push(c); }
+      else if (searchText.toLowerCase().includes(ql)) { substringMatches.push(c); }
+      else { c.classList.add('hidden'); }
+    });
+
+    if (wordMatches.length > 0) {
+      wordMatches.forEach(c => c.classList.remove('hidden'));
+      substringMatches.forEach(c => c.classList.add('hidden'));
+    } else {
+      substringMatches.forEach(c => c.classList.remove('hidden'));
+    }
+
+    const anyVisible = wordMatches.length > 0 || substringMatches.length > 0;
+    if (!anyVisible) {
+      const msg = document.createElement('div');
+      msg.className = 'no-results';
+      msg.textContent = `No results for "${query}"`;
+      document.getElementById('segment-list').appendChild(msg);
+    }
+  }
+
+  _showSwitchOverlay(show) {
+    const el = document.getElementById('switch-overlay');
+    if (el) el.style.display = show ? 'flex' : 'none';
+  }
+
+  _formatTime(s) {
+    s = Math.max(0, Math.floor(s));
+    const m = Math.floor(s / 60);
+    const sec = s % 60;
+    return m + ':' + String(sec).padStart(2, '0');
+  }
+
+  _formatDuration(s) {
+    s = Math.max(0, Math.floor(s));
+    const m = Math.floor(s / 60);
+    const sec = s % 60;
+    if (m === 0) return sec + 's';
+    if (sec === 0) return m + 'm';
+    return m + 'm ' + sec + 's';
+  }
+
+  _escHtml(s) {
+    const d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+}
+
+// ============================================================
+// Boot
+// ============================================================
+(async function() {
+  try {
+    const resp = await fetch('topic.json');
+    if (!resp.ok) throw new Error('Failed to load topic.json — serve via HTTP (python3 -m http.server)');
+    const data = await resp.json();
+    const app = new App(data);
+    await app.start();
+  } catch (err) {
+    document.getElementById('app').innerHTML = `
+      <div class="loading">
+        <div style="color:#f44;font-size:16px;text-align:center;max-width:500px;">
+          <p style="margin-bottom:12px"><strong>Error loading application</strong></p>
+          <p style="color:var(--text2);font-size:13px">${err.message}</p>
+          <p style="color:var(--text2);font-size:13px;margin-top:12px">Run: <code style="background:#222;padding:2px 6px;border-radius:3px">python3 -m http.server 8080</code></p>
+        </div>
+      </div>`;
+  }
+})();
+</script>
+</body>
+</html>

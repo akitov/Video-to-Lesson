@@ -1,0 +1,1541 @@
+[SPEAKER_00] 0:00 - 0:05
+ Well, hello there. How's it going everybody? Today we're gonna go over my 50 Cloud Code tips.
+
+[SPEAKER_00] 0:06 - 0:11
+ I've been working with Cloud Code basically every day for about six months now and I feel like I've
+
+[SPEAKER_00] 0:11 - 0:18
+ learned a ton of things and yes I am one of those engineers that are basically not writing code
+
+[SPEAKER_00] 0:18 - 0:24
+ anymore. I'm still in Cloud Code like 12 hours a day actively pair programming with Cloud Code
+
+[SPEAKER_00] 0:24 - 0:29
+ basically and reviewing a ton of code. I still read every single line of code. That's actually
+
+[SPEAKER_00] 0:29 - 0:35
+ my biggest bottleneck right now, the reviewing of the code. But I thought it would be great to show
+
+[SPEAKER_00] 0:35 - 0:40
+ you kind of the best tips that I've learned along the way and these are kind of tips that I wish I
+
+[SPEAKER_00] 0:40 - 0:44
+ knew when I was first getting started. We're gonna start off with some foundation stuff like setting
+
+[SPEAKER_00] 0:44 - 0:50
+ up, very quick setup stuff, a little bit about like cloud.md rules like what you should put in,
+
+[SPEAKER_00] 0:50 - 0:55
+ what you should think about, and kind of some of the advanced stuff for later. But without further
+
+[SPEAKER_00] 0:55 - 1:01
+ ado, let's dive into 50 Cloud Code tips. So I got my terminal here and I just have some slides behind
+
+[SPEAKER_00] 1:01 - 1:07
+ to tell you guys what I'm doing. So here is the foundations that I mentioned. We're gonna cover
+
+[SPEAKER_00] 1:07 - 1:14
+ getting started, keyboard shortcuts, some essential like slash commands, and a little bit of a deep dive
+
+[SPEAKER_00] 1:14 - 1:21
+ into the cloud.md. So let's get started. All right, so for tip number one, you want to run Cloud Code
+
+[SPEAKER_00] 1:21 - 1:27
+ in your root directory of whatever project you're working on. So for example, I have this Pomodoro
+
+[SPEAKER_00] 1:27 - 1:33
+ app that I'm like kind of been working on. So I'll type in like Cloud here. And that's essentially how
+
+[SPEAKER_00] 1:33 - 1:38
+ you get started. And you really want to do this because later we'll talk about this. But if you
+
+[SPEAKER_00] 1:38 - 1:44
+ have rule files or any kind of setup, the initial root directory is where Cloud is going to zip up the
+
+[SPEAKER_00] 1:44 - 1:50
+ context into that first token. So if you ever wonder why you had a bunch of tokens used, even though you
+
+[SPEAKER_00] 1:50 - 1:55
+ just opened up Cloud, this is probably the reason why it's because Cloud is getting your project ready.
+
+[SPEAKER_00] 1:55 - 2:01
+ All right, so one of the first things that you want to do is run slash init, like that. And what this
+
+[SPEAKER_00] 2:01 - 2:07
+ does is Cloud will go and look at your code base and do an analysis of your code base, and then create
+
+[SPEAKER_00] 2:07 - 2:15
+ that initial cloud.md file in the dot cloud directory of your code base. Now, there is like different
+
+[SPEAKER_00] 2:15 - 2:19
+ directories that you could source from, like you could have a global one or like this one. But yeah,
+
+[SPEAKER_00] 2:19 - 2:24
+ at a high level, what this is doing right now is just it's just looking at the code base, looking
+
+[SPEAKER_00] 2:24 - 2:30
+ for the architecture, and then basically it's creating that Cloud that empty. All right, so it
+
+[SPEAKER_00] 2:30 - 2:36
+ just finished, it does take some time. And as you can see, it's kind of going and saying, oh, this is,
+
+[SPEAKER_00] 2:36 - 2:43
+ this is like a next JS 15 app. It's like a portfolio site. But yeah, it's just going over high level things
+
+[SPEAKER_00] 2:43 - 2:50
+ about this particular project. And then you could just essentially hit yes, to commit that to your
+
+[SPEAKER_00] 2:50 - 2:55
+ dot cloud. So this is like really important for new projects. So I highly recommend you to run it.
+
+[SPEAKER_00] 2:55 - 3:01
+ All right, so the tip number two is that cloud.md file that we just created, it kind of runs on the
+
+[SPEAKER_00] 3:01 - 3:07
+ hierarchy. So if you go to memory slash memory, you could kind of see right here that there is a
+
+[SPEAKER_00] 3:07 - 3:11
+ checked in memory, which is the current root directory. And then there's a user memory, this is like your
+
+[SPEAKER_00] 3:11 - 3:18
+ global one. So that's like in your tilde dot cloud slash cloud. So you could kind of choose between
+
+[SPEAKER_00] 3:18 - 3:24
+ it, but it's really there. So you can know what the core rule that the cloud code is operating on
+
+[SPEAKER_00] 3:24 - 3:30
+ right now, looking at the cloud.md that we call just created, like this is a pretty good one to get
+
+[SPEAKER_00] 3:30 - 3:35
+ started, right? It just has like, you don't want it to be too large, it's like very small, right? I think
+
+[SPEAKER_00] 3:35 - 3:42
+ around 300 lines is about a decent place that you want to aim for. And to be honest, going larger is
+
+[SPEAKER_00] 3:42 - 3:48
+ fine. But just remember that every time you increase that initial context window, you're going to use
+
+[SPEAKER_00] 3:48 - 3:54
+ more tokens, first of all, but also the more bloat you have in your context, the less likely the AI will
+
+[SPEAKER_00] 3:54 - 4:00
+ do exactly what you're trying to do. All right, so for structure and what you should be thinking about
+
+[SPEAKER_00] 4:00 - 4:07
+ putting into your cloud.md, I just opened another project, this one is my anime Pomodoro. This is an
+
+[SPEAKER_00] 4:07 - 4:14
+ iOS app. So I wanted to show you a little bit more examples. But basically, the things I like to put is
+
+[SPEAKER_00] 4:14 - 4:19
+ like high level technical architecture and the requirements, you know, like what is the project,
+
+[SPEAKER_00] 4:19 - 4:24
+ like that's kind of important. And then you want to give it like some domain context, right? Like, oh,
+
+[SPEAKER_00] 4:24 - 4:31
+ it's using Swift UI. And I probably would add high level architecture and like kind of the file path
+
+[SPEAKER_00] 4:31 - 4:36
+ and things like that. And just some of the high level design patterns, like you'll see, like all of
+
+[SPEAKER_00] 4:36 - 4:43
+ that should go in here. And then one of the important thing is kind of having your build flow,
+
+[SPEAKER_00] 4:43 - 4:49
+ like your validation flow. And this is like kind of where my build and validation is. So you can see that
+
+[SPEAKER_00] 4:49 - 4:53
+ I'll like build the xcode and then build a project and make sure things compile,
+
+[SPEAKER_00] 4:53 - 4:59
+ just having this loop of validation is so amazing, because the AI will just be able to self improve
+
+[SPEAKER_00] 5:00 - 5:07
+ and keep going until it fixes itself. So like, if you're ever in that situation where you just like,
+
+[SPEAKER_00] 5:07 - 5:13
+ ask cursor to do something or ask some AI code agent to do something, and it just doesn't work,
+
+[SPEAKER_00] 5:13 - 5:19
+ a lot of that gets resolved when you fix the validation. And validation, I think as a side tip,
+
+[SPEAKER_00] 5:19 - 5:23
+ is probably one of the most important topics that you should really think about when you're
+
+[SPEAKER_00] 5:23 - 5:30
+ thinking about trying to build good AI agentic like coding systems or any workflows is really,
+
+[SPEAKER_00] 5:31 - 5:37
+ what is the validation loop, because that will dramatically improve how good your AI will be.
+
+[SPEAKER_00] 5:37 - 5:43
+ All right, so let's go to some keyboard shortcuts. And the reason why I even have this entire section
+
+[SPEAKER_00] 5:43 - 5:50
+ for this is because if you're going to be in cloud code all day, every day, like if you're an engineer,
+
+[SPEAKER_00] 5:50 - 5:56
+ you're just going to be on this workhorse for quite a while. So you should learn how to actually use
+
+[SPEAKER_00] 5:56 - 6:04
+ most useful hotkeys. And there's essentially shift tab toggle modes is pretty useful. And that's just
+
+[SPEAKER_00] 6:04 - 6:09
+ like hitting shift and tab. And then you can see right here that we're switching from accept edits to
+
+[SPEAKER_00] 6:09 - 6:17
+ plan mode. I actually use plan mode quite heavily. I think I use plan mode almost exclusively whenever I
+
+[SPEAKER_00] 6:17 - 6:23
+ start a new feature, it's rare that I start in edit mode, I always just want to verify and double check
+
+[SPEAKER_00] 6:23 - 6:28
+ that my assumptions about the code base that I'm working on. And the direction that I'm trying to
+
+[SPEAKER_00] 6:28 - 6:35
+ go with is the best option. So I usually start in plan mode and spend a decent amount of time before I go
+
+[SPEAKER_00] 6:35 - 6:42
+ to accept and just like start execution. All right, escape interrupts. Let me just get something started
+
+[SPEAKER_00] 6:42 - 6:49
+ here. Tell me a good way to plan a live activity for when I background the app. Okay, so I'm gonna
+
+[SPEAKER_00] 6:49 - 6:56
+ let this go to show you guys what escaping the interrupts is. But you can see that Claude is like
+
+[SPEAKER_00] 6:56 - 7:02
+ thinking here and it's like going through and doing things. Sometimes if especially during plan mode, you
+
+[SPEAKER_00] 7:02 - 7:08
+ want to kind of like look at this and look at the thinking and see if it's going off track. If it is, you
+
+[SPEAKER_00] 7:08 - 7:13
+ just hit escape. And then it interrupts. Now a lot of people might be like kind of like scared to
+
+[SPEAKER_00] 7:13 - 7:19
+ interrupt it. But you can just like hit up and then go right back to where you're doing. Or you
+
+[SPEAKER_00] 7:19 - 7:25
+ could just interrupt it and tell it something else. The whole point is Claude code has a really good way
+
+[SPEAKER_00] 7:25 - 7:32
+ of like deduping and entering prompts in a nice queue and like it logically knows what to do. So you don't
+
+[SPEAKER_00] 7:32 - 7:39
+ have to be so scared to like enter more than one prompt and also like escaping early and interrupting
+
+[SPEAKER_00] 7:39 - 7:44
+ and changing course. Like it's actually recommended to do that. Tip number eight is if you ever had
+
+[SPEAKER_00] 7:44 - 7:48
+ something like really big where you copy pasted something and you're like, Oh, I don't want to
+
+[SPEAKER_00] 7:48 - 7:55
+ delete everything. A handy shortcut here is just double tap escape and it'll clear the input. There's also
+
+[SPEAKER_00] 7:55 - 8:00
+ a Vim mode if you're into that, but I use this all the time. Another thing is when you're on an empty
+
+[SPEAKER_00] 8:00 - 8:07
+ input, if you double tap escape, you'll see that you can rewind to like a previous point, and then
+
+[SPEAKER_00] 8:07 - 8:13
+ restore that context point. This is kind of common with clock code. But a lot of the tools I feel like
+
+[SPEAKER_00] 8:13 - 8:19
+ is really built to manage your context and context engineering. And then there's just like an agent that
+
+[SPEAKER_00] 8:19 - 8:24
+ is wrapped around the orchestration. But a lot of the like slash commands and stuff that we'll be going
+
+[SPEAKER_00] 8:24 - 8:30
+ over, I feel like it's it's really to manage that context window. All right, screenshots is
+
+[SPEAKER_00] 8:30 - 8:36
+ obviously a pretty common thing to do. There's a lot of ways to do it. But you can essentially
+
+[SPEAKER_00] 8:36 - 8:43
+ take a screenshot and then drag it over and just drop it in. And then obviously, another good tip
+
+[SPEAKER_00] 8:43 - 8:49
+ is to add context. This is a cool picture of the clock home mascot. Do something with it. I don't know.
+
+[SPEAKER_00] 8:50 - 8:56
+ But yeah, so that's a really good example of like taking a screenshot and bringing it over. If you are
+
+[SPEAKER_00] 8:56 - 9:01
+ doing any kind of UI work, you'll definitely use this workflow. I also highly recommend finding like
+
+[SPEAKER_00] 9:01 - 9:09
+ a Figma MCP or some form of MCP that works really good with the specific validation that you're trying
+
+[SPEAKER_00] 9:09 - 9:14
+ to do. All right, moving on to essential commands. And this is slash commands. Before I end on the
+
+[SPEAKER_00] 9:14 - 9:19
+ keyboard shortcuts, there's a lot more keyboard shortcuts, things that I don't use all the time.
+
+[SPEAKER_00] 9:19 - 9:23
+ If you just go to like slash help, you'll be able to see a bunch of them. But the ones that I covered,
+
+[SPEAKER_00] 9:23 - 9:29
+ I use all the time every day. So definitely just memorize it, I think it would be really useful.
+
+[SPEAKER_00] 9:29 - 9:35
+ Now essential commands is like the slash commands that I think you should know about. There's way more
+
+[SPEAKER_00] 9:35 - 9:40
+ slash commands. And you could like make your own slash commands. But these are the ones that I think
+
+[SPEAKER_00] 9:40 - 9:48
+ is useful. All right, so slash clear is basically a way to clear the context. Now you could actually do
+
+[SPEAKER_00] 9:48 - 9:53
+ this by just creating another instance of Claude, right? That's basically the same thing.
+
+[SPEAKER_00] 9:53 - 9:59
+ But if you don't want to like do that, you could just clear the context. And this is really good
+
+[SPEAKER_00] 9:59 - 10:02
+ if you want to start a new feature and you're completely done with the old task,
+
+[SPEAKER_00] 10:02 - 10:12
+ and you don't want the old context to
+
+[SPEAKER_00] 10:04 - 10:08
+ blow up the new context and influence the new project that you're doing.
+
+[SPEAKER_00] 10:08 - 10:10
+ All right, so I just loaded some stuff.
+
+[SPEAKER_00] 10:10 - 10:12
+ Let's go into slash context.
+
+[SPEAKER_00] 10:13 - 10:19
+ What this does is it will give you like a visual representation of the current context
+
+[SPEAKER_00] 10:19 - 10:22
+ that Cloud Code is operating in.
+
+[SPEAKER_00] 10:22 - 10:24
+ Now, why is this useful?
+
+[SPEAKER_00] 10:24 - 10:31
+ So the main reason why this is useful is because it gives you an opportunity to reason about
+
+[SPEAKER_00] 10:31 - 10:36
+ the context that Cloud Code is making assumptions on on your code base.
+
+[SPEAKER_00] 10:36 - 10:40
+ Now, I always say context is best served fresh and condensed.
+
+[SPEAKER_00] 10:40 - 10:44
+ And you really want to take a look at this from time to time.
+
+[SPEAKER_00] 10:44 - 10:49
+ If you ever felt like Cloud Code has regressed and like things are not working the way it
+
+[SPEAKER_00] 10:49 - 10:54
+ is or your like cost and usage like bill is going up, you really want to look at this
+
+[SPEAKER_00] 10:54 - 10:58
+ and then see which are like the most biggest offenders, right?
+
+[SPEAKER_00] 10:58 - 11:00
+ You just want to like audit it.
+
+[SPEAKER_00] 11:00 - 11:04
+ Like MCPs are one of those very common things that blows up your tokens.
+
+[SPEAKER_00] 11:04 - 11:10
+ I mean, like look at all of this Xcode related MCPs and every time it runs it like, I mean,
+
+[SPEAKER_00] 11:10 - 11:14
+ these are not a lot because I haven't been doing that much in this particular workflow,
+
+[SPEAKER_00] 11:14 - 11:20
+ but you could just imagine that once I start doing those iteration cycles, this like usage
+
+[SPEAKER_00] 11:20 - 11:21
+ will like blow up.
+
+[SPEAKER_00] 11:21 - 11:25
+ But yeah, so if you look at this and you're like, oh, this MCP is using so much, then you
+
+[SPEAKER_00] 11:25 - 11:28
+ could remove it or just disable it for this directory.
+
+[SPEAKER_00] 11:28 - 11:31
+ So slash context is something that you probably should not ignore.
+
+[SPEAKER_00] 11:31 - 11:37
+ Again, I think Cloud Code, all of the tools is really there to manage a lot of the context
+
+[SPEAKER_00] 11:37 - 11:39
+ and doing really good context engineering.
+
+[SPEAKER_00] 11:39 - 11:41
+ So this is a good slash command.
+
+[SPEAKER_00] 11:41 - 11:41
+ All right.
+
+[SPEAKER_00] 11:41 - 11:46
+ So in terms of compaction, like if you use Cloud Code at all, if you had a long session,
+
+[SPEAKER_00] 11:46 - 11:49
+ it will start auto compacting at some point.
+
+[SPEAKER_00] 11:49 - 11:54
+ All auto compaction does is it takes your current context window, like context that you created,
+
+[SPEAKER_00] 11:54 - 11:56
+ and then it will just summarize it.
+
+[SPEAKER_00] 11:56 - 11:58
+ And then it does a pretty good job.
+
+[SPEAKER_00] 11:58 - 12:01
+ For my projects, I usually just let the auto compaction work.
+
+[SPEAKER_00] 12:02 - 12:06
+ But if you really want to compact what you have right now, you could just compact.
+
+[SPEAKER_00] 12:06 - 12:08
+ But I rarely use this.
+
+[SPEAKER_00] 12:08 - 12:15
+ The only time I use this is if I want to save some version of my context into like my local,
+
+[SPEAKER_00] 12:15 - 12:18
+ like second brain, if you haven't seen that video, go and check it out.
+
+[SPEAKER_00] 12:18 - 12:21
+ But I have the second brain concept when I work on projects.
+
+[SPEAKER_00] 12:21 - 12:22
+ And that's where that goes.
+
+[SPEAKER_00] 12:22 - 12:26
+ So for slash models, this is like very useful.
+
+[SPEAKER_00] 12:26 - 12:30
+ I think if you have unlimited tokens, like if you're doing this at work, for me,
+
+[SPEAKER_00] 12:30 - 12:34
+ I usually just defaulted to Opus 4.5.
+
+[SPEAKER_00] 12:34 - 12:39
+ But if you're very like cost sensitive, and you know, certain workflows work well in Sonnet,
+
+[SPEAKER_00] 12:39 - 12:43
+ or like haiku, then you could just go and change that.
+
+[SPEAKER_00] 12:43 - 12:45
+ Keeping it at default is fine too.
+
+[SPEAKER_00] 12:45 - 12:48
+ But I would try to use Opus as much as possible.
+
+[SPEAKER_00] 12:48 - 12:48
+ All right.
+
+[SPEAKER_00] 12:48 - 12:50
+ So slash resume is really useful.
+
+[SPEAKER_00] 12:50 - 12:55
+ If you accidentally like lost your instance, let's say you created another one,
+
+[SPEAKER_00] 12:55 - 12:59
+ and then you accidentally killed it or something like that, right?
+
+[SPEAKER_00] 13:00 - 13:02
+ Oh, you killed the wrong one or something.
+
+[SPEAKER_00] 13:02 - 13:07
+ Then when you go back into clock code, you could do slash resume, like so.
+
+[SPEAKER_00] 13:07 - 13:11
+ And then it'll give you kind of the old context.
+
+[SPEAKER_00] 13:11 - 13:16
+ And then you could like recover your context so that you don't lose the all the work that
+
+[SPEAKER_00] 13:16 - 13:18
+ you did in building up that context window.
+
+[SPEAKER_00] 13:18 - 13:18
+ All right.
+
+[SPEAKER_00] 13:19 - 13:24
+ Slash MCP is really about showing the MCPs that you have installed.
+
+[SPEAKER_00] 13:25 - 13:32
+ If I have to be honest, I try very, very hard to not use MCPs, because I think they blow up
+
+[SPEAKER_00] 13:32 - 13:33
+ your context window.
+
+[SPEAKER_00] 13:33 - 13:38
+ So I only install ones that are needed for that very specific project.
+
+[SPEAKER_00] 13:38 - 13:44
+ And I try to just leverage cloud code and write scripts and like these kind of things manually,
+
+[SPEAKER_00] 13:44 - 13:47
+ like myself, to do the validations and things like that.
+
+[SPEAKER_00] 13:47 - 13:53
+ But some projects, you just do need MCPs, like this Xcode one, you kind of need it.
+
+[SPEAKER_00] 13:53 - 13:58
+ And for other projects, like my Next.js apps, I have like a whole set of MCPs for that.
+
+[SPEAKER_00] 13:58 - 14:00
+ But just be careful with MCPs.
+
+[SPEAKER_00] 14:00 - 14:06
+ But it's a really fantastic way to teach cloud how to do certain things, especially with like
+
+[SPEAKER_00] 14:06 - 14:08
+ third party software and things like that.
+
+[SPEAKER_00] 14:08 - 14:09
+ You know, it's a protocol, right?
+
+[SPEAKER_00] 14:09 - 14:10
+ Model context protocol.
+
+[SPEAKER_00] 14:11 - 14:13
+ So it's basically used everywhere.
+
+[SPEAKER_00] 14:13 - 14:16
+ But again, it's known to blow up your token usage and your context window.
+
+[SPEAKER_00] 14:17 - 14:17
+ So just be careful.
+
+[SPEAKER_00] 14:18 - 14:18
+ All right.
+
+[SPEAKER_00] 14:18 - 14:22
+ So slash help is the last thing I'm going to teach you, you know, teach a man how to fish.
+
+[SPEAKER_00] 14:22 - 14:26
+ So this like little wizard here will just teach you what they are and give you like descriptions
+
+[SPEAKER_00] 14:26 - 14:27
+ of everything.
+
+[SPEAKER_00] 14:27 - 14:32
+ So just go ahead and like try these out and just take a look and, you know, explore.
+
+[SPEAKER_00] 14:32 - 14:32
+ All right.
+
+[SPEAKER_00] 14:32 - 14:34
+ So the next thing is around Git.
+
+[SPEAKER_00] 14:34 - 14:37
+ So you could ask Cloud Code to manage your Git.
+
+[SPEAKER_00] 14:37 - 14:41
+ I think there's a bunch of like skills you could download to Cloud Code to manage all your
+
+[SPEAKER_00] 14:41 - 14:41
+ Git.
+
+[SPEAKER_00] 14:42 - 14:43
+ And I think that's something that you should do.
+
+[SPEAKER_00] 14:43 - 14:49
+ Like I write a lot of my summaries and test plans all using like Cloud Code now.
+
+[SPEAKER_00] 14:49 - 14:52
+ Obviously, I have my own templates that I wrote.
+
+[SPEAKER_00] 14:52 - 14:56
+ So Cloud kind of sounds more like me and it's not too verbose and things like that.
+
+[SPEAKER_00] 14:56 - 14:59
+ So I highly recommend you to use Git as a safety net.
+
+[SPEAKER_00] 15:00 - 15:03
+ There is actually a rewind feature, like I think I told you, where you could restore the
+
+[SPEAKER_00] 15:03 - 15:04
+ code and the conversation.
+
+[SPEAKER_00] 15:04 - 15:07
+ But this is a little confusing to me.
+
+[SPEAKER_00] 15:07 - 15:08
+ Like Git is just better.
+
+[SPEAKER_00] 15:09 - 15:14
+ I use this as like a last resort if I didn't have Git for a certain checkpoint.
+
+[SPEAKER_00] 15:14 - 15:19
+ So now that you know how to just navigate around Cloud Code and things like that, and
+
+[SPEAKER_00] 15:19 - 15:24
+ just kind of high level important like commands and things like that, I think it's a good time
+
+[SPEAKER_00] 15:24 - 15:27
+ to deep dive into the cloud.md file.
+
+[SPEAKER_00] 15:27 - 15:37
+ I think for most people, most users, like 80% of users, if you just have a really good
+
+[SPEAKER_00] 15:37 - 15:43
+ cloud.md file for your project, you could get really, really far without learning like
+
+[SPEAKER_00] 15:43 - 15:44
+ all the advanced stuff.
+
+[SPEAKER_00] 15:44 - 15:48
+ Just having a really good rules file will save you a lot of headaches.
+
+[SPEAKER_00] 15:48 - 15:51
+ Let's kind of dive a little bit deep into this.
+
+[SPEAKER_00] 15:51 - 15:51
+ Okay.
+
+[SPEAKER_00] 15:51 - 15:58
+ So one of the most important things in the cloud.md files is first of all, it's like it
+
+[SPEAKER_00] 15:58 - 16:02
+ actually reads top to bottom and it keeps the priority from top to bottom.
+
+[SPEAKER_00] 16:02 - 16:04
+ I think that's like a very small nuance.
+
+[SPEAKER_00] 16:04 - 16:05
+ I'm pretty sure that's true.
+
+[SPEAKER_00] 16:05 - 16:07
+ I think I read that somewhere, but yeah.
+
+[SPEAKER_00] 16:07 - 16:11
+ So you want to go top to bottom as like important to least important.
+
+[SPEAKER_00] 16:11 - 16:16
+ And you want to add things that are like never do something, but always do this.
+
+[SPEAKER_00] 16:16 - 16:19
+ And they have like clear snippets of examples.
+
+[SPEAKER_00] 16:19 - 16:20
+ I think it's really good.
+
+[SPEAKER_00] 16:20 - 16:25
+ And I don't have that many on this particular project because it's stock Swift UI.
+
+[SPEAKER_00] 16:26 - 16:30
+ But the context here is that you should really think about how unique is your project?
+
+[SPEAKER_00] 16:31 - 16:33
+ How many things about your project is like homegrown?
+
+[SPEAKER_00] 16:34 - 16:37
+ And essentially like the AI may have never seen.
+
+[SPEAKER_00] 16:37 - 16:44
+ Like remember, a lot of this code is like basically a lot of the AI like coding is basically just
+
+[SPEAKER_00] 16:44 - 16:49
+ an accumulation of like the best code that the AI is trained on.
+
+[SPEAKER_00] 16:49 - 16:57
+ So it might not know your like super special DSL language that you created or like some random
+
+[SPEAKER_00] 16:57 - 17:00
+ archaic patterns that your company has.
+
+[SPEAKER_00] 17:00 - 17:04
+ And that's where you'll be like, oh, why is the AI never doing this?
+
+[SPEAKER_00] 17:04 - 17:07
+ So whenever you run into something like that, you want to fix it manually.
+
+[SPEAKER_00] 17:07 - 17:14
+ And then you just update your claw.md rules so that it never does that mistake again.
+
+[SPEAKER_00] 17:14 - 17:16
+ Think of it as like lint files kind of.
+
+[SPEAKER_00] 17:17 - 17:21
+ And then when you ask claw to update the rules, you shouldn't ever do it manually.
+
+[SPEAKER_00] 17:22 - 17:28
+ You should just go here into claw and say, hey, can you update that rule for me so we never
+
+[SPEAKER_00] 17:28 - 17:28
+ do it again?
+
+[SPEAKER_00] 17:29 - 17:29
+ Something like that.
+
+[SPEAKER_00] 17:30 - 17:34
+ Like as simple as that will go and update your claw.md files.
+
+[SPEAKER_00] 17:34 - 17:36
+ You see how it's trying to do it.
+
+[SPEAKER_00] 17:36 - 17:39
+ Obviously, there's nothing that I just did.
+
+[SPEAKER_00] 17:39 - 17:40
+ So it says nothing to add.
+
+[SPEAKER_00] 17:41 - 17:41
+ But yeah, okay.
+
+[SPEAKER_00] 17:41 - 17:43
+ It added something that I thought.
+
+[SPEAKER_00] 17:43 - 17:45
+ But you get the point.
+
+[SPEAKER_00] 17:45 - 17:45
+ All right.
+
+[SPEAKER_00] 17:45 - 17:51
+ So this next one is really around using like keywords to trigger your skills.
+
+[SPEAKER_00] 17:51 - 17:55
+ So basically, I have these like build commands inside of my rules.
+
+[SPEAKER_00] 17:55 - 18:02
+ So when I say, hey, use my Xcode MCP to build, it'll try to build the app, for example.
+
+[SPEAKER_00] 18:02 - 18:05
+ Use my Xcode MCP to build the app.
+
+[SPEAKER_00] 18:06 - 18:12
+ Okay, my whisper stuff is like failing a little bit, but maybe it'll get the gist of it from
+
+[SPEAKER_00] 18:12 - 18:13
+ build the app.
+
+[SPEAKER_00] 18:14 - 18:17
+ And as you can see, it's asking if I can use the Xcode build MCP.
+
+[SPEAKER_00] 18:17 - 18:23
+ So that's kind of the high level of like using skills and like trigger words to be able to
+
+[SPEAKER_00] 18:23 - 18:24
+ trigger certain behavior.
+
+[SPEAKER_00] 18:24 - 18:28
+ This next one is something called like compound engineering.
+
+[SPEAKER_00] 18:28 - 18:31
+ That's like kind of a new term that is being discussed.
+
+[SPEAKER_00] 18:31 - 18:39
+ But it's essentially to take your claw.md and start like committing it into the code base.
+
+[SPEAKER_00] 18:40 - 18:45
+ Now, obviously, you need to get rid of anything that's like generic for your code, like file
+
+[SPEAKER_00] 18:45 - 18:46
+ path and things like that.
+
+[SPEAKER_00] 18:46 - 18:51
+ And you also want to be mindful of how large this file becomes, right?
+
+[SPEAKER_00] 18:51 - 18:57
+ Because like I said, every time someone hits clawed in that directory or clawed trying to
+
+[SPEAKER_00] 18:57 - 19:00
+ read that directory, it will load that claw.md file.
+
+[SPEAKER_00] 19:01 - 19:04
+ So you don't want to blow up other people's context windows.
+
+[SPEAKER_00] 19:04 - 19:08
+ So you really want to be have this be like a high bar when you're committing it.
+
+[SPEAKER_00] 19:08 - 19:14
+ But the nice thing is once that's in, you essentially make that AI coding experience better for your
+
+[SPEAKER_00] 19:14 - 19:15
+ teammates.
+
+[SPEAKER_00] 19:15 - 19:18
+ But you just need to make sure that whatever you're landing is actually helping.
+
+[SPEAKER_00] 19:18 - 19:20
+ There's a lot of school of thoughts around this right now.
+
+[SPEAKER_00] 19:20 - 19:22
+ I don't think it's like completely solved.
+
+[SPEAKER_00] 19:22 - 19:25
+ But there's got to be some form of evaluations here.
+
+[SPEAKER_00] 19:25 - 19:27
+ And a lot of people are just using like vibes.
+
+[SPEAKER_00] 19:27 - 19:30
+ So you just like test it for like a few weeks.
+
+[SPEAKER_00] 19:30 - 19:34
+ And then you just try to land it and then ask for feedback, essentially.
+
+[SPEAKER_00] 19:34 - 19:39
+ So dangerously skip is essentially like clawed code in YOLO mode.
+
+[SPEAKER_00] 19:39 - 19:45
+ You know, like just basically, if you use clawed code, it will ask you to accept a bunch of stuff.
+
+[SPEAKER_00] 19:45 - 19:46
+ It could get really annoying.
+
+[SPEAKER_00] 19:46 - 19:52
+ So a lot of people, they use clawed and then dash dash dangerously skip.
+
+[SPEAKER_00] 19:52 - 19:58
+ Okay, so it's dash dash dangerously skip permissions.
+
+[SPEAKER_00] 19:58 - 20:03
+ And when you run this, clawed code will no longer ask you.
+
+[SPEAKER_00] 20:03 - 20:08
+ essentially to accept that. I think it will completely just ignore it, except for like
+
+[SPEAKER_00] 20:08 - 20:13
+ anything you put into your slash permissions, which we'll talk about. But you only really want
+
+[SPEAKER_00] 20:13 - 20:20
+ to do this in environments that you can kind of throw away. And you're doing specific work that
+
+[SPEAKER_00] 20:20 - 20:24
+ is not like super dangerous. Like if you're going to start touching the OS and stuff like that,
+
+[SPEAKER_00] 20:24 - 20:29
+ you could really mess it up. I messed up some of my Linux machines because I was just going
+
+[SPEAKER_00] 20:29 - 20:33
+ too aggressive. And I was just testing it out. And I was trying to set up some of my Linux stuff.
+
+[SPEAKER_00] 20:33 - 20:39
+ Using clock code. And then like I had to reflash the entire thing. Like I said, you can use slash
+
+[SPEAKER_00] 20:39 - 20:47
+ permissions here to kind of like tell which ones are like you still want to accept. So it does,
+
+[SPEAKER_00] 20:47 - 20:53
+ you know, like an RM dash RF or something like don't do that. Or yeah, just like mutations,
+
+[SPEAKER_00] 20:53 - 21:00
+ like just be careful with mutations, like deletion mutations, right? All right. The next big one,
+
+[SPEAKER_00] 21:00 - 21:06
+ I think now that we talked a little bit about the cloud.md rule of files, I think we should
+
+[SPEAKER_00] 21:06 - 21:13
+ talk about workflows because I have a very specific way I'd like to work and I've actually refactored
+
+[SPEAKER_00] 21:13 - 21:20
+ my entire work so that it's works with clock code. You know, I used to use cursor or like Android
+
+[SPEAKER_00] 21:20 - 21:26
+ studios mostly and VS code to do a lot of coding and stuff like that. But I dropped basically all of
+
+[SPEAKER_00] 21:26 - 21:33
+ that and I use just items now. Some people use obviously vim, but I think items is fine. So
+
+[SPEAKER_00] 21:33 - 21:42
+ I'm going to show you guys a few things. So like I said, I always start with plan mode. Let's go in
+
+[SPEAKER_00] 21:42 - 21:46
+ like plan like a little feature for this Palma de Roo app that I've been like kind of working on. I
+
+[SPEAKER_00] 21:46 - 21:53
+ actually need to remove a bunch of audio stuff. So let's just say audit my code base and make sure
+
+[SPEAKER_00] 21:53 - 22:01
+ that we're removing all of the audio playback and references to the audio of part of the Pomodoro
+
+[SPEAKER_00] 22:01 - 22:08
+ app. I always start with plan mode and I'm like iterating with cloud code. I'm arguing with it. I'm
+
+[SPEAKER_00] 22:08 - 22:12
+ having a conversation with it. You know, cloud code, you're so beautiful. You're so amazing.
+
+[SPEAKER_00] 22:13 - 22:19
+ No, but like I'm really treating it as like another like just good engineer that I'm like working with.
+
+[SPEAKER_00] 22:19 - 22:25
+ And I never just like purely accept the first answers that it gives to me. I will always kind
+
+[SPEAKER_00] 22:25 - 22:31
+ of challenging it. And I spend a lot of time and put a lot of effort at this stage of the development,
+
+[SPEAKER_00] 22:31 - 22:38
+ because I feel like once cloud code builds up that context and have good execution specs,
+
+[SPEAKER_00] 22:38 - 22:43
+ the generation of the code is actually the easy part. And I do want to take a moment and talk about
+
+[SPEAKER_00] 22:43 - 22:51
+ like kind of the news cycle about people saying, Oh, like people are no longer writing code. I think
+
+[SPEAKER_00] 22:51 - 22:59
+ like the creator of node.js said like the era of like people writing code by hand is essentially over.
+
+[SPEAKER_00] 22:59 - 23:04
+ And I actually truly believe that. And the thing is, I love like being in the zone and writing code.
+
+[SPEAKER_00] 23:04 - 23:10
+ At least I used to. The thing is, it's really hard to get back into that mode. It's like very different
+
+[SPEAKER_00] 23:10 - 23:16
+ levels of abstractions of the way you're working. And right now I'm just doing one instance of it.
+
+[SPEAKER_00] 23:16 - 23:24
+ But you could imagine just having like multiple cloud instances like this. And and then you're just
+
+[SPEAKER_00] 23:24 - 23:30
+ actively working on a bunch of different things at the same time, because you have this like new
+
+[SPEAKER_00] 23:30 - 23:36
+ superpower. The new next level of engineering is really like jumping between cloud instances,
+
+[SPEAKER_00] 23:36 - 23:43
+ and, and really context engineering, that instance, and then getting it good enough to start executing.
+
+[SPEAKER_00] 23:43 - 23:50
+ And I keep talking about this, like context, right? And this tip is really around like fresh context,
+
+[SPEAKER_00] 23:50 - 23:56
+ beats like bloated context. I think I kind of covered this throughout this. But that's why you want to
+
+[SPEAKER_00] 23:56 - 24:02
+ start with plan mode, make sure it's good. And then just go and execute instead of like having a bunch of
+
+[SPEAKER_00] 24:02 - 24:07
+ like, try this, and then try that, and then try this, and then try that, like that will just bloat
+
+[SPEAKER_00] 24:07 - 24:13
+ that context. And then the AI will get really confused at some point, because it can't remember
+
+[SPEAKER_00] 24:13 - 24:19
+ what what part of what was good and not good. So that's why you want to spend the time in the
+
+[SPEAKER_00] 24:19 - 24:24
+ beginning, building up the good context, have a good plan doc. So always has something that initially
+
+[SPEAKER_00] 24:24 - 24:30
+ was good to reference, and then it builds little by little, right? So this next one is really around
+
+[SPEAKER_00] 24:30 - 24:38
+ persisting that context. I have a full video on this about like the second brain concept. So I'll
+
+[SPEAKER_00] 24:38 - 24:43
+ link it here. But the idea here is that let's say you've finished something, you could just say,
+
+[SPEAKER_00] 24:43 - 24:50
+ save this to my local claw.md in my projects directory, save the work that we just did. So you
+
+[SPEAKER_00] 24:50 - 24:56
+ could say something like that. And then I essentially have a full workflow for this to manage this. But
+
+[SPEAKER_00] 24:56 - 25:06
+ yeah, you could do that. Load my context from my local projects. So once you have that second brain
+
+[SPEAKER_00] 25:06 - 25:13
+ concept, you could say a command like this, and it will pull that context, and then load it for your
+
+[SPEAKER_00] 25:13 - 25:19
+ new session. So here's a good example, I like to do a lot of my to do's inside of cloud code itself.
+
+[SPEAKER_00] 25:19 - 25:24
+ These are kind of the high level things that I still need to do for this next feature that I'm
+
+[SPEAKER_00] 25:24 - 25:29
+ working on. So I'm like working on a widget for this Pomodoro app. And I have like a live activity,
+
+[SPEAKER_00] 25:29 - 25:34
+ for example. And I'm also like deleting all the music stuff, because I don't think it adds value.
+
+[SPEAKER_00] 25:35 - 25:40
+ So I have a bunch of stuff that I'm tracking. But because I keep all the to do's in my local
+
+[SPEAKER_00] 25:40 - 25:45
+ index, like that I'm lazy loading, I don't always load it, I only lazy load it when I ask for it,
+
+[SPEAKER_00] 25:45 - 25:51
+ it allows me to like context switch from project to project without like carrying around like complex,
+
+[SPEAKER_00] 25:51 - 25:56
+ I don't know, Asana boards or whatever, I just keep it all in here. And it's this is this works
+
+[SPEAKER_00] 25:56 - 26:02
+ because it's my own project. But you can technically do this with like an MCP with Asana or I don't know,
+
+[SPEAKER_00] 26:02 - 26:07
+ Jira or whatever, as long as you can whatever project management that you can think of. All right,
+
+[SPEAKER_00] 26:07 - 26:14
+ so I think we covered this a little bit. But really think about the build cycle. Like, obviously,
+
+[SPEAKER_00] 26:14 - 26:20
+ if you're mobile, think about x code building the x code. But there's a lot of other workflows that you
+
+[SPEAKER_00] 26:20 - 26:25
+ could think of, like, for example, you could ask cloud code to, like, let's say you're debugging
+
+[SPEAKER_00] 26:25 - 26:29
+ something that's like kind of tricky has like race conditions or things like that, you could ask
+
+[SPEAKER_00] 26:29 - 26:36
+ cloud code to like add debug logs, for example, and then run the app and then have cloud code control
+
+[SPEAKER_00] 26:36 - 26:41
+ the emulator, you could just ask it to do that. And then like do the actions that you're trying to do
+
+[SPEAKER_00] 26:41 - 26:47
+ and then read the logs through a tail log or something, and then debug that way. Or you could use
+
+[SPEAKER_00] 26:47 - 26:52
+ like Profetto or something like that for kind of performance things, you could hook into Profetto
+
+[SPEAKER_00] 26:52 - 26:58
+ MCPs, do a run and then have a read the traces and then see if it can find jank just from like the
+
+[SPEAKER_00] 26:58 - 27:03
+ timings, right? There's just so many validation loops that you could think of, like for web,
+
+[SPEAKER_00] 27:03 - 27:09
+ you could do like puppeteer and have cloud navigated using a slash Chrome command, and then just
+
+[SPEAKER_00] 27:09 - 27:14
+ actually do the navigation or have a right just test or have like integration into an integration
+
+[SPEAKER_00] 27:14 - 27:19
+ test. You know, there's, there's a lot of things that cloud code could do. And it really is up to
+
+[SPEAKER_00] 27:19 - 27:25
+ your imagination. But it's the single most important thing, in my opinion, if you want to have a more
+
+[SPEAKER_00] 27:25 - 27:32
+ automated loop that like generates good code on like the first try. So going back to the slash models,
+
+[SPEAKER_00] 27:32 - 27:38
+ really just consider using Opus if you can afford it. It's just the best way. All of these are a little
+
+[SPEAKER_00] 27:38 - 27:45
+ bit slower. But because the way I work is I have multiple cloud instances, obviously, it's like very
+
+[SPEAKER_00] 27:45 - 27:52
+ small right in here, but I have multiple cloud instances running at all times. And then the way
+
+[SPEAKER_00] 27:52 - 27:57
+ I work is basically just juggling these cloud instances. So even if one of them takes a long
+
+[SPEAKER_00] 27:57 - 28:03
+ time, it doesn't matter because I'm like, I gave the command, and I go to the next one, I'm building
+
+[SPEAKER_00] 28:03 - 28:10
+ the context, I give a command, and I go to the other one. And then I give a command. So, so like
+
+[SPEAKER_00] 28:10 - 28:16
+ you end up like still can get into the zone, but it's like a different style. So I talked a little bit
+
+[SPEAKER_00] 28:16 - 28:24
+ about interrupting earlier. But you really want to, like look out for like assumptions or the keywords
+
+[SPEAKER_00] 28:24 - 28:29
+ are like, Oh, I'm not really sure or you'll see like errors happening. I'm having a hard time like
+
+[SPEAKER_00] 28:29 - 28:38
+ getting it to do this in this example. But just just know that like, when you go and look for the
+
+[SPEAKER_00] 28:38 - 28:47
+ best ways to delete an app, I don't know. I'm just giving it a random prompt is try to make it go off
+
+[SPEAKER_00] 28:47 - 28:53
+ course. But if you see it going and making assumptions about certain things, okay, this time
+
+[SPEAKER_00] 28:53 - 28:58
+ it didn't even because it's just new, but you should just interrupt it like that, you know, and then and
+
+[SPEAKER_00] 28:58 - 29:03
+ then just course corrected. So don't worry about course correcting. Okay, so the next section is
+
+[SPEAKER_00] 29:03 - 29:09
+ around power users, I don't really like to say power users. But most people that I've talked to
+
+[SPEAKER_00] 29:09 - 29:15
+ don't really know, like the differences between a slash command or a skill, they're kind of
+
+[SPEAKER_00] 29:15 - 29:20
+ interchangeable now. And MCPs, sub agents, you know, post hooks, pre hooks, like these kind of primitives
+
+[SPEAKER_00] 29:20 - 29:27
+ that clock code is like, known for and kind of like invented. And we're going to cover some of that and
+
+[SPEAKER_00] 29:27 - 29:33
+ and how this, these are all like composable in nature. Okay, so I call it the composability
+
+[SPEAKER_00] 29:33 - 29:37
+ framework. But it's, I just really wanted to highlight that these are composable more than
+
+[SPEAKER_00] 29:37 - 29:43
+ anything. But there's four primitive, like composable things, all the slash commands are
+
+[SPEAKER_00] 29:43 - 29:49
+ technically composable with each other, not directly each other. But anyways, so we're going to just go
+
+[SPEAKER_00] 29:49 - 29:56
+ over the fact that like, how these are composable. Okay, so let's first talk about skills. All the
+
+[SPEAKER_00] 29:56 - 30:02
+ skill is, is, it's like, you do a workflow. So let's say that I tell cloth
+
+[SPEAKER_00] 30:02 - 30:10
+ go and fetch hacker news for latest iOS news. So let's say I tell it to go and
+
+[SPEAKER_00] 30:10 - 30:16
+ fetch hacker news for the latest iOS news and then and then I tell it to save
+
+[SPEAKER_00] 30:16 - 30:31
+ that. Okay and then save a summary to my local cloud.md cloud directory. Okay I
+
+[SPEAKER_00] 30:31 - 30:36
+ misspelled that but basically let's say that it went and found some and then it's
+
+[SPEAKER_00] 30:36 - 30:40
+ save it into my local directory. Let's say I wanted to build a skill around that.
+
+[SPEAKER_00] 30:40 - 30:45
+ So you just saw me do two things. One is fetch something from a source like
+
+[SPEAKER_00] 30:45 - 30:50
+ hacker news and then save that thing to my local directory. That's technically a
+
+[SPEAKER_00] 30:50 - 30:56
+ workflow. So all you have to say do is save what we just did into a new skill
+
+[SPEAKER_00] 30:56 - 31:01
+ called fetch hacker news. And that's basically it to create a skill. It's
+
+[SPEAKER_00] 31:01 - 31:07
+ basically a recurring workflow that you can just tell Claude to remember. And
+
+[SPEAKER_00] 31:07 - 31:13
+ behind the scenes it's actually just an MD file as you can see right here. Oops. And
+
+[SPEAKER_00] 31:13 - 31:19
+ as you can see here it's literally just a system prompt. It's an MD file but Claude
+
+[SPEAKER_00] 31:19 - 31:25
+ has specific directories that is looking for skills and it will be able to infer
+
+[SPEAKER_00] 31:25 - 31:31
+ this next time I say go fetch something from hacker news or use my hacker news skill to fetch
+
+[SPEAKER_00] 31:31 - 31:37
+ articles. Yeah and then commands is basically now interchangeable. It's it's a pretty recent change
+
+[SPEAKER_00] 31:37 - 31:44
+ but you can see that skills is written to the skills documentary and it there's also now a slash
+
+[SPEAKER_00] 31:44 - 31:49
+ command called slash fetch hacker news. This is a very recent change from Anthropic where they kind of
+
+[SPEAKER_00] 31:49 - 31:56
+ like combined commands and skills. But yeah so now you can just do slash hacker news and then now it'll
+
+[SPEAKER_00] 31:56 - 32:02
+ rerun that system prompt for example. It added like an additional like assumption thing. That's pretty cool.
+
+[SPEAKER_00] 32:02 - 32:08
+ It's not exactly what I did but it kind of inferred that I would probably want that. So those are the
+
+[SPEAKER_00] 32:08 - 32:13
+ little cool things. And the thing is you could update these anytime you want. You know you could just ask
+
+[SPEAKER_00] 32:13 - 32:21
+ Claude to do something else. All right so like I said you never want to manually create these kind of
+
+[SPEAKER_00] 32:21 - 32:29
+ stuff. You want to get in the habit of asking Claude to update and manage these skills. So we could say
+
+[SPEAKER_00] 32:29 - 32:37
+ why don't you extend this fetch hacker news to fetch Twitter or Apple news. For example now sometimes it
+
+[SPEAKER_00] 32:37 - 32:43
+ won't work 100% exactly right. Okay so you see this it doesn't have Twitter authentication access.
+
+[SPEAKER_00] 32:44 - 32:52
+ So it's trying to just do some other ways. Yeah multiple sources. So you can see how it's all updating
+
+[SPEAKER_00] 32:52 - 32:59
+ that system problem that we wrote right. And then fetch hacker news and so forth. You get the idea.
+
+[SPEAKER_00] 32:59 - 33:09
+ All right so MCPs I think we covered it a little bit during the the rules but basically MCPs you just
+
+[SPEAKER_00] 33:09 - 33:16
+ want to find MCPs like this right. Like they're just model contexts. But kind of a hack is like you
+
+[SPEAKER_00] 33:16 - 33:23
+ don't actually need to search the web for an MCP. You could just be like find me a good Figma MCP. You
+
+[SPEAKER_00] 33:23 - 33:29
+ could just ask Claude to find it for you. And then most of the time it does a good job. The only thing
+
+[SPEAKER_00] 33:29 - 33:38
+ is like sometimes it's outdated. So it'll like know of one that was popular a little while ago rather
+
+[SPEAKER_00] 33:38 - 33:42
+ than doing a web search. So you just have to be mindful. And that's why I'm saying like for certain
+
+[SPEAKER_00] 33:42 - 33:49
+ actions you want to read how what it's doing and look at the thinking and then cancel it if you want to.
+
+[SPEAKER_00] 33:49 - 33:54
+ And you could have Claude also install the MCP so you don't have to like manage like the configs and
+
+[SPEAKER_00] 33:54 - 34:01
+ stuff yourself like you had to with cursor. Yeah so you could ask Claude to install the MCPs. So like
+
+[SPEAKER_00] 34:01 - 34:06
+ right here it says go and do this right. But instead I could just be like why don't you just install this
+
+[SPEAKER_00] 34:06 - 34:14
+ for me for example. And then it will just go and install it for you. All right so in terms of sub agents
+
+[SPEAKER_00] 34:14 - 34:23
+ I don't know if I have one for this. I might have like an iOS I might have one like an iOS like context
+
+[SPEAKER_00] 34:23 - 34:34
+ gathering or like architecture agent. Let me try it. So spawn a iOS architecture agent sub agent and do
+
+[SPEAKER_00] 34:34 - 34:43
+ some investigation on and on my code base and see if it's actually good or not. So you can build sub agents
+
+[SPEAKER_00] 34:43 - 34:50
+ just like you can with slash commands and skills. All you do is just ask it to make a sub agent after
+
+[SPEAKER_00] 34:50 - 35:00
+ you do the work once. The main reason why you want to create a sub agent is really to do parallel work
+
+[SPEAKER_00] 35:00 - 35:07
+ but also it's to protect your context window. So like I said one of the key features of Claude code is to
+
+[SPEAKER_00] 35:07 - 35:14
+ manage your context and do context engineering and sub agent is a huge way. And I think a lot of people
+
+[SPEAKER_00] 35:14 - 35:20
+ are using sub agents incorrectly because they do things like this where you have like an iOS
+
+[SPEAKER_00] 35:20 - 35:26
+ sub agent right by the way it's not triggering the sub agent. I'll just make one after it creates it and
+
+[SPEAKER_00] 35:26 - 35:31
+ show you guys what it looks like. It like highlights it in like a different color. But a lot of them have
+
+[SPEAKER_00] 35:31 - 35:38
+ this like workflow where they'll tell it to go do something that does the context gathering and then
+
+[SPEAKER_00] 35:38 - 35:44
+ they ask to like bring it back. But that part that portion of the context that's bringing brings back
+
+[SPEAKER_00] 35:44 - 35:50
+ from the sub agent it's only like the output it's not like how it got there. So it doesn't have the full context.
+
+[SPEAKER_00] 35:50 - 35:57
+ So for those kind of works I usually just keep it within the context window because those are the things that are really good.
+
+[SPEAKER_00] 35:57 - 36:06
+ Use what we just did to create a iOS architecture sub agent. But yeah so so oftentimes people mistake that
+
+[SPEAKER_00] 36:06 - 36:13
+ you want to like have a validator agent you want to have like a testing agent and all these kind of
+
+[SPEAKER_00] 36:13 - 36:20
+ things. But I try to keep the all the things that need that context to do its work within the same
+
+[SPEAKER_00] 36:20 - 36:26
+ cloud code session. Because like a good testing agent needs to know about the code that it wrote
+
+[SPEAKER_00] 36:26 - 36:32
+ most of the time in my opinion. Of course sometimes things could live in isolation. So what are really
+
+[SPEAKER_00] 36:32 - 36:39
+ good things for sub agents is really just like things that are atomic in nature that you want to
+
+[SPEAKER_00] 36:39 - 36:44
+ just have it run as side effects and just go and do. But yeah so that's what I use sub agents for. I don't
+
+[SPEAKER_00] 36:44 - 36:50
+ use sub agents that often. I know some people like love using them. But one of the most common like
+
+[SPEAKER_00] 36:50 - 36:56
+ clowny kind of use cases that I've seen is like CEO agent, product agent, design agent, and stuff like
+
+[SPEAKER_00] 36:56 - 37:01
+ that. And I don't really believe in that particular workflow. Like you really want to have this
+
+[SPEAKER_00] 37:01 - 37:06
+ concept of bringing the work to the context rather than trying to spread out the context that gets
+
+[SPEAKER_00] 37:06 - 37:13
+ created. All right so and this kind of ties into it like you want to avoid like having a lot of
+
+[SPEAKER_00] 37:13 - 37:20
+ instructions and overloading the context all the time. You want to keep your context condensed and fresh.
+
+[SPEAKER_00] 37:20 - 37:26
+ So that watch my video on the second brain and you like that's it'll teach you a lot about like
+
+[SPEAKER_00] 37:26 - 37:32
+ lazy loading and then having this like ongoing project domain thing that builds over time and you
+
+[SPEAKER_00] 37:32 - 37:40
+ want to essentially use that as your rag system to build like a good context and then be able to just
+
+[SPEAKER_00] 37:40 - 37:47
+ have fresh and good context all the time for your AI to execute on. All right so here is some interesting like
+
+[SPEAKER_00] 37:48 - 37:54
+ advanced workflows and I really think that the big game changer in my opinion for
+
+[SPEAKER_00] 37:55 - 38:01
+ cloud code and why I think cloud code is just so amazing is that you can do a lot of parallel
+
+[SPEAKER_00] 38:01 - 38:08
+ development. This is why I had to like fully change how I work using like terminal and stuff because
+
+[SPEAKER_00] 38:08 - 38:14
+ you could run multiple instances and I already kind of showed you guys this but you could just swap between
+
+[SPEAKER_00] 38:14 - 38:21
+ these and just have like multiple things running at the same time. So I could say start working on my
+
+[SPEAKER_00] 38:21 - 38:27
+ live activities feature so I could just have that obviously I would do it in plan mode but I'm just
+
+[SPEAKER_00] 38:27 - 38:33
+ showing you guys and then over here I could just say all right let's test out this iOS architecture and
+
+[SPEAKER_00] 38:33 - 38:38
+ and then just spawn a sub-agent. So as you can see I'm doing some investigation on one side and then I'm
+
+[SPEAKER_00] 38:38 - 38:44
+ doing live code editing but the thing is I could always just create another one go to like a
+
+[SPEAKER_00] 38:44 - 38:50
+ different project like this and then now I could be saying hey I want to work on a new newsletter
+
+[SPEAKER_00] 38:52 - 38:59
+ for example. So I could be doing a bunch of stuff all at the same time so that's like a really so
+
+[SPEAKER_00] 38:59 - 39:04
+ understanding how to juggle this and doing it effectively I think is like the next step function
+
+[SPEAKER_00] 39:04 - 39:12
+ change and I just want to kind of shout out iterms I think it's like really good because you know you
+
+[SPEAKER_00] 39:12 - 39:18
+ could do command d to create new instances like this right and then you could juggle between the
+
+[SPEAKER_00] 39:18 - 39:26
+ terminals using command the left bracket and right bracket like ignore this like slash it's like I'm just
+
+[SPEAKER_00] 39:26 - 39:33
+ saying oh it's left bracket or right bracket like slash right but yeah so and you could do that you could
+
+[SPEAKER_00] 39:33 - 39:39
+ also if you have multiple tabs like this you can actually swap between it and at work what I do is
+
+[SPEAKER_00] 39:39 - 39:47
+ I rename like what I'm doing in here like I'll say local and maybe here I'll say like remote ssh or
+
+[SPEAKER_00] 39:47 - 39:53
+ something like that and then from the remote ssh I could have cloud like running like this and I could
+
+[SPEAKER_00] 39:53 - 40:01
+ spawn them more you know and then and then I could just be going back and forth here so it really feels like
+
+[SPEAKER_00] 40:01 - 40:07
+ I'm playing Starcraft to some degree, right? And all of these I'm just doing with my keyboard. And
+
+[SPEAKER_00] 40:07 - 40:13
+ when I'm home, I'll just like be in whisper, using whisper, which is like this voice little thing
+
+[SPEAKER_00] 40:13 - 40:18
+ that you see right here. And it just translates speech to text really quickly. Sometimes it's not
+
+[SPEAKER_00] 40:18 - 40:23
+ that accurate. But so I'm just like switching, switching, and I'm just basically talking to it,
+
+[SPEAKER_00] 40:23 - 40:28
+ you know, just literally working as in multiple projects all at the same time. I think my
+
+[SPEAKER_00] 40:28 - 40:32
+ bottleneck right now is really how much context switching I can do in my head. So yeah,
+
+[SPEAKER_00] 40:32 - 40:37
+ another thing is enabling notifications, you could tell clock code to change the notifications, right?
+
+[SPEAKER_00] 40:38 - 40:43
+ You could just say change the notification to ring a little sound when you finish execution,
+
+[SPEAKER_00] 40:43 - 40:50
+ for example. And then when it's now, it will basically ring like a little notification. And
+
+[SPEAKER_00] 40:50 - 40:58
+ you could do a lot of things. At one point I had like, Texas speech, where like reads a summary of
+
+[SPEAKER_00] 40:59 - 41:04
+ one of wherever it finished, it will read the summary. So I could be like, okay, I got to go back to
+
+[SPEAKER_00] 41:04 - 41:10
+ tab two and then go do something. But that was too much. So I disabled it gig work trees is another way
+
+[SPEAKER_00] 41:10 - 41:15
+ to do multiple code execution. So one of the bottlenecks that you'll see is if you have these
+
+[SPEAKER_00] 41:15 - 41:20
+ kind of like bunch of multiple instances, you'll soon realize if you're doing local development,
+
+[SPEAKER_00] 41:20 - 41:26
+ you won't be able to make code edits the same project, unless you use get work trees. And I'll add some
+
+[SPEAKER_00] 41:26 - 41:31
+ descriptions on how to use get work trees. But basically, it's a way to like clone multiple
+
+[SPEAKER_00] 41:31 - 41:36
+ instances of your code base and have like different forking branches. So you could have like, you could
+
+[SPEAKER_00] 41:36 - 41:42
+ work on like code, like executions in the same project. Slash Chrome is actually a really cool
+
+[SPEAKER_00] 41:42 - 41:50
+ tool, in my opinion. So the way you get to it is by just doing slash Chrome like this, and then it'll go to
+
+[SPEAKER_00] 41:50 - 41:55
+ like slash Chrome, and then it will open this thing, you can't see it here. But there's like a little
+
+[SPEAKER_00] 41:55 - 42:05
+ button, and it just opens it and you could actually navigate the browser. So go to tip number 46.
+
+[SPEAKER_00] 42:06 - 42:11
+ So what it does is we'll look at the website and we'll and you can approve the plan, you could allow
+
+[SPEAKER_00] 42:11 - 42:17
+ the action. But basically, it will create the plan and they will like, do it, okay, it doesn't it doesn't
+
+[SPEAKER_00] 42:17 - 42:27
+ really know how to do it. So I'll say hit, let's just try YouTube. I think YouTube might be easier.
+
+[SPEAKER_00] 42:28 - 42:39
+ Okay, so we'll open YouTube and then say, find a video on cooking, for example. Yep.
+
+[SPEAKER_00] 42:39 - 42:48
+ So you can see that it like takes a screenshot, it will like click, it'll type cooking, and then it
+
+[SPEAKER_00] 42:48 - 42:55
+ will like, find cooking videos, for example. And then so I use this whenever I don't have API access
+
+[SPEAKER_00] 42:55 - 43:03
+ to certain things, but I can get there via my web. And because you could control it via slash Chrome,
+
+[SPEAKER_00] 43:03 - 43:10
+ you can have it as part, like I mentioned that all of these are composable. So you can have a command
+
+[SPEAKER_00] 43:10 - 43:17
+ that goes to Chrome, scrapes bunch of stuff, and comes back to you with the data. Okay, so moving on,
+
+[SPEAKER_00] 43:17 - 43:22
+ like I mentioned, it's really good for a powerful, like debugging, right, you can navigate the web with
+
+[SPEAKER_00] 43:22 - 43:27
+ it. That's also part of the validation thing that I was talking about, you can fill out forms and stuff.
+
+[SPEAKER_00] 43:27 - 43:32
+ All right, hooks and automation is really just like kind of the cherry on top. And this is very
+
+[SPEAKER_00] 43:32 - 43:40
+ similar to like, get ups, pre hooks, and get ups, like posts, like commit stuff, like recommit stuff.
+
+[SPEAKER_00] 43:40 - 43:48
+ So basically, these are hooks. And as you can tell, it's just like, something to do before you start
+
+[SPEAKER_00] 43:48 - 43:54
+ executing or after executing. And after executing fails, like, there's all these things that you can
+
+[SPEAKER_00] 43:54 - 43:59
+ do. And you shouldn't manually do this, you should just ask Claude to, like, add these for you, you
+
+[SPEAKER_00] 43:59 - 44:05
+ know, like, go back to that principle that you're no longer main manually maintaining your work
+
+[SPEAKER_00] 44:05 - 44:13
+ environment. And a good example on what to put here for the post tool use is like, you know, things like
+
+[SPEAKER_00] 44:14 - 44:20
+ arc, like linting and formatting your code and things like that. And I'm not really using this yet. But
+
+[SPEAKER_00] 44:20 - 44:27
+ basically, this is really good if you want to block like, removing your entire like database or
+
+[SPEAKER_00] 44:27 - 44:33
+ something like that. It's just like good, good to prevent very destructive things. I haven't really
+
+[SPEAKER_00] 44:33 - 44:38
+ set it up because, you know, I have like, remote backups. And also, this is like side projects. But
+
+[SPEAKER_00] 44:38 - 44:45
+ for real world, you probably want something. And finally, with that, I think you got the vast majority
+
+[SPEAKER_00] 44:45 - 44:52
+ of like, the best tips that I know for clock code. The last thing I'll leave it with you is to explore
+
+[SPEAKER_00] 44:52 - 44:59
+ the like the plugin ecosystem. All the plugin is, is a just a combination of any of these composable
+
+[SPEAKER_00] 44:59 - 45:04
+ things that I talked about, like a skill that triggers an MCP that triggers like sub agents or
+
+[SPEAKER_00] 45:04 - 45:10
+ something like that. Or maybe there's like a bash script that's attached to a skill that can all be
+
+[SPEAKER_00] 45:10 - 45:14
+ turned into a plugin. And then a lot of people share their plugins online.
+
+[SPEAKER_00] 45:14 - 45:19
+ So this is like a really good example, you know, Anthropic has our own like plugins,
+
+[SPEAKER_00] 45:19 - 45:23
+ like structure, and they have a bunch of plugins here that you could download, for example,
+
+[SPEAKER_00] 45:25 - 45:31
+ like Colin ISP and things like that. So that's basically it. And the last thing I want to say
+
+[SPEAKER_00] 45:31 - 45:38
+ is context is king, you got to keep it fresh, keep it relevant, you essentially need to give
+
+[SPEAKER_00] 45:38 - 45:48
+ cod the context that it needs and nothing more. But yeah, so go and build something amazing. I hope this
+
+[SPEAKER_00] 45:48 - 45:54
+ was valuable to you. I hope you learned something, go and build something amazing. And if you're interested
+
+[SPEAKER_00] 45:54 - 46:00
+ in this kind of video on cloud cloud, I did a whole video on like kind of the high level thought process
+
+[SPEAKER_00] 46:00 - 46:07
+ of like AI coding, and and also talked a little bit about my second brain thing, those two videos are
+
+[SPEAKER_00] 46:07 - 46:12
+ right here to go and check it out. But yeah, until I see you guys on the next video. Bye.

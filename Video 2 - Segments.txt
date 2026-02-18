@@ -1,0 +1,98 @@
+0:00 Introduction to 50 Claude Code Tips
+The video introduces 50 Claude Code tips based on the presenter's six months of daily use. The presenter aims to share the most valuable insights learned, especially those that would have been helpful when starting out. The content will cover foundation setup, cloud.md rules, and advanced techniques.
+
+1:17 Run from Root Directory
+Tip number one emphasizes running Claude Code from the root directory of the project. This ensures Claude has access to the entire project structure for better context zipping. Running from the root directory also helps prevent high token usage when Claude initializes.
+
+1:55 Initialize Claude.md
+The presenter advises running `/init` immediately to create a `CLAUDE.md` file. This file stores the code base analysis, which serves as Claude's long-term memory. The CLAUDE.md file is crucial for new projects, providing Claude with an understanding of the project's architecture.
+
+2:50 Hierarchical CLAUDE.md
+The CLAUDE.md file runs on a hierarchy, which is accessible through memory/memory, where it checks for existing memory to make changes. Users can select different directories for CLAUDE to source from. This allows users to control the core rules Claude Code operates under, by choosing a cloud.md file.
+
+3:25 Concise CLAUDE.md
+The presenter advises keeping the CLAUDE.md file concise, ideally around 300 lines, to avoid bloating the context window and degrading performance. The CLAUDE.md should be specific to the project, detailing technical architecture, requirements, domain context, and design patterns.
+
+4:30 Build and Validation
+Validation flow, including build steps, is an important aspect of CLAUDE.md. This improves the AI's ability to self-improve and fix itself. A proper validation loop greatly enhances the performance of AI coding systems, allowing them to achieve better results.
+
+5:30 Keyboard Shortcuts
+The presenter highlights useful keyboard shortcuts for efficient use of Claude Code. These shortcuts include shift+tab for toggling modes between accept edits and plan mode. Learning these hotkeys is essential to fully utilize the workhorse, Claude Code.
+
+6:39 Interrupting Actions
+Escape interrupts the process so that a user can alter it. However, because Claude code has a really good way of queueing prompts, users should feel welcome to enter new prompts and experiment with how Claude behaves in different circumstances.
+
+7:43 Double Escape Functionality
+Double-tapping escape clears the input and a double tap on an empty input opens rewind, which allows the user to rewind to a previous context point. A lot of the tools in Claude code manage user context, which is what that agent is ultimately wrapped around.
+
+8:19 Screenshots and Context
+Screenshots can be dragged and dropped into Claude, and context should be added when using screenshots. Screenshots are useful for UI work and are recommended with a Figma MCP for proper validation. This workflow can be supplemented with a Figma MCP to better improve the process.
+
+9:41 Slash Commands
+Essential slash commands for efficient Claude Code usage are described, starting with slash clear which clears the context and prevents old content from influencing the new project. Slash commands help to control which actions Claude code takes.
+
+10:41 Context Command
+The `/context` command provides a visual representation of the current context Claude Code is operating in, and allows users to control cost by removing unneeded or bloated context. It can also help users improve Claude Code after long sessions by ensuring the code is not regressing.
+
+12:23 Model Selection
+The slash models command allows you to select Opus or other models. Opus is the superior model, while other models can help minimize costs if they are preferred for a specific workflow. A limited token strategy, as a result, may require the use of inferior models.
+
+12:48 Resuming Code
+Slash resume recovers sessions if an instance is lost. Claude code is always ready to give the user's old context back so that the user can recover. Without this slash command, any work done before may be at risk of being lost, so slash resume is useful for finding that.
+
+13:19 Utilizing MCP
+`/MCP` manages the installed MCPs. MCPs blow up the context window, so the presenter tries very hard not to use them, however some projects such as Xcode require the MCPs. MCPs are useful for managing different integrations.
+
+15:51 Critical Rules
+A critical rules section in the CLAUDE.md file should include specific instructions and examples such as 'never do something' or 'always do this'. It must be top to bottom in importance in order to establish clear rules and prevent the AI from making errors. These prevent the AI from repeating mistakes.
+
+17:17 Workflow Triggers
+Keywords can trigger workflow skills. To trigger workflow skills, make sure to tell Claude to add what you need. `Claude.md` files can be committed to git so that the team has instant access and can contribute. To maintain that, users must make sure that what they land is helping.
+
+19:34 Dangerously-Skip Mode
+To avoid repeated prompts, use CLAUDE in YOLO or dangerously-skip mode, however the presenter suggests that you only do so in environments that you can throw away. The use of such strategies is ideal when performing specific work that is not super dangerous.
+
+21:34 Fresh Context
+Starting a feature in plan mode first allows one to iterate and argue with Claude first. This is because fresh context, beats bloated context, so it helps to start with plan mode and double check before going to accept or execute to ensure the right path.
+
+24:28 Persistent Code
+Persist code before ending sessions so that sessions are temporary while CLAUDE.md remains permanent. Having a strong project to draw context from can ensure code is more effective. A lazy-load system can be useful in that scenario.
+
+25:33 Validation and Commands
+It is important to build your test cycle into CLAUDE.md. A lazy-load system, along with the use of commands that validate builds can significantly improve Claude's capabilities. Users can provide a high-level assessment and improve CLAUDE.md by adding tests and commands.
+
+29:39 Workflow Skills
+The difference between casual and power users with Claude is knowing the four composability primitives, which are skills, commands, MCPS and Subagents. Templates that load context when triggered are lazy-loaded so they don't eat tokens until they are needed.
+
+32:17 Twitter Commands
+Automated steps, through commands, should not be created manually. This allows Claude to easily manage all steps and manage file structure, improving organization of the application as a result. Instead, it can write it and save it into your local MD file by updating it.
+
+33:01 External Sources
+MCPs or external service documents are more than just API connections because they have structured documentation for databases, browsers and systems. Users don't actually need to search the web for the MCP because they can just have Claude find it for them.
+
+34:12 Sub Agents
+Task() spawns clones for parallel work where each fresh context window is spawned. Users can install FIGMA with this strategy. Subagents must have a high degree of testability with atomic and side effect functionality. However, users can also build iOS architecture sub agents for custom actions.
+
+37:07 Avoid Instruction Overload
+Context is best served fresh and condensed, therefore, it is better to do quality over quantity when doing instruction. There are several next steps after software installation including obtaining a Figma API key for example. The format includes an analysis as well as an overall assessment.
+
+38:09 Code Instances
+Running multiple instances can increase the speed with which a project develops. This can be achieved by using different terminals for different tasks, resulting in no shared context. Doing so allows for less bottlenecks.
+
+39:06 ITerm Split Panes
+Using ITerm Split Panes can improve Claude with command d (split), bracket (navigate), or Cmd with the corresponding bracket to change tabs, making Claude a breeze. The user can rename the different tabs as necessary to maintain flow and organization.
+
+40:33 Enabling Notifications
+Enabling notifications allows a custom sound when code finishes, allowing context switches as needed while Claude works, saving the user time. A user can direct Claude to add or remove what is necessary.
+
+41:08 Git Worktrees
+GIT worktrees provide multiple Claude instances, the same repo with isolated files where each worktree can separate a checkout. To better improve workflow and allow for code executions in the same project, this can be a great help.
+
+41:41 Connecting Browsers
+Connecting a browser through slash Chrome can lead to API keys and see and interact with web pages. Because users can control the actions, such as extracting specific information or actions that normally require an API key it becomes easier to have access to various different code sets.
+
+44:01 Intercepting Actions
+Hooks intercept actions so that actions can be performed before or after the execution. It is better if you ask Claude to add hooks rather than doing it manually, making the environment that the user uses hands off. This is good to prevent destructive actions.
+
+45:01 Plugin Ecosystem
+Explore the plugin ecosystem to find pre-built skills and commands. Once downloaded, the environment can be used immediately. The plugin is a combination of commands, skills, hooks, MCPS, and subagents. However, Context is King, so that code has what it needs and nothing more.

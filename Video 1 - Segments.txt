@@ -1,0 +1,44 @@
+0:00 Introduction to Claude Code
+Boris Cherny introduces himself and Claude Code, highlighting that the talk will focus on practical tips rather than theory. He prompts the audience to install Claude Code to follow along, emphasizing it as a new kind of AI assistant designed for more than just completing lines of code.
+
+1:28 Key Features of Claude Code
+Claude Code is presented as an agentic AI assistant that works with existing tools and workflows. It is general-purpose, allowing users to build features, write entire functions, and fix bugs. The speaker emphasizes that it works with every IDE, terminal, and environment without requiring significant workflow changes.
+
+2:56 Optimizing Your Setup
+The presenter recommends several setup steps for new Claude Code users. These include using Terminal Setup for new lines, setting a theme, installing the GitHub app for tagging Claude in issues, and customizing allowed tools. The speaker also suggests using macOS dictation for voice prompts.
+
+4:14 Codebase Q&A
+The primary recommendation for getting started with Claude Code is to use the Codebase Q&A feature. This involves asking questions about the codebase to Claude, which explores the code and provides answers. This method is used for technical onboarding at Anthropic and significantly reduces the time required.
+
+5:30 Example Prompts and Use Cases
+The speaker shares specific prompts and code samples to enhance the Claude Code experience. He suggests asking questions like 'How is this code used?' or 'Why does this function have 15 arguments?' Claude Code can look through Git history and provide summaries, look up context on GitHub issues, and provide a readout of shipped code.
+
+7:52 Editing Code with Tools
+After mastering Q&A, the next step is editing code. Claude Code is powerful due to its tools, such as file editing, bash commands, and file searching, which it strings together to explore, brainstorm, and make edits. The speaker recommends asking Claude to brainstorm or make a plan before writing code.
+
+9:50 Plugging in Team Tools
+Users can plug in their team's tools to Claude Code, enhancing its capabilities. This includes bash and MCP tools. The presenter describes how to tell Claude about these tools and how to use them, making Claude Code more powerful and able to use existing tools for a codebase.
+
+10:59 Common Workflows
+The presentation outlines common workflows such as exploration, planning, and confirmation before writing code. When Claude can check its work, such as by writing unit tests, it can iterate to improve its results. Providing a tool for feedback enables Claude to enhance its performance.
+
+11:58 Providing Context to Claude
+Giving Claude more context leads to smarter decisions. This context can be provided through various means, including CLAUDE.md files, slash commands, and at-mentioning filenames. A CLAUDE.md file in the project root is automatically read into context at the start of each session.
+
+13:32 More Ways to Give Context
+Additional methods for providing context include nested CLAUDE.md files, slash commands, and mentioning files. Enterprise-level CLAUDE.md files can be managed across different codebases. The presentation stresses the importance of tuning the context for optimal performance.
+
+15:38 Team Collaboration
+The presentation shifts to team collaboration, emphasizing sharing permissions, memory, and MCP servers. This involves configuring CLAUDE.md files, MCP servers, permissions, and slash commands for the team and checking them into Git for unified access.
+
+18:41 Keybindings Interlude
+The presentation pauses for a brief interlude on useful keybindings, including Shift+Tab for auto-accept edits, # for creating a memory, i to enter bash mode, @ to add a file or folder, Esc to cancel, double-Esc to jump back in history, -resume to resume, Ctrl+R for verbose output.
+
+20:50 Claude Code SDK
+The Claude Code SDK is introduced, allowing programmatic access useful for CI/CD. It supports CLI, Typescript, and Python SDKs. The SDK functions as a Unix utility, allowing users to pipe in prompts and receive JSON output.
+
+22:36 Multi-Claude Parallelization
+The presentation discusses ways to run multiple instances of Claude in parallel, like multiple checkouts, Git worktrees, SSH+TMUX, and GitHub Actions. This setup enables users to accomplish more in parallel.
+
+23:47 Q&A and Closing Remarks
+The presentation concludes with a Q&A session, addressing questions about the most challenging parts of implementing Claude Code, the use of multimodal functionality with images, the choice to build a CLI tool instead of an IDE, and the applications of Claude Code for machine learning. The presenter then thanks the audience.

@@ -1,0 +1,5429 @@
+{
+  "topic": {
+    "title": "Claude Code Mastery",
+    "description": "Best tips from 2 expert talks on Claude Code"
+  },
+  "videos": [
+    {
+      "id": "vid-1",
+      "youtubeId": "6eBSHbLKuN0",
+      "title": "Mastering Claude Code in 30 Minutes"
+    },
+    {
+      "id": "vid-2",
+      "youtubeId": "mZzhfPle9QU",
+      "title": "50 Claude Code Tips"
+    }
+  ],
+  "segments": [
+    {
+      "id": "seg-001",
+      "videoId": "vid-1",
+      "label": "Introduction to Claude Code",
+      "start": 0,
+      "end": 88,
+      "bullets": [
+        "Boris Cherny introduces himself and Claude Code, highlighting that the talk will focus on practical tips rather than theory."
+      ]
+    },
+    {
+      "id": "seg-002",
+      "videoId": "vid-1",
+      "label": "Key Features of Claude Code",
+      "start": 88,
+      "end": 176,
+      "bullets": [
+        "Claude Code is presented as an agentic AI assistant that works with existing tools and workflows.",
+        "It is general-purpose, allowing users to build features, write entire functions, and fix bugs.",
+        "The speaker emphasizes that it works with every IDE, terminal, and environment without requiring significant workflow changes."
+      ]
+    },
+    {
+      "id": "seg-003",
+      "videoId": "vid-1",
+      "label": "Optimizing Your Setup",
+      "start": 176,
+      "end": 254,
+      "bullets": [
+        "The presenter recommends several setup steps for new Claude Code users.",
+        "These include using Terminal Setup for new lines, setting a theme, installing the GitHub app for tagging Claude in issues, and customizing allowed tools.",
+        "The speaker also suggests using macOS dictation for voice prompts."
+      ]
+    },
+    {
+      "id": "seg-004",
+      "videoId": "vid-1",
+      "label": "Codebase Q&A",
+      "start": 254,
+      "end": 330,
+      "bullets": [
+        "This involves asking questions about the codebase to Claude, which explores the code and provides answers.",
+        "This method is used for technical onboarding at Anthropic and significantly reduces the time required."
+      ]
+    },
+    {
+      "id": "seg-005",
+      "videoId": "vid-1",
+      "label": "Example Prompts and Use Cases",
+      "start": 330,
+      "end": 472,
+      "bullets": [
+        "The speaker shares specific prompts and code samples to enhance the Claude Code experience.",
+        "He suggests asking questions like 'How is this code used?' or 'Why does this function have 15 arguments?' Claude Code can look through Git history and provide summaries, look up context on GitHub issues, and provide a readout of shipped code."
+      ]
+    },
+    {
+      "id": "seg-006",
+      "videoId": "vid-1",
+      "label": "Editing Code with Tools",
+      "start": 472,
+      "end": 590,
+      "bullets": [
+        "After mastering Q&A, the next step is editing code.",
+        "Claude Code is powerful due to its tools, such as file editing, bash commands, and file searching, which it strings together to explore, brainstorm, and make edits.",
+        "The speaker recommends asking Claude to brainstorm or make a plan before writing code."
+      ]
+    },
+    {
+      "id": "seg-007",
+      "videoId": "vid-1",
+      "label": "Plugging in Team Tools",
+      "start": 590,
+      "end": 659,
+      "bullets": [
+        "Users can plug in their team's tools to Claude Code, enhancing its capabilities.",
+        "This includes bash and MCP tools.",
+        "The presenter describes how to tell Claude about these tools and how to use them, making Claude Code more powerful and able to use existing tools for a codebase."
+      ]
+    },
+    {
+      "id": "seg-008",
+      "videoId": "vid-1",
+      "label": "Common Workflows",
+      "start": 659,
+      "end": 718,
+      "bullets": [
+        "When Claude can check its work, such as by writing unit tests, it can iterate to improve its results.",
+        "Providing a tool for feedback enables Claude to enhance its performance."
+      ]
+    },
+    {
+      "id": "seg-009",
+      "videoId": "vid-1",
+      "label": "Providing Context to Claude",
+      "start": 718,
+      "end": 812,
+      "bullets": [
+        "This context can be provided through various means, including CLAUDE.md files, slash commands, and at-mentioning filenames.",
+        "A CLAUDE.md file in the project root is automatically read into context at the start of each session."
+      ]
+    },
+    {
+      "id": "seg-010",
+      "videoId": "vid-1",
+      "label": "More Ways to Give Context",
+      "start": 812,
+      "end": 938,
+      "bullets": [
+        "Additional methods for providing context include nested CLAUDE.md files, slash commands, and mentioning files.",
+        "Enterprise-level CLAUDE.md files can be managed across different codebases.",
+        "The presentation stresses the importance of tuning the context for optimal performance."
+      ]
+    },
+    {
+      "id": "seg-011",
+      "videoId": "vid-1",
+      "label": "Team Collaboration",
+      "start": 938,
+      "end": 1121,
+      "bullets": [
+        "The presentation shifts to team collaboration, emphasizing sharing permissions, memory, and MCP servers.",
+        "This involves configuring CLAUDE.md files, MCP servers, permissions, and slash commands for the team and checking them into Git for unified access."
+      ]
+    },
+    {
+      "id": "seg-012",
+      "videoId": "vid-1",
+      "label": "Keybindings Interlude",
+      "start": 1121,
+      "end": 1250,
+      "bullets": [
+        "The presentation pauses for a brief interlude on useful keybindings, including Shift+Tab for auto-accept edits, # for creating a memory, i to enter bash mode, @ to add a file or folder, Esc to cancel, double-Esc to jump back in history, -resume to resume, Ctrl+R for verbose output."
+      ]
+    },
+    {
+      "id": "seg-013",
+      "videoId": "vid-1",
+      "label": "Claude Code SDK",
+      "start": 1250,
+      "end": 1356,
+      "bullets": [
+        "It supports CLI, Typescript, and Python SDKs.",
+        "The SDK functions as a Unix utility, allowing users to pipe in prompts and receive JSON output."
+      ]
+    },
+    {
+      "id": "seg-014",
+      "videoId": "vid-1",
+      "label": "Multi-Claude Parallelization",
+      "start": 1356,
+      "end": 1427,
+      "bullets": [
+        "The presentation discusses ways to run multiple instances of Claude in parallel, like multiple checkouts, Git worktrees, SSH+TMUX, and GitHub Actions.",
+        "This setup enables users to accomplish more in parallel."
+      ]
+    },
+    {
+      "id": "seg-015",
+      "videoId": "vid-1",
+      "label": "Q&A and Closing Remarks",
+      "start": 1427,
+      "end": 1689,
+      "bullets": [
+        "The presentation concludes with a Q&A session, addressing questions about the most challenging parts of implementing Claude Code, the use of multimodal functionality with images, the choice to build a CLI tool instead of an IDE, and the applications of Claude Code for machine learning.",
+        "The presenter then thanks the audience."
+      ]
+    },
+    {
+      "id": "seg-016",
+      "videoId": "vid-2",
+      "label": "Introduction to 50 Claude Code Tips",
+      "start": 0,
+      "end": 77,
+      "bullets": [
+        "The presenter aims to share the most valuable insights learned, especially those that would have been helpful when starting out.",
+        "The content will cover foundation setup, cloud.md rules, and advanced techniques."
+      ]
+    },
+    {
+      "id": "seg-017",
+      "videoId": "vid-2",
+      "label": "Run from Root Directory",
+      "start": 77,
+      "end": 115,
+      "bullets": [
+        "This ensures Claude has access to the entire project structure for better context zipping."
+      ]
+    },
+    {
+      "id": "seg-018",
+      "videoId": "vid-2",
+      "label": "Initialize Claude.md",
+      "start": 115,
+      "end": 170,
+      "bullets": [
+        "The presenter advises running `/init` immediately to create a `CLAUDE.md` file.",
+        "This file stores the code base analysis, which serves as Claude's long-term memory.",
+        "The CLAUDE.md file is crucial for new projects, providing Claude with an understanding of the project's architecture."
+      ]
+    },
+    {
+      "id": "seg-019",
+      "videoId": "vid-2",
+      "label": "Hierarchical CLAUDE.md",
+      "start": 170,
+      "end": 205,
+      "bullets": [
+        "The CLAUDE.md file runs on a hierarchy, which is accessible through memory/memory, where it checks for existing memory to make changes.",
+        "Users can select different directories for CLAUDE to source from.",
+        "This allows users to control the core rules Claude Code operates under, by choosing a cloud.md file."
+      ]
+    },
+    {
+      "id": "seg-020",
+      "videoId": "vid-2",
+      "label": "Concise CLAUDE.md",
+      "start": 205,
+      "end": 270,
+      "bullets": [
+        "The presenter advises keeping the CLAUDE.md file concise, ideally around 300 lines, to avoid bloating the context window and degrading performance.",
+        "The CLAUDE.md should be specific to the project, detailing technical architecture, requirements, domain context, and design patterns."
+      ]
+    },
+    {
+      "id": "seg-021",
+      "videoId": "vid-2",
+      "label": "Build and Validation",
+      "start": 270,
+      "end": 330,
+      "bullets": [
+        "This improves the AI's ability to self-improve and fix itself.",
+        "A proper validation loop greatly enhances the performance of AI coding systems, allowing them to achieve better results."
+      ]
+    },
+    {
+      "id": "seg-022",
+      "videoId": "vid-2",
+      "label": "Keyboard Shortcuts",
+      "start": 330,
+      "end": 399,
+      "bullets": [
+        "These shortcuts include shift+tab for toggling modes between accept edits and plan mode.",
+        "Learning these hotkeys is essential to fully utilize the workhorse, Claude Code."
+      ]
+    },
+    {
+      "id": "seg-023",
+      "videoId": "vid-2",
+      "label": "Interrupting Actions",
+      "start": 399,
+      "end": 463,
+      "bullets": [
+        "Escape interrupts the process so that a user can alter it.",
+        "However, because Claude code has a really good way of queueing prompts, users should feel welcome to enter new prompts and experiment with how Claude behaves in different circumstances."
+      ]
+    },
+    {
+      "id": "seg-024",
+      "videoId": "vid-2",
+      "label": "Double Escape Functionality",
+      "start": 463,
+      "end": 499,
+      "bullets": [
+        "A lot of the tools in Claude code manage user context, which is what that agent is ultimately wrapped around."
+      ]
+    },
+    {
+      "id": "seg-025",
+      "videoId": "vid-2",
+      "label": "Screenshots and Context",
+      "start": 499,
+      "end": 581,
+      "bullets": [
+        "This workflow can be supplemented with a Figma MCP to better improve the process."
+      ]
+    },
+    {
+      "id": "seg-026",
+      "videoId": "vid-2",
+      "label": "Slash Commands",
+      "start": 581,
+      "end": 641,
+      "bullets": [
+        "Essential slash commands for efficient Claude Code usage are described, starting with slash clear which clears the context and prevents old content from influencing the new project.",
+        "Slash commands help to control which actions Claude code takes."
+      ]
+    },
+    {
+      "id": "seg-027",
+      "videoId": "vid-2",
+      "label": "Context Command",
+      "start": 641,
+      "end": 743,
+      "bullets": [
+        "It can also help users improve Claude Code after long sessions by ensuring the code is not regressing."
+      ]
+    },
+    {
+      "id": "seg-028",
+      "videoId": "vid-2",
+      "label": "Model Selection",
+      "start": 743,
+      "end": 768,
+      "bullets": [
+        "The slash models command allows you to select Opus or other models.",
+        "Opus is the superior model, while other models can help minimize costs if they are preferred for a specific workflow.",
+        "A limited token strategy, as a result, may require the use of inferior models."
+      ]
+    },
+    {
+      "id": "seg-029",
+      "videoId": "vid-2",
+      "label": "Resuming Code",
+      "start": 768,
+      "end": 799,
+      "bullets": [
+        "Slash resume recovers sessions if an instance is lost.",
+        "Claude code is always ready to give the user's old context back so that the user can recover.",
+        "Without this slash command, any work done before may be at risk of being lost, so slash resume is useful for finding that."
+      ]
+    },
+    {
+      "id": "seg-030",
+      "videoId": "vid-2",
+      "label": "Utilizing MCP",
+      "start": 799,
+      "end": 951,
+      "bullets": [
+        "`/MCP` manages the installed MCPs.",
+        "MCPs blow up the context window, so the presenter tries very hard not to use them, however some projects such as Xcode require the MCPs.",
+        "MCPs are useful for managing different integrations."
+      ]
+    },
+    {
+      "id": "seg-031",
+      "videoId": "vid-2",
+      "label": "Critical Rules",
+      "start": 951,
+      "end": 1037,
+      "bullets": [
+        "It must be top to bottom in importance in order to establish clear rules and prevent the AI from making errors.",
+        "These prevent the AI from repeating mistakes."
+      ]
+    },
+    {
+      "id": "seg-032",
+      "videoId": "vid-2",
+      "label": "Workflow Triggers",
+      "start": 1037,
+      "end": 1174,
+      "bullets": [
+        "Keywords can trigger workflow skills.",
+        "To trigger workflow skills, make sure to tell Claude to add what you need.",
+        "`Claude.md` files can be committed to git so that the team has instant access and can contribute."
+      ]
+    },
+    {
+      "id": "seg-033",
+      "videoId": "vid-2",
+      "label": "Dangerously-Skip Mode",
+      "start": 1174,
+      "end": 1294,
+      "bullets": [
+        "To avoid repeated prompts, use CLAUDE in YOLO or dangerously-skip mode, however the presenter suggests that you only do so in environments that you can throw away.",
+        "The use of such strategies is ideal when performing specific work that is not super dangerous."
+      ]
+    },
+    {
+      "id": "seg-034",
+      "videoId": "vid-2",
+      "label": "Fresh Context",
+      "start": 1294,
+      "end": 1468,
+      "bullets": [
+        "Starting a feature in plan mode first allows one to iterate and argue with Claude first.",
+        "This is because fresh context, beats bloated context, so it helps to start with plan mode and double check before going to accept or execute to ensure the right path."
+      ]
+    },
+    {
+      "id": "seg-035",
+      "videoId": "vid-2",
+      "label": "Persistent Code",
+      "start": 1468,
+      "end": 1533,
+      "bullets": [
+        "Persist code before ending sessions so that sessions are temporary while CLAUDE.md remains permanent.",
+        "Having a strong project to draw context from can ensure code is more effective.",
+        "A lazy-load system can be useful in that scenario."
+      ]
+    },
+    {
+      "id": "seg-036",
+      "videoId": "vid-2",
+      "label": "Validation and Commands",
+      "start": 1533,
+      "end": 1779,
+      "bullets": [
+        "It is important to build your test cycle into CLAUDE.md.",
+        "A lazy-load system, along with the use of commands that validate builds can significantly improve Claude's capabilities.",
+        "Users can provide a high-level assessment and improve CLAUDE.md by adding tests and commands."
+      ]
+    },
+    {
+      "id": "seg-037",
+      "videoId": "vid-2",
+      "label": "Workflow Skills",
+      "start": 1779,
+      "end": 1937,
+      "bullets": [
+        "The difference between casual and power users with Claude is knowing the four composability primitives, which are skills, commands, MCPS and Subagents.",
+        "Templates that load context when triggered are lazy-loaded so they don't eat tokens until they are needed."
+      ]
+    },
+    {
+      "id": "seg-038",
+      "videoId": "vid-2",
+      "label": "Twitter Commands",
+      "start": 1937,
+      "end": 1981,
+      "bullets": [
+        "Automated steps, through commands, should not be created manually.",
+        "This allows Claude to easily manage all steps and manage file structure, improving organization of the application as a result.",
+        "Instead, it can write it and save it into your local MD file by updating it."
+      ]
+    },
+    {
+      "id": "seg-039",
+      "videoId": "vid-2",
+      "label": "External Sources",
+      "start": 1981,
+      "end": 2052,
+      "bullets": [
+        "MCPs or external service documents are more than just API connections because they have structured documentation for databases, browsers and systems.",
+        "Users don't actually need to search the web for the MCP because they can just have Claude find it for them."
+      ]
+    },
+    {
+      "id": "seg-040",
+      "videoId": "vid-2",
+      "label": "Sub Agents",
+      "start": 2052,
+      "end": 2227,
+      "bullets": [
+        "Task() spawns clones for parallel work where each fresh context window is spawned.",
+        "Users can install FIGMA with this strategy.",
+        "Subagents must have a high degree of testability with atomic and side effect functionality."
+      ]
+    },
+    {
+      "id": "seg-041",
+      "videoId": "vid-2",
+      "label": "Avoid Instruction Overload",
+      "start": 2227,
+      "end": 2289,
+      "bullets": [
+        "Context is best served fresh and condensed, therefore, it is better to do quality over quantity when doing instruction.",
+        "There are several next steps after software installation including obtaining a Figma API key for example.",
+        "The format includes an analysis as well as an overall assessment."
+      ]
+    },
+    {
+      "id": "seg-042",
+      "videoId": "vid-2",
+      "label": "Code Instances",
+      "start": 2289,
+      "end": 2346,
+      "bullets": [
+        "Running multiple instances can increase the speed with which a project develops.",
+        "This can be achieved by using different terminals for different tasks, resulting in no shared context.",
+        "Doing so allows for less bottlenecks."
+      ]
+    },
+    {
+      "id": "seg-043",
+      "videoId": "vid-2",
+      "label": "ITerm Split Panes",
+      "start": 2346,
+      "end": 2433,
+      "bullets": [
+        "The user can rename the different tabs as necessary to maintain flow and organization."
+      ]
+    },
+    {
+      "id": "seg-044",
+      "videoId": "vid-2",
+      "label": "Enabling Notifications",
+      "start": 2433,
+      "end": 2468,
+      "bullets": [
+        "A user can direct Claude to add or remove what is necessary."
+      ]
+    },
+    {
+      "id": "seg-045",
+      "videoId": "vid-2",
+      "label": "Git Worktrees",
+      "start": 2468,
+      "end": 2501,
+      "bullets": [
+        "To better improve workflow and allow for code executions in the same project, this can be a great help."
+      ]
+    },
+    {
+      "id": "seg-046",
+      "videoId": "vid-2",
+      "label": "Connecting Browsers",
+      "start": 2501,
+      "end": 2641,
+      "bullets": [
+        "Connecting a browser through slash Chrome can lead to API keys and see and interact with web pages.",
+        "Because users can control the actions, such as extracting specific information or actions that normally require an API key it becomes easier to have access to various different code sets."
+      ]
+    },
+    {
+      "id": "seg-047",
+      "videoId": "vid-2",
+      "label": "Intercepting Actions",
+      "start": 2641,
+      "end": 2701,
+      "bullets": [
+        "Hooks intercept actions so that actions can be performed before or after the execution.",
+        "It is better if you ask Claude to add hooks rather than doing it manually, making the environment that the user uses hands off.",
+        "This is good to prevent destructive actions."
+      ]
+    },
+    {
+      "id": "seg-048",
+      "videoId": "vid-2",
+      "label": "Plugin Ecosystem",
+      "start": 2701,
+      "end": 2772,
+      "bullets": [
+        "Once downloaded, the environment can be used immediately.",
+        "The plugin is a combination of commands, skills, hooks, MCPS, and subagents.",
+        "However, Context is King, so that code has what it needs and nothing more."
+      ]
+    }
+  ],
+  "transcripts": {
+    "vid-1": [
+      {
+        "start": 0,
+        "end": 24,
+        "text": "Hello. Hey everyone. I'm Boris. I'm a member of technical staff here at Anthropic and I created"
+      },
+      {
+        "start": 24,
+        "end": 29,
+        "text": "QuadCode. And here to talk to you a little bit about some practical tips and tricks for using"
+      },
+      {
+        "start": 29,
+        "end": 34,
+        "text": "QuadCode. It's going to be very practical. I'm not going to go too much into the history or the"
+      },
+      {
+        "start": 34,
+        "end": 40,
+        "text": "theory or anything like this. And yeah, before we start, actually, can we get a quick show of hands"
+      },
+      {
+        "start": 40,
+        "end": 47,
+        "text": "who has used QuadCode before? Yeah. All right. That's what we like to see. For everyone that"
+      },
+      {
+        "start": 47,
+        "end": 51,
+        "text": "didn't raise your hands, I know you're not supposed to do this while people are talking, but if you"
+      },
+      {
+        "start": 51,
+        "end": 60,
+        "text": "can open your laptop and type this, and this will help you install QuadCode just so you can follow"
+      },
+      {
+        "start": 60,
+        "end": 70,
+        "text": "along for the rest of the talk. All you need is Node.js if you have it. This should work."
+      },
+      {
+        "start": 70,
+        "end": 80,
+        "text": "Yeah. You don't have to follow along, but if you don't have it yet,"
+      },
+      {
+        "start": 80,
+        "end": 89,
+        "text": "this is your chance to install it so you can follow along. So what is QuadCode? QuadCode is a new kind"
+      },
+      {
+        "start": 89,
+        "end": 95,
+        "text": "of AI assistant. And there's been different generations of AI assistants for coding. Most of"
+      },
+      {
+        "start": 95,
+        "end": 101,
+        "text": "them have been about completing a line at a time, completing a few lines of code at a time. QuadCode"
+      },
+      {
+        "start": 101,
+        "end": 107,
+        "text": "is not for that. It's fully agentic. So it's meant for building features, for writing entire functions,"
+      },
+      {
+        "start": 107,
+        "end": 115,
+        "text": "entire files, fixing entire bugs at the same time. And what's kind of cool about QuadCode is it works"
+      },
+      {
+        "start": 115,
+        "end": 119,
+        "text": "with all of your tools. And you don't have to change out your workflow. You don't have to swap"
+      },
+      {
+        "start": 119,
+        "end": 126,
+        "text": "everything to start using it. So whatever IDE you use, if you use VS Code or if you use Xcode or if you"
+      },
+      {
+        "start": 126,
+        "end": 132,
+        "text": "use JetBrains IDEs, there's some people at Anthropic that you can't pry them from their cold, dead hands."
+      },
+      {
+        "start": 132,
+        "end": 138,
+        "text": "But they use QuadCode. Because QuadCode works with every single IDE, every terminal out there. It'll"
+      },
+      {
+        "start": 138,
+        "end": 143,
+        "text": "work locally over remote SSH, over Tmux, whatever environment you're in, you can run it."
+      },
+      {
+        "start": 147,
+        "end": 152,
+        "text": "It's general purpose, and this is something where if you haven't used these kind of free-form coding"
+      },
+      {
+        "start": 152,
+        "end": 157,
+        "text": "assistants in the past, it can be kind of hard to figure out how to get started. Because you open it up"
+      },
+      {
+        "start": 157,
+        "end": 160,
+        "text": "and you just see a prompt bar and you might wonder, like, what do I do with this? What do I type in?"
+      },
+      {
+        "start": 161,
+        "end": 166,
+        "text": "It's a power tool, so you can use it for a lot of things. But also, because it can do so much,"
+      },
+      {
+        "start": 166,
+        "end": 170,
+        "text": "we don't try to guide you towards a particular workflow. Because really, you should be able to"
+      },
+      {
+        "start": 170,
+        "end": 172,
+        "text": "use it however you want as an engineer."
+      },
+      {
+        "start": 177,
+        "end": 180,
+        "text": "As you open up QuadCode for the first time, there's a few things that we recommend doing"
+      },
+      {
+        "start": 181,
+        "end": 185,
+        "text": "to get your environment set up. And these are pretty straightforward. So run Terminal Setup,"
+      },
+      {
+        "start": 185,
+        "end": 190,
+        "text": "this will give you Shift-Enter for new lines, so you don't have to do backslashes to enter new lines."
+      },
+      {
+        "start": 190,
+        "end": 196,
+        "text": "This is, you know, it makes it a little bit nicer to use. Do slash theme to set light mode or dark mode"
+      },
+      {
+        "start": 196,
+        "end": 203,
+        "text": "or daltonize themes. You can do slash install GitHub app. So today we announced a GitHub app"
+      },
+      {
+        "start": 204,
+        "end": 210,
+        "text": "where you can mention Cloud on any GitHub issue or pull request. So to install it, just run this command"
+      },
+      {
+        "start": 210,
+        "end": 216,
+        "text": "in your terminal. You can customize the set of allowed tools that you can use so you're not"
+      },
+      {
+        "start": 216,
+        "end": 220,
+        "text": "prompted for it every time. This is pretty convenient. For stuff that I'm prompted about a bunch, I'll"
+      },
+      {
+        "start": 220,
+        "end": 225,
+        "text": "definitely customize it in this way so I don't have to accept it every time. And something that I actually"
+      },
+      {
+        "start": 225,
+        "end": 231,
+        "text": "do is for a lot of my prompts, I won't hand type them into QuadCode. If you're on macOS, you can go into"
+      },
+      {
+        "start": 231,
+        "end": 237,
+        "text": "your system settings under accessibility as dictation, and you can enable it. And so something I do is you just"
+      },
+      {
+        "start": 237,
+        "end": 243,
+        "text": "hit like that dictation key twice, and you can just speak your prompt. And it helps a lot to have"
+      },
+      {
+        "start": 243,
+        "end": 247,
+        "text": "specific prompts. So this is actually pretty awesome. You can just talk to QuadCode and like you would"
+      },
+      {
+        "start": 247,
+        "end": 256,
+        "text": "another engineer, and you don't have to type a lot of code. So when you're starting out with QuadCode,"
+      },
+      {
+        "start": 256,
+        "end": 261,
+        "text": "it's so freeform and it can do everything. What do you start with? The thing I recommend above everything"
+      },
+      {
+        "start": 261,
+        "end": 267,
+        "text": "else is starting with CodeBase Q&A. So just asking questions to your CodeBase. This is something"
+      },
+      {
+        "start": 267,
+        "end": 272,
+        "text": "that we teach new hires at Anthropic. So on the first day in technical onboarding, you learn about"
+      },
+      {
+        "start": 272,
+        "end": 277,
+        "text": "QuadCode, you download it, you get it set up, and then you immediately start asking questions about the"
+      },
+      {
+        "start": 277,
+        "end": 281,
+        "text": "CodeBase. And in the past when you were doing technical onboarding, it's something that taxes the"
+      },
+      {
+        "start": 281,
+        "end": 287,
+        "text": "team a lot. You have to ask other engineers on the team questions, you have to look around the code,"
+      },
+      {
+        "start": 287,
+        "end": 290,
+        "text": "and this takes a while, you have to figure out how to use the tools, this takes a long time."
+      },
+      {
+        "start": 292,
+        "end": 296,
+        "text": "With QuadCode, you can just ask QuadCode, and it'll explore the code base, it'll answer these kind"
+      },
+      {
+        "start": 296,
+        "end": 300,
+        "text": "of questions. And so at Anthropic, onboarding used to take about two or three weeks for technical"
+      },
+      {
+        "start": 300,
+        "end": 308,
+        "text": "hires. It's now about two or three days. What's also kind of cool about Q&A is we don't do any sort of"
+      },
+      {
+        "start": 308,
+        "end": 313,
+        "text": "indexing. So there's no remote database with your code, we don't upload it anywhere, your code stays"
+      },
+      {
+        "start": 313,
+        "end": 319,
+        "text": "local, we do not train generative models on the code. So it's there, you control it, there's no"
+      },
+      {
+        "start": 319,
+        "end": 324,
+        "text": "indices or anything like this. And what that means is also there's no setup. So you start Quad, you"
+      },
+      {
+        "start": 324,
+        "end": 327,
+        "text": "download it, you start it, there's no indexing, you don't have to wait, you can just use it right away."
+      },
+      {
+        "start": 330,
+        "end": 335,
+        "text": "This is a technical talk. So I'm going to show some very specific prompts and very specific code"
+      },
+      {
+        "start": 335,
+        "end": 339,
+        "text": "samples that you can use and hopefully improve and up level your QuadCode experience."
+      },
+      {
+        "start": 339,
+        "end": 344,
+        "text": "So some kind of questions that you can ask is, you know, like how is this particular piece of code"
+      },
+      {
+        "start": 344,
+        "end": 348,
+        "text": "used? Or how do I instantiate this thing? And QuadCode, it won't just do like a text search and try to"
+      },
+      {
+        "start": 348,
+        "end": 353,
+        "text": "answer this. It'll often go a level deeper and it'll try to find examples of how is this class"
+      },
+      {
+        "start": 353,
+        "end": 358,
+        "text": "instantiated? How is it used? And it'll give you a much deeper answer. So something that you would get"
+      },
+      {
+        "start": 358,
+        "end": 365,
+        "text": "out of a wiki or documentation instead of just like command F. Something that I do a lot also is"
+      },
+      {
+        "start": 365,
+        "end": 371,
+        "text": "ask it about Git history. So for example, you know, why does this function have 15 arguments? And why"
+      },
+      {
+        "start": 371,
+        "end": 376,
+        "text": "are the arguments named this weird way? And this is something I bet in all of our code bases, you have"
+      },
+      {
+        "start": 376,
+        "end": 381,
+        "text": "some function like this or some class like this. And QuadCode can look through Git history. And it'll"
+      },
+      {
+        "start": 381,
+        "end": 385,
+        "text": "look to figure out how did these arguments get introduced and who introduced them and what was the"
+      },
+      {
+        "start": 385,
+        "end": 390,
+        "text": "situation? What are the issues that those commits link to? And it'll look through all this and summarize it."
+      },
+      {
+        "start": 390,
+        "end": 395,
+        "text": "And you don't have to tell it that in all this detail. You just ask it. So just say look through"
+      },
+      {
+        "start": 395,
+        "end": 400,
+        "text": "Git history and it'll know to do this. The reason it knows, by the way, is not because we prompted it"
+      },
+      {
+        "start": 400,
+        "end": 404,
+        "text": "to. There's nothing in the system prompt about looking through Git history. It knows it because the"
+      },
+      {
+        "start": 404,
+        "end": 410,
+        "text": "model is awesome. And if you tell it to use Git, it'll know how to use Git. So we're lucky to be"
+      },
+      {
+        "start": 410,
+        "end": 418,
+        "text": "building on such a good model. I often ask about GitHub issues. So, you know, it can use web fetch and"
+      },
+      {
+        "start": 418,
+        "end": 421,
+        "text": "they can fetch issues and look up context on issues too. And this is pretty awesome."
+      },
+      {
+        "start": 423,
+        "end": 428,
+        "text": "And this is something that I do every single Monday in our weekly standup is I ask, what did"
+      },
+      {
+        "start": 428,
+        "end": 432,
+        "text": "I ship this week? And QuadCode looks to the log. It knows my username. And it'll just give me a nice"
+      },
+      {
+        "start": 432,
+        "end": 442,
+        "text": "readout of everything I shipped. And I'll just copy and paste that into a docs. So, yeah, that's tip"
+      },
+      {
+        "start": 442,
+        "end": 446,
+        "text": "number one. For people that have not used QuadCode before, if you're just showing it to someone for the"
+      },
+      {
+        "start": 446,
+        "end": 450,
+        "text": "first time, onboarding your team, the thing we definitely recommend is start with codebase Q&A."
+      },
+      {
+        "start": 450,
+        "end": 454,
+        "text": "Don't start by using fancy tools. Don't start by editing code. Just start by asking questions"
+      },
+      {
+        "start": 454,
+        "end": 458,
+        "text": "about the codebase. And that'll teach people how to prompt. And it'll start teaching them this boundary"
+      },
+      {
+        "start": 458,
+        "end": 463,
+        "text": "of, like, what can QuadCode do? What is it capable of? Versus what do you need to hold its hand with a"
+      },
+      {
+        "start": 463,
+        "end": 468,
+        "text": "little bit more? What can be one-shotted? What can be two-shotted, three-shotted? What do you need to use"
+      },
+      {
+        "start": 468,
+        "end": 475,
+        "text": "interactive mode for in a REPL? Once you're pretty comfortable with Q&A, you can dive into editing"
+      },
+      {
+        "start": 475,
+        "end": 483,
+        "text": "code. This is the next thing. And the cool thing about any sort of agentic, you know, like using"
+      },
+      {
+        "start": 483,
+        "end": 487,
+        "text": "an LM in an agentic way is you give it tools, and it's just, like, magical. It figures out how to use"
+      },
+      {
+        "start": 487,
+        "end": 492,
+        "text": "the tools. And with QuadCode, we give it a pretty small set of tools. It's not a lot. And so it has a"
+      },
+      {
+        "start": 492,
+        "end": 498,
+        "text": "tool to edit files. It has a tool to run bash commands. It has a tool to search files. And it'll"
+      },
+      {
+        "start": 498,
+        "end": 505,
+        "text": "string these together to explore the code, brainstorm, and then finally make edits. And you don't have to"
+      },
+      {
+        "start": 505,
+        "end": 508,
+        "text": "prompt it specifically to use this tool and this tool and this tool. You just say, you know, do this"
+      },
+      {
+        "start": 508,
+        "end": 511,
+        "text": "thing, and it'll figure out how to do it. It'll string it together in the right way. That makes sense"
+      },
+      {
+        "start": 511,
+        "end": 522,
+        "text": "for QuadCode. There's a lot of ways to use this. Something I like to do sometimes is before having"
+      },
+      {
+        "start": 522,
+        "end": 528,
+        "text": "Quad jump in to write code, I'll ask it to brainstorm a little bit or make a plan. This is something we"
+      },
+      {
+        "start": 528,
+        "end": 533,
+        "text": "highly recommend and something I see sometimes is people, you know, they take QuadCode and they"
+      },
+      {
+        "start": 533,
+        "end": 538,
+        "text": "ask it, hey, implement this enormous, like, 3000 line feature. And sometimes it gets this right on"
+      },
+      {
+        "start": 538,
+        "end": 542,
+        "text": "the first shot. But sometimes what happens is the thing that it builds is not at all the thing that"
+      },
+      {
+        "start": 542,
+        "end": 549,
+        "text": "you wanted. And the easiest way to get the result you want is ask it to think first. So brainstorm ideas,"
+      },
+      {
+        "start": 549,
+        "end": 554,
+        "text": "make a plan, run it by me, ask for approval before you write code. And you don't have to use plan"
+      },
+      {
+        "start": 554,
+        "end": 559,
+        "text": "mode, you don't have to use any special tools to do this. All you have to do is ask Quad, and it'll"
+      },
+      {
+        "start": 559,
+        "end": 566,
+        "text": "know to do this. So just say, before you write code, make a plan. That's it. This is also, I want to"
+      },
+      {
+        "start": 566,
+        "end": 570,
+        "text": "think for this one, this commit push PR, this is a really common incantation that I use. There's nothing"
+      },
+      {
+        "start": 570,
+        "end": 574,
+        "text": "special about it, but Quad is kind of smart enough to interpret this, so it'll make a commit, it'll push it"
+      },
+      {
+        "start": 574,
+        "end": 578,
+        "text": "to the branch, make a branch, and then make a pull request for me on GitHub. You don't have to explain anything."
+      },
+      {
+        "start": 578,
+        "end": 582,
+        "text": "It'll look through the code, it'll look through the history, it'll look through the git log by itself"
+      },
+      {
+        "start": 582,
+        "end": 586,
+        "text": "to figure out the commit format and all the stuff, and it'll make the commit and push it the right way."
+      },
+      {
+        "start": 588,
+        "end": 593,
+        "text": "Again, we're not system prompting it to do this, it just knows how to do this. The model is good."
+      },
+      {
+        "start": 596,
+        "end": 600,
+        "text": "As you get a little bit more advanced, you're going to want to start to plug in your team's tools,"
+      },
+      {
+        "start": 600,
+        "end": 606,
+        "text": "and this is where Quad Code starts to really shine."
+      },
+      {
+        "start": 602,
+        "end": 604,
+        "text": "And there's generally two kinds of tools."
+      },
+      {
+        "start": 604,
+        "end": 607,
+        "text": "So one is batch tools, and an example of this,"
+      },
+      {
+        "start": 607,
+        "end": 608,
+        "text": "I just made up this like burly CLI,"
+      },
+      {
+        "start": 608,
+        "end": 610,
+        "text": "this isn't a real thing."
+      },
+      {
+        "start": 610,
+        "end": 612,
+        "text": "But you can say use the CLI to do something."
+      },
+      {
+        "start": 612,
+        "end": 614,
+        "text": "And you can tell Cloud Code about this."
+      },
+      {
+        "start": 614,
+        "end": 616,
+        "text": "And you can tell it to use, for example,"
+      },
+      {
+        "start": 616,
+        "end": 618,
+        "text": "like dash dash help to figure out how to use it."
+      },
+      {
+        "start": 618,
+        "end": 620,
+        "text": "And this is efficient."
+      },
+      {
+        "start": 620,
+        "end": 622,
+        "text": "If you find yourself using it a lot,"
+      },
+      {
+        "start": 622,
+        "end": 623,
+        "text": "you can also dump this into your Cloud MD,"
+      },
+      {
+        "start": 623,
+        "end": 625,
+        "text": "which we'll talk about in a bit,"
+      },
+      {
+        "start": 625,
+        "end": 627,
+        "text": "so Cloud can remember this across sessions."
+      },
+      {
+        "start": 627,
+        "end": 629,
+        "text": "But this is a common pattern we follow at Anthropic,"
+      },
+      {
+        "start": 629,
+        "end": 631,
+        "text": "and we see external customers use too."
+      },
+      {
+        "start": 632,
+        "end": 634,
+        "text": "And same thing with MCP."
+      },
+      {
+        "start": 634,
+        "end": 637,
+        "text": "Cloud Code can use batch tools, it can use MCP tools."
+      },
+      {
+        "start": 637,
+        "end": 638,
+        "text": "So just tell it about the tools,"
+      },
+      {
+        "start": 638,
+        "end": 640,
+        "text": "and you can add the MCP tool,"
+      },
+      {
+        "start": 640,
+        "end": 641,
+        "text": "and you can tell it how to use it,"
+      },
+      {
+        "start": 641,
+        "end": 643,
+        "text": "and it'll just start using it."
+      },
+      {
+        "start": 644,
+        "end": 646,
+        "text": "And this is extremely powerful,"
+      },
+      {
+        "start": 646,
+        "end": 649,
+        "text": "because when you start to use code on a new code base,"
+      },
+      {
+        "start": 649,
+        "end": 651,
+        "text": "you can just give it all of your tools,"
+      },
+      {
+        "start": 651,
+        "end": 654,
+        "text": "all the tools your team already uses for this code base,"
+      },
+      {
+        "start": 654,
+        "end": 656,
+        "text": "and Cloud Code can use it on your behalf."
+      },
+      {
+        "start": 656,
+        "end": 658,
+        "text": "There's a few common workflows,"
+      },
+      {
+        "start": 658,
+        "end": 659,
+        "text": "and this is the one that I talked about already,"
+      },
+      {
+        "start": 659,
+        "end": 661,
+        "text": "so kind of do a little bit of exploration,"
+      },
+      {
+        "start": 661,
+        "end": 662,
+        "text": "do a little bit of planning,"
+      },
+      {
+        "start": 662,
+        "end": 665,
+        "text": "and ask me for confirmation before you start to write code."
+      },
+      {
+        "start": 665,
+        "end": 667,
+        "text": "These other two on the right are extremely powerful."
+      },
+      {
+        "start": 667,
+        "end": 669,
+        "text": "When Cloud has some way to check its work,"
+      },
+      {
+        "start": 669,
+        "end": 670,
+        "text": "so for example, by writing unit tests,"
+      },
+      {
+        "start": 670,
+        "end": 671,
+        "text": "or screenshotting in Puppeteer,"
+      },
+      {
+        "start": 671,
+        "end": 673,
+        "text": "or screenshotting the iOS simulator,"
+      },
+      {
+        "start": 673,
+        "end": 674,
+        "text": "then it can iterate."
+      },
+      {
+        "start": 674,
+        "end": 675,
+        "text": "And this is incredible"
+      },
+      {
+        "start": 675,
+        "end": 677,
+        "text": "because if you give it, for example, a mock,"
+      },
+      {
+        "start": 677,
+        "end": 678,
+        "text": "and you say build this web UI,"
+      },
+      {
+        "start": 678,
+        "end": 680,
+        "text": "it'll get it pretty good."
+      },
+      {
+        "start": 680,
+        "end": 682,
+        "text": "But if you edit iterate two or three times,"
+      },
+      {
+        "start": 682,
+        "end": 684,
+        "text": "often it gets it almost perfect."
+      },
+      {
+        "start": 684,
+        "end": 685,
+        "text": "So the trick is,"
+      },
+      {
+        "start": 685,
+        "end": 686,
+        "text": "give it some sort of tool"
+      },
+      {
+        "start": 686,
+        "end": 688,
+        "text": "that it can use for feedback to check its work,"
+      },
+      {
+        "start": 688,
+        "end": 691,
+        "text": "and then based on that it will give it another quick emoji"
+      },
+      {
+        "start": 691,
+        "end": 693,
+        "text": "and then enter a text into the page."
+      },
+      {
+        "start": 693,
+        "end": 695,
+        "text": "Like the Help Code Initiative page."
+      },
+      {
+        "start": 695,
+        "end": 697,
+        "text": "often it gets it almost perfect."
+      },
+      {
+        "start": 697,
+        "end": 699,
+        "text": "So the trick is give it some sort of tool"
+      },
+      {
+        "start": 699,
+        "end": 702,
+        "text": "that it can use for feedback to check its work,"
+      },
+      {
+        "start": 702,
+        "end": 704,
+        "text": "and then based on that it will iterate by itself"
+      },
+      {
+        "start": 704,
+        "end": 707,
+        "text": "and you're gonna get a much better result."
+      },
+      {
+        "start": 707,
+        "end": 708,
+        "text": "So whatever your domain is, if it's unit test"
+      },
+      {
+        "start": 708,
+        "end": 712,
+        "text": "or integration test or screenshots for apps or web"
+      },
+      {
+        "start": 712,
+        "end": 714,
+        "text": "or anything, just give it a way to see its result"
+      },
+      {
+        "start": 714,
+        "end": 715,
+        "text": "and it'll iterate and get better."
+      },
+      {
+        "start": 720,
+        "end": 721,
+        "text": "So these are the next steps."
+      },
+      {
+        "start": 721,
+        "end": 722,
+        "text": "Teach Cloud how to use your tools"
+      },
+      {
+        "start": 722,
+        "end": 725,
+        "text": "and figure out the right workflow."
+      },
+      {
+        "start": 725,
+        "end": 726,
+        "text": "If you want Quad to jump into code,"
+      },
+      {
+        "start": 726,
+        "end": 728,
+        "text": "if you want it to brainstorm a little bit, make a plan,"
+      },
+      {
+        "start": 728,
+        "end": 731,
+        "text": "if you want it to iterate, kind of have some sense of that"
+      },
+      {
+        "start": 731,
+        "end": 733,
+        "text": "so you know how to prompt Quad to do what you want."
+      },
+      {
+        "start": 737,
+        "end": 739,
+        "text": "As you go deeper, beyond tools,"
+      },
+      {
+        "start": 739,
+        "end": 741,
+        "text": "you want to start to give Quad more context."
+      },
+      {
+        "start": 741,
+        "end": 744,
+        "text": "And the more context, the smarter the decisions will be"
+      },
+      {
+        "start": 744,
+        "end": 746,
+        "text": "because as an engineer working in a codebase,"
+      },
+      {
+        "start": 746,
+        "end": 748,
+        "text": "you have a ton of context in your head about your systems"
+      },
+      {
+        "start": 748,
+        "end": 750,
+        "text": "and all the history and everything else."
+      },
+      {
+        "start": 750,
+        "end": 753,
+        "text": "So there's different ways to give this to Quad."
+      },
+      {
+        "start": 753,
+        "end": 754,
+        "text": "And as you give Quad more context,"
+      },
+      {
+        "start": 754,
+        "end": 755,
+        "text": "it'll do better."
+      },
+      {
+        "start": 755,
+        "end": 758,
+        "text": "There's different ways to do this."
+      },
+      {
+        "start": 758,
+        "end": 761,
+        "text": "The simplest one is what we call CloudMD."
+      },
+      {
+        "start": 761,
+        "end": 763,
+        "text": "And Cloud.MD is the special file name."
+      },
+      {
+        "start": 763,
+        "end": 767,
+        "text": "The simplest place to put it is in the project root."
+      },
+      {
+        "start": 767,
+        "end": 769,
+        "text": "So the same directory you start Cloud in,"
+      },
+      {
+        "start": 769,
+        "end": 770,
+        "text": "put a CloudMD in there."
+      },
+      {
+        "start": 770,
+        "end": 773,
+        "text": "And that'll get automatically read into context"
+      },
+      {
+        "start": 773,
+        "end": 774,
+        "text": "at the start of every session."
+      },
+      {
+        "start": 774,
+        "end": 777,
+        "text": "And essentially the first user turn will include the CloudMD."
+      },
+      {
+        "start": 777,
+        "end": 781,
+        "text": "You can also have a local CloudMD."
+      },
+      {
+        "start": 781,
+        "end": 784,
+        "text": "And this one you don't usually check into source control."
+      },
+      {
+        "start": 784,
+        "end": 786,
+        "text": "So CloudMD, you should check into source control,"
+      },
+      {
+        "start": 786,
+        "end": 788,
+        "text": "share with your team so that you can write it once"
+      },
+      {
+        "start": 788,
+        "end": 790,
+        "text": "and share it with your team."
+      },
+      {
+        "start": 790,
+        "end": 792,
+        "text": "This one you don't check in."
+      },
+      {
+        "start": 792,
+        "end": 793,
+        "text": "It's just for you."
+      },
+      {
+        "start": 793,
+        "end": 795,
+        "text": "The kinds of things you put in CloudMD,"
+      },
+      {
+        "start": 795,
+        "end": 798,
+        "text": "it's like common bash commands, common MCP tools,"
+      },
+      {
+        "start": 798,
+        "end": 802,
+        "text": "architectural decisions, important files, anything that you would"
+      },
+      {
+        "start": 802,
+        "end": 806,
+        "text": "kind of typically need to know in order to work in this codebase."
+      },
+      {
+        "start": 806,
+        "end": 808,
+        "text": "Try to keep it pretty short, because if it gets too long,"
+      },
+      {
+        "start": 808,
+        "end": 810,
+        "text": "it's just going to use up a bunch of context."
+      },
+      {
+        "start": 810,
+        "end": 812,
+        "text": "And it's usually not that useful."
+      },
+      {
+        "start": 812,
+        "end": 814,
+        "text": "So just try to keep it as short as you can."
+      },
+      {
+        "start": 814,
+        "end": 816,
+        "text": "And for example, in our codebase,"
+      },
+      {
+        "start": 816,
+        "end": 819,
+        "text": "we have common bash commands, we have a style guide,"
+      },
+      {
+        "start": 819,
+        "end": 822,
+        "text": "we have a few core files, kind of things like that."
+      },
+      {
+        "start": 822,
+        "end": 825,
+        "text": "All the other CloudMDs, you can put them in other nested child"
+      },
+      {
+        "start": 825,
+        "end": 828,
+        "text": "directories, and Cloud will pull them in on demand."
+      },
+      {
+        "start": 828,
+        "end": 830,
+        "text": "So these are the CloudMDs that will get pulled into the code"
+      },
+      {
+        "start": 830,
+        "end": 835,
+        "text": "automatically, but then also you can put CloudMDs"
+      },
+      {
+        "start": 835,
+        "end": 838,
+        "text": "in nested directories, and those will get automatically pulled"
+      },
+      {
+        "start": 838,
+        "end": 840,
+        "text": "when Cloud works in those directories."
+      },
+      {
+        "start": 840,
+        "end": 842,
+        "text": "And of course, if you're a company,"
+      },
+      {
+        "start": 842,
+        "end": 845,
+        "text": "maybe you want a CloudMD that's shared across all the different"
+      },
+      {
+        "start": 845,
+        "end": 848,
+        "text": "codebases, and you want to manage it on behalf of your users,"
+      },
+      {
+        "start": 848,
+        "end": 850,
+        "text": "and you can put it in your enterprise route,"
+      },
+      {
+        "start": 850,
+        "end": 852,
+        "text": "and that'll get pulled in automatically."
+      },
+      {
+        "start": 852,
+        "end": 855,
+        "text": "There's a ton of ways to pull in context."
+      },
+      {
+        "start": 855,
+        "end": 857,
+        "text": "I actually had a lot of trouble putting this stuff in,"
+      },
+      {
+        "start": 857,
+        "end": 859,
+        "text": "but I'm going to put it in a lot of context."
+      },
+      {
+        "start": 859,
+        "end": 861,
+        "text": "I'm going to have trouble putting this slide together just to"
+      },
+      {
+        "start": 861,
+        "end": 863,
+        "text": "communicate the breadth of ways you can do this."
+      },
+      {
+        "start": 863,
+        "end": 866,
+        "text": "But CloudMD is pulled in automatically."
+      },
+      {
+        "start": 866,
+        "end": 868,
+        "text": "You can also use slash commands."
+      },
+      {
+        "start": 868,
+        "end": 870,
+        "text": "So this is .cloud slash commands, and this can be in your home"
+      },
+      {
+        "start": 870,
+        "end": 873,
+        "text": "directory, or it can be checked into your project, and this is for"
+      },
+      {
+        "start": 873,
+        "end": 874,
+        "text": "slash commands."
+      },
+      {
+        "start": 874,
+        "end": 880,
+        "text": "And over here, we have a few examples of the slash commands that"
+      },
+      {
+        "start": 880,
+        "end": 882,
+        "text": "we have in Cloud code itself."
+      },
+      {
+        "start": 882,
+        "end": 885,
+        "text": "And so for example, if you're in the Cloud code repo, and you see"
+      },
+      {
+        "start": 885,
+        "end": 888,
+        "text": "issues getting labeled, that's actually this workflow running"
+      },
+      {
+        "start": 888,
+        "end": 889,
+        "text": "here."
+      },
+      {
+        "start": 889,
+        "end": 891,
+        "text": "It's labeled GitHub issues."
+      },
+      {
+        "start": 891,
+        "end": 893,
+        "text": "And we have a GitHub action running, the same one we talked"
+      },
+      {
+        "start": 893,
+        "end": 897,
+        "text": "about this morning, where Cloud code will run this command,"
+      },
+      {
+        "start": 897,
+        "end": 898,
+        "text": "and it's just a slash command."
+      },
+      {
+        "start": 898,
+        "end": 901,
+        "text": "It'll run, and it'll label the issues so humans don't have to."
+      },
+      {
+        "start": 901,
+        "end": 903,
+        "text": "It just saves us a bunch of time."
+      },
+      {
+        "start": 903,
+        "end": 906,
+        "text": "And of course, you can add mention files to pull them into context."
+      },
+      {
+        "start": 906,
+        "end": 911,
+        "text": "And like I said before, CloudMDs in a nested directory get pulled"
+      },
+      {
+        "start": 911,
+        "end": 913,
+        "text": "in when Cloud works in that directory."
+      },
+      {
+        "start": 917,
+        "end": 921,
+        "text": "So give Cloud more context, and it's definitely worth taking the"
+      },
+      {
+        "start": 921,
+        "end": 922,
+        "text": "time to tune context."
+      },
+      {
+        "start": 922,
+        "end": 923,
+        "text": "You can run it through a prompt improver."
+      },
+      {
+        "start": 923,
+        "end": 926,
+        "text": "Consider who the context is for."
+      },
+      {
+        "start": 926,
+        "end": 928,
+        "text": "If you want to pull it in every time, if you want to pull it in on"
+      },
+      {
+        "start": 928,
+        "end": 931,
+        "text": "demand, if you want to share it with a team, if it's a personal"
+      },
+      {
+        "start": 931,
+        "end": 933,
+        "text": "preference, definitely take the time to tune it."
+      },
+      {
+        "start": 933,
+        "end": 936,
+        "text": "This will improve performance dramatically if you do it right."
+      },
+      {
+        "start": 940,
+        "end": 944,
+        "text": "As you get more advanced, you're going to want to think about this"
+      },
+      {
+        "start": 944,
+        "end": 946,
+        "text": "a little bit more of this kind of hierarchy of different ways"
+      },
+      {
+        "start": 946,
+        "end": 947,
+        "text": "to pull in everything."
+      },
+      {
+        "start": 947,
+        "end": 953,
+        "text": "So like not just CloudMD, but also config and kind of everything"
+      },
+      {
+        "start": 953,
+        "end": 955,
+        "text": "about Cloud you can pull in in this hierarchical way."
+      },
+      {
+        "start": 955,
+        "end": 959,
+        "text": "So projects are specific to your Git repo, and this you can check"
+      },
+      {
+        "start": 959,
+        "end": 961,
+        "text": "in or you can make it just for you."
+      },
+      {
+        "start": 961,
+        "end": 965,
+        "text": "You can also have global configs that are across all your projects,"
+      },
+      {
+        "start": 965,
+        "end": 966,
+        "text": "or you can have enterprise policies."
+      },
+      {
+        "start": 966,
+        "end": 969,
+        "text": "And this is essentially a global config that you roll out for all"
+      },
+      {
+        "start": 969,
+        "end": 971,
+        "text": "of your employees, everyone on your team automatically."
+      },
+      {
+        "start": 971,
+        "end": 976,
+        "text": "And this slide is like pretty information dense, but the point is"
+      },
+      {
+        "start": 976,
+        "end": 977,
+        "text": "this applies to a lot of stuff."
+      },
+      {
+        "start": 977,
+        "end": 979,
+        "text": "So you can do this for slash commands, you can do it for"
+      },
+      {
+        "start": 979,
+        "end": 980,
+        "text": "permissions."
+      },
+      {
+        "start": 980,
+        "end": 983,
+        "text": "So for example, if you have a bash command that you would run for"
+      },
+      {
+        "start": 983,
+        "end": 986,
+        "text": "all your employees, like all your employees use this like test"
+      },
+      {
+        "start": 986,
+        "end": 987,
+        "text": "command for example."
+      },
+      {
+        "start": 987,
+        "end": 991,
+        "text": "You can actually just check it into this enterprise policies file,"
+      },
+      {
+        "start": 991,
+        "end": 994,
+        "text": "and then any employee when they run this command it will be"
+      },
+      {
+        "start": 994,
+        "end": 996,
+        "text": "auto approved, which is pretty convenient."
+      },
+      {
+        "start": 996,
+        "end": 998,
+        "text": "And you can also use this to block commands."
+      },
+      {
+        "start": 998,
+        "end": 1000,
+        "text": "So for example, let's say there's a URL that should never be"
+      },
+      {
+        "start": 1000,
+        "end": 1001,
+        "text": "fetched."
+      },
+      {
+        "start": 1001,
+        "end": 1004,
+        "text": "Just add it to this config, and that'll make it so an employee"
+      },
+      {
+        "start": 1004,
+        "end": 1005,
+        "text": "cannot override it."
+      },
+      {
+        "start": 1005,
+        "end": 1008,
+        "text": "And that URL can never be fetched."
+      },
+      {
+        "start": 1008,
+        "end": 1010,
+        "text": "So pretty convenient both to unblock people and also just to keep"
+      },
+      {
+        "start": 1010,
+        "end": 1011,
+        "text": "your code base safe."
+      },
+      {
+        "start": 1011,
+        "end": 1013,
+        "text": "And then same thing for MCP servers."
+      },
+      {
+        "start": 1013,
+        "end": 1015,
+        "text": "Have a MCP JSON file, check it into the code base."
+      },
+      {
+        "start": 1015,
+        "end": 1017,
+        "text": "That way any time someone runs quad code in your code base,"
+      },
+      {
+        "start": 1017,
+        "end": 1019,
+        "text": "they'll be prompted to install the MCP servers and share it with"
+      },
+      {
+        "start": 1019,
+        "end": 1020,
+        "text": "the team."
+      },
+      {
+        "start": 1020,
+        "end": 1023,
+        "text": "If you're not sure which of these to use, this is like kind of an"
+      },
+      {
+        "start": 1023,
+        "end": 1025,
+        "text": "insane matrix because we support a lot of stuff and engineer"
+      },
+      {
+        "start": 1025,
+        "end": 1026,
+        "text": "workflows are very flexible and every company is different."
+      },
+      {
+        "start": 1026,
+        "end": 1027,
+        "text": "So we kind of want to support everything."
+      },
+      {
+        "start": 1027,
+        "end": 1029,
+        "text": "So if you're not sure how to get started, if you're not sure"
+      },
+      {
+        "start": 1029,
+        "end": 1031,
+        "text": "how to get started, you can use the code base."
+      },
+      {
+        "start": 1031,
+        "end": 1033,
+        "text": "So if you're not sure how to get started, you can use"
+      },
+      {
+        "start": 1033,
+        "end": 1035,
+        "text": "login objects and I think once a month before, you give"
+      },
+      {
+        "start": 1035,
+        "end": 1037,
+        "text": "uh approximately 1.2 or 3. 4 or around, uh,"
+      },
+      {
+        "start": 1037,
+        "end": 1040,
+        "text": "communities that have come in there can be stored in theuu"
+      },
+      {
+        "start": 1040,
+        "end": 1042,
+        "text": "server tester world, new server patient werdears, new server"
+      },
+      {
+        "start": 1042,
+        "end": 1043,
+        "text": "trying to identify andpe Logicogle. And then you can run"
+      },
+      {
+        "start": 1043,
+        "end": 1057,
+        "text": "to this website how you"
+      },
+      {
+        "start": 1057,
+        "end": 1059,
+        "text": "can output interface nh\u01b0 tunnels."
+      },
+      {
+        "start": 1059,
+        "end": 1062,
+        "text": "So they can already deuil and"
+      },
+      {
+        "start": 1062,
+        "end": 1069,
+        "text": "So maybe I have an enterprise policy, I have my user memory, I have project quad MD, and then maybe there's a nested quad MD."
+      },
+      {
+        "start": 1069,
+        "end": 1071,
+        "text": "That's only pulled in for certain directories."
+      },
+      {
+        "start": 1073,
+        "end": 1077,
+        "text": "And then similarly, when you do slash memory, you can edit particular memory files."
+      },
+      {
+        "start": 1077,
+        "end": 1081,
+        "text": "When you type pound sign to remember something, you can pick which memory you want it to go to."
+      },
+      {
+        "start": 1085,
+        "end": 1087,
+        "text": "So yeah, that's the next step."
+      },
+      {
+        "start": 1087,
+        "end": 1096,
+        "text": "Take the time to configure quad MD, MCP servers, all the stuff that your team uses so that you can use it once, configure it once, and then share it with everyone."
+      },
+      {
+        "start": 1098,
+        "end": 1103,
+        "text": "An example of this is in our apps repo for Anthropic."
+      },
+      {
+        "start": 1103,
+        "end": 1107,
+        "text": "This is like the repo that we have all of our web and apps code in."
+      },
+      {
+        "start": 1107,
+        "end": 1110,
+        "text": "There's a Puppeteer MCP server, and we share this with the team."
+      },
+      {
+        "start": 1110,
+        "end": 1112,
+        "text": "And there's an MCP JSON checked in."
+      },
+      {
+        "start": 1112,
+        "end": 1120,
+        "text": "So any engineer working in that repo can use Puppeteer in order to pilot end-to-end tests and to screenshot automatically and iterate so that every engineer doesn't have to install it themselves."
+      },
+      {
+        "start": 1125,
+        "end": 1126,
+        "text": "This is a talk about pro tips."
+      },
+      {
+        "start": 1127,
+        "end": 1131,
+        "text": "I just want to take a quick interlude to talk about some common key bindings that people may not know."
+      },
+      {
+        "start": 1131,
+        "end": 1133,
+        "text": "It's very hard to build for terminal."
+      },
+      {
+        "start": 1133,
+        "end": 1134,
+        "text": "It's also very fun."
+      },
+      {
+        "start": 1134,
+        "end": 1137,
+        "text": "It feels like rediscovering this new design language."
+      },
+      {
+        "start": 1137,
+        "end": 1140,
+        "text": "But something about terminal is it's extremely minimal."
+      },
+      {
+        "start": 1140,
+        "end": 1143,
+        "text": "And so sometimes it's hard to discover these key bindings."
+      },
+      {
+        "start": 1143,
+        "end": 1145,
+        "text": "And here's just a quick reference sheet."
+      },
+      {
+        "start": 1145,
+        "end": 1151,
+        "text": "So anytime you can hit shift tab to accept edits, and this switches you into auto accept edits mode."
+      },
+      {
+        "start": 1151,
+        "end": 1154,
+        "text": "So bash commands still need approval, but edits are auto accepted."
+      },
+      {
+        "start": 1154,
+        "end": 1156,
+        "text": "And you can always ask Claude to undo them later."
+      },
+      {
+        "start": 1157,
+        "end": 1162,
+        "text": "For example, I'll do this if I know Claude's on the right track or if it's writing unit tests and iterating on tests."
+      },
+      {
+        "start": 1162,
+        "end": 1166,
+        "text": "I'll usually just switch into auto accept mode so I don't have to okay every single edit."
+      },
+      {
+        "start": 1166,
+        "end": 1177,
+        "text": "Anytime you want Claude to remember something, so for example if it's not using a tool correctly and you wanted to use it correctly from then on, just type the pound sign and then tell it what to remember."
+      },
+      {
+        "start": 1177,
+        "end": 1178,
+        "text": "And it'll remember it."
+      },
+      {
+        "start": 1178,
+        "end": 1180,
+        "text": "It'll incorporate it into Claude MD automatically."
+      },
+      {
+        "start": 1181,
+        "end": 1187,
+        "text": "If you ever want to drop down to bash mode, so just run a bash command, you can hit the exclamation mark and type in your command."
+      },
+      {
+        "start": 1187,
+        "end": 1190,
+        "text": "That'll run locally, but that also goes into the context window."
+      },
+      {
+        "start": 1190,
+        "end": 1192,
+        "text": "So Claude will see it on the next turn."
+      },
+      {
+        "start": 1192,
+        "end": 1198,
+        "text": "And this is pretty good for long running commands if you know exactly what you want to do or any command that you want to get into context."
+      },
+      {
+        "start": 1198,
+        "end": 1199,
+        "text": "And Claude will see the..."
+      },
+      {
+        "start": 1199,
+        "end": 1200,
+        "text": "Thank God we'll see the..."
+      },
+      {
+        "start": 1200,
+        "end": 1203,
+        "text": "command and the output."
+      },
+      {
+        "start": 1203,
+        "end": 1205,
+        "text": "You can add mention files and folders."
+      },
+      {
+        "start": 1205,
+        "end": 1209,
+        "text": "Any time you can hit escape to stop what Claude is doing."
+      },
+      {
+        "start": 1209,
+        "end": 1210,
+        "text": "No matter what Claude is doing, you"
+      },
+      {
+        "start": 1210,
+        "end": 1211,
+        "text": "can always safely hit escape."
+      },
+      {
+        "start": 1211,
+        "end": 1212,
+        "text": "It's not going to corrupt the session."
+      },
+      {
+        "start": 1212,
+        "end": 1214,
+        "text": "It's not going to mess anything up."
+      },
+      {
+        "start": 1214,
+        "end": 1216,
+        "text": "So maybe Claude is doing a file edit."
+      },
+      {
+        "start": 1216,
+        "end": 1216,
+        "text": "I'll hit escape."
+      },
+      {
+        "start": 1216,
+        "end": 1218,
+        "text": "I'll tell it what to do differently."
+      },
+      {
+        "start": 1218,
+        "end": 1220,
+        "text": "Or maybe it suggested a 20 line edit,"
+      },
+      {
+        "start": 1220,
+        "end": 1222,
+        "text": "and I'm like, actually, 19 of these lines look perfect,"
+      },
+      {
+        "start": 1222,
+        "end": 1224,
+        "text": "but one line you should change."
+      },
+      {
+        "start": 1224,
+        "end": 1225,
+        "text": "I'll hit escape."
+      },
+      {
+        "start": 1225,
+        "end": 1225,
+        "text": "I'll tell it that."
+      },
+      {
+        "start": 1225,
+        "end": 1227,
+        "text": "And then I'll tell it to redo the edit."
+      },
+      {
+        "start": 1227,
+        "end": 1232,
+        "text": "You can hit escape twice to jump back in history."
+      },
+      {
+        "start": 1232,
+        "end": 1234,
+        "text": "And then after you're done with the session,"
+      },
+      {
+        "start": 1234,
+        "end": 1236,
+        "text": "you can start Claude with a resume to resume that session"
+      },
+      {
+        "start": 1236,
+        "end": 1240,
+        "text": "if you want, or dash, dash, continue."
+      },
+      {
+        "start": 1240,
+        "end": 1243,
+        "text": "And then any time if you want to see more output, hit Control R."
+      },
+      {
+        "start": 1243,
+        "end": 1246,
+        "text": "And that'll show you the entire output, the same thing"
+      },
+      {
+        "start": 1246,
+        "end": 1247,
+        "text": "that Claude sees in its context window."
+      },
+      {
+        "start": 1254,
+        "end": 1256,
+        "text": "The next thing I want to talk about is the Claude code SDK."
+      },
+      {
+        "start": 1256,
+        "end": 1258,
+        "text": "So we talked about this at the top."
+      },
+      {
+        "start": 1258,
+        "end": 1261,
+        "text": "Right after this, Sid is doing a session, I think,"
+      },
+      {
+        "start": 1261,
+        "end": 1262,
+        "text": "just across the hallway."
+      },
+      {
+        "start": 1262,
+        "end": 1264,
+        "text": "And he's going to go super deep on the SDK."
+      },
+      {
+        "start": 1264,
+        "end": 1266,
+        "text": "If you hadn't played around with this,"
+      },
+      {
+        "start": 1266,
+        "end": 1269,
+        "text": "if you used the dash P flag in Claude,"
+      },
+      {
+        "start": 1269,
+        "end": 1270,
+        "text": "this is what the SDK is."
+      },
+      {
+        "start": 1270,
+        "end": 1272,
+        "text": "And we've been planning a bunch of features"
+      },
+      {
+        "start": 1272,
+        "end": 1275,
+        "text": "over the last few weeks to make it even better."
+      },
+      {
+        "start": 1275,
+        "end": 1277,
+        "text": "So yeah, you can build on top of this."
+      },
+      {
+        "start": 1277,
+        "end": 1278,
+        "text": "You can do cool stuff."
+      },
+      {
+        "start": 1278,
+        "end": 1280,
+        "text": "This is exactly the thing that Claude code uses."
+      },
+      {
+        "start": 1280,
+        "end": 1283,
+        "text": "It's exactly the same SDK."
+      },
+      {
+        "start": 1283,
+        "end": 1285,
+        "text": "And so for example, something you can do is Claude-P."
+      },
+      {
+        "start": 1285,
+        "end": 1287,
+        "text": "So this is the CLI SDK."
+      },
+      {
+        "start": 1287,
+        "end": 1289,
+        "text": "You can pass a prompt."
+      },
+      {
+        "start": 1289,
+        "end": 1293,
+        "text": "You can pass some allowed tools, which could include specific"
+      },
+      {
+        "start": 1293,
+        "end": 1294,
+        "text": "bash commands."
+      },
+      {
+        "start": 1294,
+        "end": 1296,
+        "text": "And you can tell it which format you want."
+      },
+      {
+        "start": 1296,
+        "end": 1299,
+        "text": "So you might want JSON, or you might want streaming JSON,"
+      },
+      {
+        "start": 1299,
+        "end": 1300,
+        "text": "if you want to process this somehow."
+      },
+      {
+        "start": 1300,
+        "end": 1303,
+        "text": "So this is awesome for building on."
+      },
+      {
+        "start": 1303,
+        "end": 1305,
+        "text": "We use this in CI all the time."
+      },
+      {
+        "start": 1305,
+        "end": 1306,
+        "text": "We use this for incident response."
+      },
+      {
+        "start": 1306,
+        "end": 1309,
+        "text": "We use this in all sorts of pipelines."
+      },
+      {
+        "start": 1309,
+        "end": 1310,
+        "text": "So really convenient."
+      },
+      {
+        "start": 1310,
+        "end": 1311,
+        "text": "Just think of it as like a Unix utility."
+      },
+      {
+        "start": 1311,
+        "end": 1312,
+        "text": "You give it a prompt."
+      },
+      {
+        "start": 1312,
+        "end": 1313,
+        "text": "It gives you JSON."
+      },
+      {
+        "start": 1313,
+        "end": 1314,
+        "text": "You can use this in any way."
+      },
+      {
+        "start": 1314,
+        "end": 1315,
+        "text": "You can pipe into it."
+      },
+      {
+        "start": 1315,
+        "end": 1316,
+        "text": "You can pipe out of it."
+      },
+      {
+        "start": 1320,
+        "end": 1322,
+        "text": "The piping is also pretty cool."
+      },
+      {
+        "start": 1322,
+        "end": 1324,
+        "text": "So you can use, for example, git status,"
+      },
+      {
+        "start": 1324,
+        "end": 1328,
+        "text": "and pipe this in, and use JQ to select the result."
+      },
+      {
+        "start": 1328,
+        "end": 1330,
+        "text": "The combinations are endless."
+      },
+      {
+        "start": 1330,
+        "end": 1331,
+        "text": "And it's sort of this new idea."
+      },
+      {
+        "start": 1331,
+        "end": 1334,
+        "text": "It's like a super intelligent Unix utility."
+      },
+      {
+        "start": 1334,
+        "end": 1335,
+        "text": "And I think we've barely scratched the surface"
+      },
+      {
+        "start": 1335,
+        "end": 1336,
+        "text": "of how to use this."
+      },
+      {
+        "start": 1336,
+        "end": 1339,
+        "text": "We're just figuring this out."
+      },
+      {
+        "start": 1339,
+        "end": 1341,
+        "text": "You can read from a GCP bucket."
+      },
+      {
+        "start": 1341,
+        "end": 1343,
+        "text": "Read a giant log, and pipe it in,"
+      },
+      {
+        "start": 1343,
+        "end": 1344,
+        "text": "and tell Claude to figure out what's"
+      },
+      {
+        "start": 1344,
+        "end": 1346,
+        "text": "interesting about this log."
+      },
+      {
+        "start": 1346,
+        "end": 1350,
+        "text": "You can fetch data from the Sentry CLI."
+      },
+      {
+        "start": 1350,
+        "end": 1352,
+        "text": "You can also pipe it in, and have Claude do something with it."
+      },
+      {
+        "start": 1358,
+        "end": 1360,
+        "text": "The final thing, and this is probably"
+      },
+      {
+        "start": 1360,
+        "end": 1362,
+        "text": "the most advanced use cases we see,"
+      },
+      {
+        "start": 1362,
+        "end": 1363,
+        "text": "I'm sort of a Claude normie."
+      },
+      {
+        "start": 1363,
+        "end": 1365,
+        "text": "So I'll have usually one Claude running"
+      },
+      {
+        "start": 1365,
+        "end": 1370,
+        "text": "at a time, and maybe I'll have a few terminal tabs for a few different repos running at a time."
+      },
+      {
+        "start": 1370,
+        "end": 1376,
+        "text": "When I look at power users in and out of Anthropic, almost always they're going to have SSH sessions."
+      },
+      {
+        "start": 1376,
+        "end": 1379,
+        "text": "They'll have Tmux tunnels into their Claude sessions."
+      },
+      {
+        "start": 1379,
+        "end": 1384,
+        "text": "They're going to have a bunch of checkouts of the same repo, so that they can run a bunch of Claude in parallel in that repo."
+      },
+      {
+        "start": 1384,
+        "end": 1388,
+        "text": "Or they're using Git work trees to have some kind of isolation as they do this."
+      },
+      {
+        "start": 1388,
+        "end": 1396,
+        "text": "And we're actively working on making this easier to use, but for now, these are some ideas for how to do more work in parallel with Claude."
+      },
+      {
+        "start": 1396,
+        "end": 1401,
+        "text": "You can run as many sessions as you want, and there's a lot that you can get done in parallel."
+      },
+      {
+        "start": 1401,
+        "end": 1406,
+        "text": "So yeah, that's it."
+      },
+      {
+        "start": 1406,
+        "end": 1408,
+        "text": "I wanted to also leave some time for Q&A."
+      },
+      {
+        "start": 1408,
+        "end": 1411,
+        "text": "So I think this is the last slide that I have."
+      },
+      {
+        "start": 1411,
+        "end": 1414,
+        "text": "And yeah, if folks have questions, there's mics on both sides."
+      },
+      {
+        "start": 1414,
+        "end": 1417,
+        "text": "And yeah, we'd love to answer any questions."
+      },
+      {
+        "start": 1417,
+        "end": 1442,
+        "text": "I did."
+      },
+      {
+        "start": 1442,
+        "end": 1443,
+        "text": "Thanks for building a Cloud Code."
+      },
+      {
+        "start": 1443,
+        "end": 1451,
+        "text": "And I was wondering what was the hardest implementation, like part of the implementation for you of building it?"
+      },
+      {
+        "start": 1451,
+        "end": 1455,
+        "text": "I think there's a lot of tricky parts."
+      },
+      {
+        "start": 1455,
+        "end": 1462,
+        "text": "I think one part that is especially tricky is the things that we do to make bash commands safe."
+      },
+      {
+        "start": 1462,
+        "end": 1466,
+        "text": "Bash is inherently pretty dangerous, and it can change system state in unexpected ways."
+      },
+      {
+        "start": 1466,
+        "end": 1474,
+        "text": "But at the same time, if you have to manually approve every single bash command, it's super annoying as an engineer."
+      },
+      {
+        "start": 1474,
+        "end": 1476,
+        "text": "And you can't really be productive because you're just constantly approving every command."
+      },
+      {
+        "start": 1477,
+        "end": 1483,
+        "text": "And just kind of navigating how to do this safely in a way that scales across the different kinds of code bases people have,"
+      },
+      {
+        "start": 1483,
+        "end": 1487,
+        "text": "because not everyone runs their code in a Docker container, was pretty tricky."
+      },
+      {
+        "start": 1487,
+        "end": 1491,
+        "text": "And essentially, the thing we landed on is there's some commands that are read-only."
+      },
+      {
+        "start": 1491,
+        "end": 1496,
+        "text": "There's some static analysis that we do in order to figure out which commands can be combined in safe ways."
+      },
+      {
+        "start": 1496,
+        "end": 1502,
+        "text": "And then we have this pretty complex tiered permission system so that you can allow list and block list commands at different levels."
+      },
+      {
+        "start": 1505,
+        "end": 1506,
+        "text": "Hi, Boris."
+      },
+      {
+        "start": 1506,
+        "end": 1514,
+        "text": "You mentioned giving an image to Cloud Code, which made me wonder if there's some sort of multimodal functionality that I'm not aware of."
+      },
+      {
+        "start": 1514,
+        "end": 1517,
+        "text": "Is that, are you just pointing it at an image on the file system or something?"
+      },
+      {
+        "start": 1517,
+        "end": 1523,
+        "text": "Yeah, so Cloud Code is fully multimodal. It has been from the start. It's in a terminal, so it's a little hard to discover."
+      },
+      {
+        "start": 1524,
+        "end": 1527,
+        "text": "But yeah, you can take an image and just drag and drop it in. That'll work."
+      },
+      {
+        "start": 1528,
+        "end": 1533,
+        "text": "You can give it a file path. That'll work. You can copy and paste the image in, and that works too."
+      },
+      {
+        "start": 1535,
+        "end": 1539,
+        "text": "So I'll use this pretty often for if I have like a mock of something, I'll just drag and drop in the mock."
+      },
+      {
+        "start": 1539,
+        "end": 1543,
+        "text": "I'll tell it to implement it. I'll give it up a tier server so it can iterate against it."
+      },
+      {
+        "start": 1544,
+        "end": 1545,
+        "text": "And yeah, it's just fully automated."
+      },
+      {
+        "start": 1547,
+        "end": 1553,
+        "text": "Hey, why did you build a CLI tool instead of an IDE?"
+      },
+      {
+        "start": 1555,
+        "end": 1563,
+        "text": "Yeah, it's a good question. I think there's probably two reasons. One is we started this adanthropic, and adanthropic people use a broad range of IDEs."
+      },
+      {
+        "start": 1563,
+        "end": 1569,
+        "text": "And some people use VS Code, other people use Zed or Xcode or Vim or Emacs."
+      },
+      {
+        "start": 1569,
+        "end": 1574,
+        "text": "And it was just hard to build something that works for everyone. And so terminal is just the common denominator."
+      },
+      {
+        "start": 1575,
+        "end": 1582,
+        "text": "The second thing is adanthropic, we see up close how fast the model is getting better."
+      },
+      {
+        "start": 1583,
+        "end": 1586,
+        "text": "And so I think there's a good chance that by the end of the year, people aren't using IDEs anymore."
+      },
+      {
+        "start": 1586,
+        "end": 1598,
+        "text": "And so we want to get ready for this future. And we want to avoid over investing in UI and other layers on top, given that the way the models are progressing, it just may not be useful work pretty soon."
+      },
+      {
+        "start": 1598,
+        "end": 1606,
+        "text": "Yeah. How much have you, I don't know if this is, is this on?"
+      },
+      {
+        "start": 1606,
+        "end": 1615,
+        "text": "How much have you used Cloud Code for machine learning modeling and almost that AutoML experience? I was curious what the experience has been so far with that."
+      },
+      {
+        "start": 1615,
+        "end": 1622,
+        "text": "Yeah, I think the question was how much are we using Cloud Code for machine learning and modeling?"
+      },
+      {
+        "start": 1622,
+        "end": 1627,
+        "text": "We actually use it for this a bunch. So both engineers and researchers at Anthropic use Cloud Code every day."
+      },
+      {
+        "start": 1628,
+        "end": 1633,
+        "text": "I think about 80% of people at Anthropic that are technical use Cloud Code every day."
+      },
+      {
+        "start": 1633,
+        "end": 1637,
+        "text": "And hopefully you can see that in the product and kind of the amount of love and dog fooding we've put into it."
+      },
+      {
+        "start": 1638,
+        "end": 1643,
+        "text": "But this includes researchers who use tools like the notebook tool to edit and run notebooks."
+      },
+      {
+        "start": 1643,
+        "end": 1645,
+        "text": "Okay, very cool. Thank you."
+      },
+      {
+        "start": 1647,
+        "end": 1649,
+        "text": "All right. I think that's it. Thanks."
+      },
+      {
+        "start": 1673,
+        "end": 1679,
+        "text": "Peace out"
+      },
+      {
+        "start": 1680,
+        "end": 1684,
+        "text": "Peace out"
+      },
+      {
+        "start": 1686,
+        "end": 1689,
+        "text": "Bye"
+      }
+    ],
+    "vid-2": [
+      {
+        "start": 0,
+        "end": 5,
+        "text": "Well, hello there. How's it going everybody? Today we're gonna go over my 50 Cloud Code tips."
+      },
+      {
+        "start": 6,
+        "end": 11,
+        "text": "I've been working with Cloud Code basically every day for about six months now and I feel like I've"
+      },
+      {
+        "start": 11,
+        "end": 18,
+        "text": "learned a ton of things and yes I am one of those engineers that are basically not writing code"
+      },
+      {
+        "start": 18,
+        "end": 24,
+        "text": "anymore. I'm still in Cloud Code like 12 hours a day actively pair programming with Cloud Code"
+      },
+      {
+        "start": 24,
+        "end": 29,
+        "text": "basically and reviewing a ton of code. I still read every single line of code. That's actually"
+      },
+      {
+        "start": 29,
+        "end": 35,
+        "text": "my biggest bottleneck right now, the reviewing of the code. But I thought it would be great to show"
+      },
+      {
+        "start": 35,
+        "end": 40,
+        "text": "you kind of the best tips that I've learned along the way and these are kind of tips that I wish I"
+      },
+      {
+        "start": 40,
+        "end": 44,
+        "text": "knew when I was first getting started. We're gonna start off with some foundation stuff like setting"
+      },
+      {
+        "start": 44,
+        "end": 50,
+        "text": "up, very quick setup stuff, a little bit about like cloud.md rules like what you should put in,"
+      },
+      {
+        "start": 50,
+        "end": 55,
+        "text": "what you should think about, and kind of some of the advanced stuff for later. But without further"
+      },
+      {
+        "start": 55,
+        "end": 61,
+        "text": "ado, let's dive into 50 Cloud Code tips. So I got my terminal here and I just have some slides behind"
+      },
+      {
+        "start": 61,
+        "end": 67,
+        "text": "to tell you guys what I'm doing. So here is the foundations that I mentioned. We're gonna cover"
+      },
+      {
+        "start": 67,
+        "end": 74,
+        "text": "getting started, keyboard shortcuts, some essential like slash commands, and a little bit of a deep dive"
+      },
+      {
+        "start": 74,
+        "end": 81,
+        "text": "into the cloud.md. So let's get started. All right, so for tip number one, you want to run Cloud Code"
+      },
+      {
+        "start": 81,
+        "end": 87,
+        "text": "in your root directory of whatever project you're working on. So for example, I have this Pomodoro"
+      },
+      {
+        "start": 87,
+        "end": 93,
+        "text": "app that I'm like kind of been working on. So I'll type in like Cloud here. And that's essentially how"
+      },
+      {
+        "start": 93,
+        "end": 98,
+        "text": "you get started. And you really want to do this because later we'll talk about this. But if you"
+      },
+      {
+        "start": 98,
+        "end": 104,
+        "text": "have rule files or any kind of setup, the initial root directory is where Cloud is going to zip up the"
+      },
+      {
+        "start": 104,
+        "end": 110,
+        "text": "context into that first token. So if you ever wonder why you had a bunch of tokens used, even though you"
+      },
+      {
+        "start": 110,
+        "end": 115,
+        "text": "just opened up Cloud, this is probably the reason why it's because Cloud is getting your project ready."
+      },
+      {
+        "start": 115,
+        "end": 121,
+        "text": "All right, so one of the first things that you want to do is run slash init, like that. And what this"
+      },
+      {
+        "start": 121,
+        "end": 127,
+        "text": "does is Cloud will go and look at your code base and do an analysis of your code base, and then create"
+      },
+      {
+        "start": 127,
+        "end": 135,
+        "text": "that initial cloud.md file in the dot cloud directory of your code base. Now, there is like different"
+      },
+      {
+        "start": 135,
+        "end": 139,
+        "text": "directories that you could source from, like you could have a global one or like this one. But yeah,"
+      },
+      {
+        "start": 139,
+        "end": 144,
+        "text": "at a high level, what this is doing right now is just it's just looking at the code base, looking"
+      },
+      {
+        "start": 144,
+        "end": 150,
+        "text": "for the architecture, and then basically it's creating that Cloud that empty. All right, so it"
+      },
+      {
+        "start": 150,
+        "end": 156,
+        "text": "just finished, it does take some time. And as you can see, it's kind of going and saying, oh, this is,"
+      },
+      {
+        "start": 156,
+        "end": 163,
+        "text": "this is like a next JS 15 app. It's like a portfolio site. But yeah, it's just going over high level things"
+      },
+      {
+        "start": 163,
+        "end": 170,
+        "text": "about this particular project. And then you could just essentially hit yes, to commit that to your"
+      },
+      {
+        "start": 170,
+        "end": 175,
+        "text": "dot cloud. So this is like really important for new projects. So I highly recommend you to run it."
+      },
+      {
+        "start": 175,
+        "end": 181,
+        "text": "All right, so the tip number two is that cloud.md file that we just created, it kind of runs on the"
+      },
+      {
+        "start": 181,
+        "end": 187,
+        "text": "hierarchy. So if you go to memory slash memory, you could kind of see right here that there is a"
+      },
+      {
+        "start": 187,
+        "end": 191,
+        "text": "checked in memory, which is the current root directory. And then there's a user memory, this is like your"
+      },
+      {
+        "start": 191,
+        "end": 198,
+        "text": "global one. So that's like in your tilde dot cloud slash cloud. So you could kind of choose between"
+      },
+      {
+        "start": 198,
+        "end": 204,
+        "text": "it, but it's really there. So you can know what the core rule that the cloud code is operating on"
+      },
+      {
+        "start": 204,
+        "end": 210,
+        "text": "right now, looking at the cloud.md that we call just created, like this is a pretty good one to get"
+      },
+      {
+        "start": 210,
+        "end": 215,
+        "text": "started, right? It just has like, you don't want it to be too large, it's like very small, right? I think"
+      },
+      {
+        "start": 215,
+        "end": 222,
+        "text": "around 300 lines is about a decent place that you want to aim for. And to be honest, going larger is"
+      },
+      {
+        "start": 222,
+        "end": 228,
+        "text": "fine. But just remember that every time you increase that initial context window, you're going to use"
+      },
+      {
+        "start": 228,
+        "end": 234,
+        "text": "more tokens, first of all, but also the more bloat you have in your context, the less likely the AI will"
+      },
+      {
+        "start": 234,
+        "end": 240,
+        "text": "do exactly what you're trying to do. All right, so for structure and what you should be thinking about"
+      },
+      {
+        "start": 240,
+        "end": 247,
+        "text": "putting into your cloud.md, I just opened another project, this one is my anime Pomodoro. This is an"
+      },
+      {
+        "start": 247,
+        "end": 254,
+        "text": "iOS app. So I wanted to show you a little bit more examples. But basically, the things I like to put is"
+      },
+      {
+        "start": 254,
+        "end": 259,
+        "text": "like high level technical architecture and the requirements, you know, like what is the project,"
+      },
+      {
+        "start": 259,
+        "end": 264,
+        "text": "like that's kind of important. And then you want to give it like some domain context, right? Like, oh,"
+      },
+      {
+        "start": 264,
+        "end": 271,
+        "text": "it's using Swift UI. And I probably would add high level architecture and like kind of the file path"
+      },
+      {
+        "start": 271,
+        "end": 276,
+        "text": "and things like that. And just some of the high level design patterns, like you'll see, like all of"
+      },
+      {
+        "start": 276,
+        "end": 283,
+        "text": "that should go in here. And then one of the important thing is kind of having your build flow,"
+      },
+      {
+        "start": 283,
+        "end": 289,
+        "text": "like your validation flow. And this is like kind of where my build and validation is. So you can see that"
+      },
+      {
+        "start": 289,
+        "end": 293,
+        "text": "I'll like build the xcode and then build a project and make sure things compile,"
+      },
+      {
+        "start": 293,
+        "end": 299,
+        "text": "just having this loop of validation is so amazing, because the AI will just be able to self improve"
+      },
+      {
+        "start": 300,
+        "end": 307,
+        "text": "and keep going until it fixes itself. So like, if you're ever in that situation where you just like,"
+      },
+      {
+        "start": 307,
+        "end": 313,
+        "text": "ask cursor to do something or ask some AI code agent to do something, and it just doesn't work,"
+      },
+      {
+        "start": 313,
+        "end": 319,
+        "text": "a lot of that gets resolved when you fix the validation. And validation, I think as a side tip,"
+      },
+      {
+        "start": 319,
+        "end": 323,
+        "text": "is probably one of the most important topics that you should really think about when you're"
+      },
+      {
+        "start": 323,
+        "end": 330,
+        "text": "thinking about trying to build good AI agentic like coding systems or any workflows is really,"
+      },
+      {
+        "start": 331,
+        "end": 337,
+        "text": "what is the validation loop, because that will dramatically improve how good your AI will be."
+      },
+      {
+        "start": 337,
+        "end": 343,
+        "text": "All right, so let's go to some keyboard shortcuts. And the reason why I even have this entire section"
+      },
+      {
+        "start": 343,
+        "end": 350,
+        "text": "for this is because if you're going to be in cloud code all day, every day, like if you're an engineer,"
+      },
+      {
+        "start": 350,
+        "end": 356,
+        "text": "you're just going to be on this workhorse for quite a while. So you should learn how to actually use"
+      },
+      {
+        "start": 356,
+        "end": 364,
+        "text": "most useful hotkeys. And there's essentially shift tab toggle modes is pretty useful. And that's just"
+      },
+      {
+        "start": 364,
+        "end": 369,
+        "text": "like hitting shift and tab. And then you can see right here that we're switching from accept edits to"
+      },
+      {
+        "start": 369,
+        "end": 377,
+        "text": "plan mode. I actually use plan mode quite heavily. I think I use plan mode almost exclusively whenever I"
+      },
+      {
+        "start": 377,
+        "end": 383,
+        "text": "start a new feature, it's rare that I start in edit mode, I always just want to verify and double check"
+      },
+      {
+        "start": 383,
+        "end": 388,
+        "text": "that my assumptions about the code base that I'm working on. And the direction that I'm trying to"
+      },
+      {
+        "start": 388,
+        "end": 395,
+        "text": "go with is the best option. So I usually start in plan mode and spend a decent amount of time before I go"
+      },
+      {
+        "start": 395,
+        "end": 402,
+        "text": "to accept and just like start execution. All right, escape interrupts. Let me just get something started"
+      },
+      {
+        "start": 402,
+        "end": 409,
+        "text": "here. Tell me a good way to plan a live activity for when I background the app. Okay, so I'm gonna"
+      },
+      {
+        "start": 409,
+        "end": 416,
+        "text": "let this go to show you guys what escaping the interrupts is. But you can see that Claude is like"
+      },
+      {
+        "start": 416,
+        "end": 422,
+        "text": "thinking here and it's like going through and doing things. Sometimes if especially during plan mode, you"
+      },
+      {
+        "start": 422,
+        "end": 428,
+        "text": "want to kind of like look at this and look at the thinking and see if it's going off track. If it is, you"
+      },
+      {
+        "start": 428,
+        "end": 433,
+        "text": "just hit escape. And then it interrupts. Now a lot of people might be like kind of like scared to"
+      },
+      {
+        "start": 433,
+        "end": 439,
+        "text": "interrupt it. But you can just like hit up and then go right back to where you're doing. Or you"
+      },
+      {
+        "start": 439,
+        "end": 445,
+        "text": "could just interrupt it and tell it something else. The whole point is Claude code has a really good way"
+      },
+      {
+        "start": 445,
+        "end": 452,
+        "text": "of like deduping and entering prompts in a nice queue and like it logically knows what to do. So you don't"
+      },
+      {
+        "start": 452,
+        "end": 459,
+        "text": "have to be so scared to like enter more than one prompt and also like escaping early and interrupting"
+      },
+      {
+        "start": 459,
+        "end": 464,
+        "text": "and changing course. Like it's actually recommended to do that. Tip number eight is if you ever had"
+      },
+      {
+        "start": 464,
+        "end": 468,
+        "text": "something like really big where you copy pasted something and you're like, Oh, I don't want to"
+      },
+      {
+        "start": 468,
+        "end": 475,
+        "text": "delete everything. A handy shortcut here is just double tap escape and it'll clear the input. There's also"
+      },
+      {
+        "start": 475,
+        "end": 480,
+        "text": "a Vim mode if you're into that, but I use this all the time. Another thing is when you're on an empty"
+      },
+      {
+        "start": 480,
+        "end": 487,
+        "text": "input, if you double tap escape, you'll see that you can rewind to like a previous point, and then"
+      },
+      {
+        "start": 487,
+        "end": 493,
+        "text": "restore that context point. This is kind of common with clock code. But a lot of the tools I feel like"
+      },
+      {
+        "start": 493,
+        "end": 499,
+        "text": "is really built to manage your context and context engineering. And then there's just like an agent that"
+      },
+      {
+        "start": 499,
+        "end": 504,
+        "text": "is wrapped around the orchestration. But a lot of the like slash commands and stuff that we'll be going"
+      },
+      {
+        "start": 504,
+        "end": 510,
+        "text": "over, I feel like it's it's really to manage that context window. All right, screenshots is"
+      },
+      {
+        "start": 510,
+        "end": 516,
+        "text": "obviously a pretty common thing to do. There's a lot of ways to do it. But you can essentially"
+      },
+      {
+        "start": 516,
+        "end": 523,
+        "text": "take a screenshot and then drag it over and just drop it in. And then obviously, another good tip"
+      },
+      {
+        "start": 523,
+        "end": 529,
+        "text": "is to add context. This is a cool picture of the clock home mascot. Do something with it. I don't know."
+      },
+      {
+        "start": 530,
+        "end": 536,
+        "text": "But yeah, so that's a really good example of like taking a screenshot and bringing it over. If you are"
+      },
+      {
+        "start": 536,
+        "end": 541,
+        "text": "doing any kind of UI work, you'll definitely use this workflow. I also highly recommend finding like"
+      },
+      {
+        "start": 541,
+        "end": 549,
+        "text": "a Figma MCP or some form of MCP that works really good with the specific validation that you're trying"
+      },
+      {
+        "start": 549,
+        "end": 554,
+        "text": "to do. All right, moving on to essential commands. And this is slash commands. Before I end on the"
+      },
+      {
+        "start": 554,
+        "end": 559,
+        "text": "keyboard shortcuts, there's a lot more keyboard shortcuts, things that I don't use all the time."
+      },
+      {
+        "start": 559,
+        "end": 563,
+        "text": "If you just go to like slash help, you'll be able to see a bunch of them. But the ones that I covered,"
+      },
+      {
+        "start": 563,
+        "end": 569,
+        "text": "I use all the time every day. So definitely just memorize it, I think it would be really useful."
+      },
+      {
+        "start": 569,
+        "end": 575,
+        "text": "Now essential commands is like the slash commands that I think you should know about. There's way more"
+      },
+      {
+        "start": 575,
+        "end": 580,
+        "text": "slash commands. And you could like make your own slash commands. But these are the ones that I think"
+      },
+      {
+        "start": 580,
+        "end": 588,
+        "text": "is useful. All right, so slash clear is basically a way to clear the context. Now you could actually do"
+      },
+      {
+        "start": 588,
+        "end": 593,
+        "text": "this by just creating another instance of Claude, right? That's basically the same thing."
+      },
+      {
+        "start": 593,
+        "end": 599,
+        "text": "But if you don't want to like do that, you could just clear the context. And this is really good"
+      },
+      {
+        "start": 599,
+        "end": 602,
+        "text": "if you want to start a new feature and you're completely done with the old task,"
+      },
+      {
+        "start": 602,
+        "end": 612,
+        "text": "and you don't want the old context to"
+      },
+      {
+        "start": 604,
+        "end": 608,
+        "text": "blow up the new context and influence the new project that you're doing."
+      },
+      {
+        "start": 608,
+        "end": 610,
+        "text": "All right, so I just loaded some stuff."
+      },
+      {
+        "start": 610,
+        "end": 612,
+        "text": "Let's go into slash context."
+      },
+      {
+        "start": 613,
+        "end": 619,
+        "text": "What this does is it will give you like a visual representation of the current context"
+      },
+      {
+        "start": 619,
+        "end": 622,
+        "text": "that Cloud Code is operating in."
+      },
+      {
+        "start": 622,
+        "end": 624,
+        "text": "Now, why is this useful?"
+      },
+      {
+        "start": 624,
+        "end": 631,
+        "text": "So the main reason why this is useful is because it gives you an opportunity to reason about"
+      },
+      {
+        "start": 631,
+        "end": 636,
+        "text": "the context that Cloud Code is making assumptions on on your code base."
+      },
+      {
+        "start": 636,
+        "end": 640,
+        "text": "Now, I always say context is best served fresh and condensed."
+      },
+      {
+        "start": 640,
+        "end": 644,
+        "text": "And you really want to take a look at this from time to time."
+      },
+      {
+        "start": 644,
+        "end": 649,
+        "text": "If you ever felt like Cloud Code has regressed and like things are not working the way it"
+      },
+      {
+        "start": 649,
+        "end": 654,
+        "text": "is or your like cost and usage like bill is going up, you really want to look at this"
+      },
+      {
+        "start": 654,
+        "end": 658,
+        "text": "and then see which are like the most biggest offenders, right?"
+      },
+      {
+        "start": 658,
+        "end": 660,
+        "text": "You just want to like audit it."
+      },
+      {
+        "start": 660,
+        "end": 664,
+        "text": "Like MCPs are one of those very common things that blows up your tokens."
+      },
+      {
+        "start": 664,
+        "end": 670,
+        "text": "I mean, like look at all of this Xcode related MCPs and every time it runs it like, I mean,"
+      },
+      {
+        "start": 670,
+        "end": 674,
+        "text": "these are not a lot because I haven't been doing that much in this particular workflow,"
+      },
+      {
+        "start": 674,
+        "end": 680,
+        "text": "but you could just imagine that once I start doing those iteration cycles, this like usage"
+      },
+      {
+        "start": 680,
+        "end": 681,
+        "text": "will like blow up."
+      },
+      {
+        "start": 681,
+        "end": 685,
+        "text": "But yeah, so if you look at this and you're like, oh, this MCP is using so much, then you"
+      },
+      {
+        "start": 685,
+        "end": 688,
+        "text": "could remove it or just disable it for this directory."
+      },
+      {
+        "start": 688,
+        "end": 691,
+        "text": "So slash context is something that you probably should not ignore."
+      },
+      {
+        "start": 691,
+        "end": 697,
+        "text": "Again, I think Cloud Code, all of the tools is really there to manage a lot of the context"
+      },
+      {
+        "start": 697,
+        "end": 699,
+        "text": "and doing really good context engineering."
+      },
+      {
+        "start": 699,
+        "end": 701,
+        "text": "So this is a good slash command."
+      },
+      {
+        "start": 701,
+        "end": 701,
+        "text": "All right."
+      },
+      {
+        "start": 701,
+        "end": 706,
+        "text": "So in terms of compaction, like if you use Cloud Code at all, if you had a long session,"
+      },
+      {
+        "start": 706,
+        "end": 709,
+        "text": "it will start auto compacting at some point."
+      },
+      {
+        "start": 709,
+        "end": 714,
+        "text": "All auto compaction does is it takes your current context window, like context that you created,"
+      },
+      {
+        "start": 714,
+        "end": 716,
+        "text": "and then it will just summarize it."
+      },
+      {
+        "start": 716,
+        "end": 718,
+        "text": "And then it does a pretty good job."
+      },
+      {
+        "start": 718,
+        "end": 721,
+        "text": "For my projects, I usually just let the auto compaction work."
+      },
+      {
+        "start": 722,
+        "end": 726,
+        "text": "But if you really want to compact what you have right now, you could just compact."
+      },
+      {
+        "start": 726,
+        "end": 728,
+        "text": "But I rarely use this."
+      },
+      {
+        "start": 728,
+        "end": 735,
+        "text": "The only time I use this is if I want to save some version of my context into like my local,"
+      },
+      {
+        "start": 735,
+        "end": 738,
+        "text": "like second brain, if you haven't seen that video, go and check it out."
+      },
+      {
+        "start": 738,
+        "end": 741,
+        "text": "But I have the second brain concept when I work on projects."
+      },
+      {
+        "start": 741,
+        "end": 742,
+        "text": "And that's where that goes."
+      },
+      {
+        "start": 742,
+        "end": 746,
+        "text": "So for slash models, this is like very useful."
+      },
+      {
+        "start": 746,
+        "end": 750,
+        "text": "I think if you have unlimited tokens, like if you're doing this at work, for me,"
+      },
+      {
+        "start": 750,
+        "end": 754,
+        "text": "I usually just defaulted to Opus 4.5."
+      },
+      {
+        "start": 754,
+        "end": 759,
+        "text": "But if you're very like cost sensitive, and you know, certain workflows work well in Sonnet,"
+      },
+      {
+        "start": 759,
+        "end": 763,
+        "text": "or like haiku, then you could just go and change that."
+      },
+      {
+        "start": 763,
+        "end": 765,
+        "text": "Keeping it at default is fine too."
+      },
+      {
+        "start": 765,
+        "end": 768,
+        "text": "But I would try to use Opus as much as possible."
+      },
+      {
+        "start": 768,
+        "end": 768,
+        "text": "All right."
+      },
+      {
+        "start": 768,
+        "end": 770,
+        "text": "So slash resume is really useful."
+      },
+      {
+        "start": 770,
+        "end": 775,
+        "text": "If you accidentally like lost your instance, let's say you created another one,"
+      },
+      {
+        "start": 775,
+        "end": 779,
+        "text": "and then you accidentally killed it or something like that, right?"
+      },
+      {
+        "start": 780,
+        "end": 782,
+        "text": "Oh, you killed the wrong one or something."
+      },
+      {
+        "start": 782,
+        "end": 787,
+        "text": "Then when you go back into clock code, you could do slash resume, like so."
+      },
+      {
+        "start": 787,
+        "end": 791,
+        "text": "And then it'll give you kind of the old context."
+      },
+      {
+        "start": 791,
+        "end": 796,
+        "text": "And then you could like recover your context so that you don't lose the all the work that"
+      },
+      {
+        "start": 796,
+        "end": 798,
+        "text": "you did in building up that context window."
+      },
+      {
+        "start": 798,
+        "end": 798,
+        "text": "All right."
+      },
+      {
+        "start": 799,
+        "end": 804,
+        "text": "Slash MCP is really about showing the MCPs that you have installed."
+      },
+      {
+        "start": 805,
+        "end": 812,
+        "text": "If I have to be honest, I try very, very hard to not use MCPs, because I think they blow up"
+      },
+      {
+        "start": 812,
+        "end": 813,
+        "text": "your context window."
+      },
+      {
+        "start": 813,
+        "end": 818,
+        "text": "So I only install ones that are needed for that very specific project."
+      },
+      {
+        "start": 818,
+        "end": 824,
+        "text": "And I try to just leverage cloud code and write scripts and like these kind of things manually,"
+      },
+      {
+        "start": 824,
+        "end": 827,
+        "text": "like myself, to do the validations and things like that."
+      },
+      {
+        "start": 827,
+        "end": 833,
+        "text": "But some projects, you just do need MCPs, like this Xcode one, you kind of need it."
+      },
+      {
+        "start": 833,
+        "end": 838,
+        "text": "And for other projects, like my Next.js apps, I have like a whole set of MCPs for that."
+      },
+      {
+        "start": 838,
+        "end": 840,
+        "text": "But just be careful with MCPs."
+      },
+      {
+        "start": 840,
+        "end": 846,
+        "text": "But it's a really fantastic way to teach cloud how to do certain things, especially with like"
+      },
+      {
+        "start": 846,
+        "end": 848,
+        "text": "third party software and things like that."
+      },
+      {
+        "start": 848,
+        "end": 849,
+        "text": "You know, it's a protocol, right?"
+      },
+      {
+        "start": 849,
+        "end": 850,
+        "text": "Model context protocol."
+      },
+      {
+        "start": 851,
+        "end": 853,
+        "text": "So it's basically used everywhere."
+      },
+      {
+        "start": 853,
+        "end": 856,
+        "text": "But again, it's known to blow up your token usage and your context window."
+      },
+      {
+        "start": 857,
+        "end": 857,
+        "text": "So just be careful."
+      },
+      {
+        "start": 858,
+        "end": 858,
+        "text": "All right."
+      },
+      {
+        "start": 858,
+        "end": 862,
+        "text": "So slash help is the last thing I'm going to teach you, you know, teach a man how to fish."
+      },
+      {
+        "start": 862,
+        "end": 866,
+        "text": "So this like little wizard here will just teach you what they are and give you like descriptions"
+      },
+      {
+        "start": 866,
+        "end": 867,
+        "text": "of everything."
+      },
+      {
+        "start": 867,
+        "end": 872,
+        "text": "So just go ahead and like try these out and just take a look and, you know, explore."
+      },
+      {
+        "start": 872,
+        "end": 872,
+        "text": "All right."
+      },
+      {
+        "start": 872,
+        "end": 874,
+        "text": "So the next thing is around Git."
+      },
+      {
+        "start": 874,
+        "end": 877,
+        "text": "So you could ask Cloud Code to manage your Git."
+      },
+      {
+        "start": 877,
+        "end": 881,
+        "text": "I think there's a bunch of like skills you could download to Cloud Code to manage all your"
+      },
+      {
+        "start": 881,
+        "end": 881,
+        "text": "Git."
+      },
+      {
+        "start": 882,
+        "end": 883,
+        "text": "And I think that's something that you should do."
+      },
+      {
+        "start": 883,
+        "end": 889,
+        "text": "Like I write a lot of my summaries and test plans all using like Cloud Code now."
+      },
+      {
+        "start": 889,
+        "end": 892,
+        "text": "Obviously, I have my own templates that I wrote."
+      },
+      {
+        "start": 892,
+        "end": 896,
+        "text": "So Cloud kind of sounds more like me and it's not too verbose and things like that."
+      },
+      {
+        "start": 896,
+        "end": 899,
+        "text": "So I highly recommend you to use Git as a safety net."
+      },
+      {
+        "start": 900,
+        "end": 903,
+        "text": "There is actually a rewind feature, like I think I told you, where you could restore the"
+      },
+      {
+        "start": 903,
+        "end": 904,
+        "text": "code and the conversation."
+      },
+      {
+        "start": 904,
+        "end": 907,
+        "text": "But this is a little confusing to me."
+      },
+      {
+        "start": 907,
+        "end": 908,
+        "text": "Like Git is just better."
+      },
+      {
+        "start": 909,
+        "end": 914,
+        "text": "I use this as like a last resort if I didn't have Git for a certain checkpoint."
+      },
+      {
+        "start": 914,
+        "end": 919,
+        "text": "So now that you know how to just navigate around Cloud Code and things like that, and"
+      },
+      {
+        "start": 919,
+        "end": 924,
+        "text": "just kind of high level important like commands and things like that, I think it's a good time"
+      },
+      {
+        "start": 924,
+        "end": 927,
+        "text": "to deep dive into the cloud.md file."
+      },
+      {
+        "start": 927,
+        "end": 937,
+        "text": "I think for most people, most users, like 80% of users, if you just have a really good"
+      },
+      {
+        "start": 937,
+        "end": 943,
+        "text": "cloud.md file for your project, you could get really, really far without learning like"
+      },
+      {
+        "start": 943,
+        "end": 944,
+        "text": "all the advanced stuff."
+      },
+      {
+        "start": 944,
+        "end": 948,
+        "text": "Just having a really good rules file will save you a lot of headaches."
+      },
+      {
+        "start": 948,
+        "end": 951,
+        "text": "Let's kind of dive a little bit deep into this."
+      },
+      {
+        "start": 951,
+        "end": 951,
+        "text": "Okay."
+      },
+      {
+        "start": 951,
+        "end": 958,
+        "text": "So one of the most important things in the cloud.md files is first of all, it's like it"
+      },
+      {
+        "start": 958,
+        "end": 962,
+        "text": "actually reads top to bottom and it keeps the priority from top to bottom."
+      },
+      {
+        "start": 962,
+        "end": 964,
+        "text": "I think that's like a very small nuance."
+      },
+      {
+        "start": 964,
+        "end": 965,
+        "text": "I'm pretty sure that's true."
+      },
+      {
+        "start": 965,
+        "end": 967,
+        "text": "I think I read that somewhere, but yeah."
+      },
+      {
+        "start": 967,
+        "end": 971,
+        "text": "So you want to go top to bottom as like important to least important."
+      },
+      {
+        "start": 971,
+        "end": 976,
+        "text": "And you want to add things that are like never do something, but always do this."
+      },
+      {
+        "start": 976,
+        "end": 979,
+        "text": "And they have like clear snippets of examples."
+      },
+      {
+        "start": 979,
+        "end": 980,
+        "text": "I think it's really good."
+      },
+      {
+        "start": 980,
+        "end": 985,
+        "text": "And I don't have that many on this particular project because it's stock Swift UI."
+      },
+      {
+        "start": 986,
+        "end": 990,
+        "text": "But the context here is that you should really think about how unique is your project?"
+      },
+      {
+        "start": 991,
+        "end": 993,
+        "text": "How many things about your project is like homegrown?"
+      },
+      {
+        "start": 994,
+        "end": 997,
+        "text": "And essentially like the AI may have never seen."
+      },
+      {
+        "start": 997,
+        "end": 1004,
+        "text": "Like remember, a lot of this code is like basically a lot of the AI like coding is basically just"
+      },
+      {
+        "start": 1004,
+        "end": 1009,
+        "text": "an accumulation of like the best code that the AI is trained on."
+      },
+      {
+        "start": 1009,
+        "end": 1017,
+        "text": "So it might not know your like super special DSL language that you created or like some random"
+      },
+      {
+        "start": 1017,
+        "end": 1020,
+        "text": "archaic patterns that your company has."
+      },
+      {
+        "start": 1020,
+        "end": 1024,
+        "text": "And that's where you'll be like, oh, why is the AI never doing this?"
+      },
+      {
+        "start": 1024,
+        "end": 1027,
+        "text": "So whenever you run into something like that, you want to fix it manually."
+      },
+      {
+        "start": 1027,
+        "end": 1034,
+        "text": "And then you just update your claw.md rules so that it never does that mistake again."
+      },
+      {
+        "start": 1034,
+        "end": 1036,
+        "text": "Think of it as like lint files kind of."
+      },
+      {
+        "start": 1037,
+        "end": 1041,
+        "text": "And then when you ask claw to update the rules, you shouldn't ever do it manually."
+      },
+      {
+        "start": 1042,
+        "end": 1048,
+        "text": "You should just go here into claw and say, hey, can you update that rule for me so we never"
+      },
+      {
+        "start": 1048,
+        "end": 1048,
+        "text": "do it again?"
+      },
+      {
+        "start": 1049,
+        "end": 1049,
+        "text": "Something like that."
+      },
+      {
+        "start": 1050,
+        "end": 1054,
+        "text": "Like as simple as that will go and update your claw.md files."
+      },
+      {
+        "start": 1054,
+        "end": 1056,
+        "text": "You see how it's trying to do it."
+      },
+      {
+        "start": 1056,
+        "end": 1059,
+        "text": "Obviously, there's nothing that I just did."
+      },
+      {
+        "start": 1059,
+        "end": 1060,
+        "text": "So it says nothing to add."
+      },
+      {
+        "start": 1061,
+        "end": 1061,
+        "text": "But yeah, okay."
+      },
+      {
+        "start": 1061,
+        "end": 1063,
+        "text": "It added something that I thought."
+      },
+      {
+        "start": 1063,
+        "end": 1065,
+        "text": "But you get the point."
+      },
+      {
+        "start": 1065,
+        "end": 1065,
+        "text": "All right."
+      },
+      {
+        "start": 1065,
+        "end": 1071,
+        "text": "So this next one is really around using like keywords to trigger your skills."
+      },
+      {
+        "start": 1071,
+        "end": 1075,
+        "text": "So basically, I have these like build commands inside of my rules."
+      },
+      {
+        "start": 1075,
+        "end": 1082,
+        "text": "So when I say, hey, use my Xcode MCP to build, it'll try to build the app, for example."
+      },
+      {
+        "start": 1082,
+        "end": 1085,
+        "text": "Use my Xcode MCP to build the app."
+      },
+      {
+        "start": 1086,
+        "end": 1092,
+        "text": "Okay, my whisper stuff is like failing a little bit, but maybe it'll get the gist of it from"
+      },
+      {
+        "start": 1092,
+        "end": 1093,
+        "text": "build the app."
+      },
+      {
+        "start": 1094,
+        "end": 1097,
+        "text": "And as you can see, it's asking if I can use the Xcode build MCP."
+      },
+      {
+        "start": 1097,
+        "end": 1103,
+        "text": "So that's kind of the high level of like using skills and like trigger words to be able to"
+      },
+      {
+        "start": 1103,
+        "end": 1104,
+        "text": "trigger certain behavior."
+      },
+      {
+        "start": 1104,
+        "end": 1108,
+        "text": "This next one is something called like compound engineering."
+      },
+      {
+        "start": 1108,
+        "end": 1111,
+        "text": "That's like kind of a new term that is being discussed."
+      },
+      {
+        "start": 1111,
+        "end": 1119,
+        "text": "But it's essentially to take your claw.md and start like committing it into the code base."
+      },
+      {
+        "start": 1120,
+        "end": 1125,
+        "text": "Now, obviously, you need to get rid of anything that's like generic for your code, like file"
+      },
+      {
+        "start": 1125,
+        "end": 1126,
+        "text": "path and things like that."
+      },
+      {
+        "start": 1126,
+        "end": 1131,
+        "text": "And you also want to be mindful of how large this file becomes, right?"
+      },
+      {
+        "start": 1131,
+        "end": 1137,
+        "text": "Because like I said, every time someone hits clawed in that directory or clawed trying to"
+      },
+      {
+        "start": 1137,
+        "end": 1140,
+        "text": "read that directory, it will load that claw.md file."
+      },
+      {
+        "start": 1141,
+        "end": 1144,
+        "text": "So you don't want to blow up other people's context windows."
+      },
+      {
+        "start": 1144,
+        "end": 1148,
+        "text": "So you really want to be have this be like a high bar when you're committing it."
+      },
+      {
+        "start": 1148,
+        "end": 1154,
+        "text": "But the nice thing is once that's in, you essentially make that AI coding experience better for your"
+      },
+      {
+        "start": 1154,
+        "end": 1155,
+        "text": "teammates."
+      },
+      {
+        "start": 1155,
+        "end": 1158,
+        "text": "But you just need to make sure that whatever you're landing is actually helping."
+      },
+      {
+        "start": 1158,
+        "end": 1160,
+        "text": "There's a lot of school of thoughts around this right now."
+      },
+      {
+        "start": 1160,
+        "end": 1162,
+        "text": "I don't think it's like completely solved."
+      },
+      {
+        "start": 1162,
+        "end": 1165,
+        "text": "But there's got to be some form of evaluations here."
+      },
+      {
+        "start": 1165,
+        "end": 1167,
+        "text": "And a lot of people are just using like vibes."
+      },
+      {
+        "start": 1167,
+        "end": 1170,
+        "text": "So you just like test it for like a few weeks."
+      },
+      {
+        "start": 1170,
+        "end": 1174,
+        "text": "And then you just try to land it and then ask for feedback, essentially."
+      },
+      {
+        "start": 1174,
+        "end": 1179,
+        "text": "So dangerously skip is essentially like clawed code in YOLO mode."
+      },
+      {
+        "start": 1179,
+        "end": 1185,
+        "text": "You know, like just basically, if you use clawed code, it will ask you to accept a bunch of stuff."
+      },
+      {
+        "start": 1185,
+        "end": 1186,
+        "text": "It could get really annoying."
+      },
+      {
+        "start": 1186,
+        "end": 1192,
+        "text": "So a lot of people, they use clawed and then dash dash dangerously skip."
+      },
+      {
+        "start": 1192,
+        "end": 1198,
+        "text": "Okay, so it's dash dash dangerously skip permissions."
+      },
+      {
+        "start": 1198,
+        "end": 1203,
+        "text": "And when you run this, clawed code will no longer ask you."
+      },
+      {
+        "start": 1203,
+        "end": 1208,
+        "text": "essentially to accept that. I think it will completely just ignore it, except for like"
+      },
+      {
+        "start": 1208,
+        "end": 1213,
+        "text": "anything you put into your slash permissions, which we'll talk about. But you only really want"
+      },
+      {
+        "start": 1213,
+        "end": 1220,
+        "text": "to do this in environments that you can kind of throw away. And you're doing specific work that"
+      },
+      {
+        "start": 1220,
+        "end": 1224,
+        "text": "is not like super dangerous. Like if you're going to start touching the OS and stuff like that,"
+      },
+      {
+        "start": 1224,
+        "end": 1229,
+        "text": "you could really mess it up. I messed up some of my Linux machines because I was just going"
+      },
+      {
+        "start": 1229,
+        "end": 1233,
+        "text": "too aggressive. And I was just testing it out. And I was trying to set up some of my Linux stuff."
+      },
+      {
+        "start": 1233,
+        "end": 1239,
+        "text": "Using clock code. And then like I had to reflash the entire thing. Like I said, you can use slash"
+      },
+      {
+        "start": 1239,
+        "end": 1247,
+        "text": "permissions here to kind of like tell which ones are like you still want to accept. So it does,"
+      },
+      {
+        "start": 1247,
+        "end": 1253,
+        "text": "you know, like an RM dash RF or something like don't do that. Or yeah, just like mutations,"
+      },
+      {
+        "start": 1253,
+        "end": 1260,
+        "text": "like just be careful with mutations, like deletion mutations, right? All right. The next big one,"
+      },
+      {
+        "start": 1260,
+        "end": 1266,
+        "text": "I think now that we talked a little bit about the cloud.md rule of files, I think we should"
+      },
+      {
+        "start": 1266,
+        "end": 1273,
+        "text": "talk about workflows because I have a very specific way I'd like to work and I've actually refactored"
+      },
+      {
+        "start": 1273,
+        "end": 1280,
+        "text": "my entire work so that it's works with clock code. You know, I used to use cursor or like Android"
+      },
+      {
+        "start": 1280,
+        "end": 1286,
+        "text": "studios mostly and VS code to do a lot of coding and stuff like that. But I dropped basically all of"
+      },
+      {
+        "start": 1286,
+        "end": 1293,
+        "text": "that and I use just items now. Some people use obviously vim, but I think items is fine. So"
+      },
+      {
+        "start": 1293,
+        "end": 1302,
+        "text": "I'm going to show you guys a few things. So like I said, I always start with plan mode. Let's go in"
+      },
+      {
+        "start": 1302,
+        "end": 1306,
+        "text": "like plan like a little feature for this Palma de Roo app that I've been like kind of working on. I"
+      },
+      {
+        "start": 1306,
+        "end": 1313,
+        "text": "actually need to remove a bunch of audio stuff. So let's just say audit my code base and make sure"
+      },
+      {
+        "start": 1313,
+        "end": 1321,
+        "text": "that we're removing all of the audio playback and references to the audio of part of the Pomodoro"
+      },
+      {
+        "start": 1321,
+        "end": 1328,
+        "text": "app. I always start with plan mode and I'm like iterating with cloud code. I'm arguing with it. I'm"
+      },
+      {
+        "start": 1328,
+        "end": 1332,
+        "text": "having a conversation with it. You know, cloud code, you're so beautiful. You're so amazing."
+      },
+      {
+        "start": 1333,
+        "end": 1339,
+        "text": "No, but like I'm really treating it as like another like just good engineer that I'm like working with."
+      },
+      {
+        "start": 1339,
+        "end": 1345,
+        "text": "And I never just like purely accept the first answers that it gives to me. I will always kind"
+      },
+      {
+        "start": 1345,
+        "end": 1351,
+        "text": "of challenging it. And I spend a lot of time and put a lot of effort at this stage of the development,"
+      },
+      {
+        "start": 1351,
+        "end": 1358,
+        "text": "because I feel like once cloud code builds up that context and have good execution specs,"
+      },
+      {
+        "start": 1358,
+        "end": 1363,
+        "text": "the generation of the code is actually the easy part. And I do want to take a moment and talk about"
+      },
+      {
+        "start": 1363,
+        "end": 1371,
+        "text": "like kind of the news cycle about people saying, Oh, like people are no longer writing code. I think"
+      },
+      {
+        "start": 1371,
+        "end": 1379,
+        "text": "like the creator of node.js said like the era of like people writing code by hand is essentially over."
+      },
+      {
+        "start": 1379,
+        "end": 1384,
+        "text": "And I actually truly believe that. And the thing is, I love like being in the zone and writing code."
+      },
+      {
+        "start": 1384,
+        "end": 1390,
+        "text": "At least I used to. The thing is, it's really hard to get back into that mode. It's like very different"
+      },
+      {
+        "start": 1390,
+        "end": 1396,
+        "text": "levels of abstractions of the way you're working. And right now I'm just doing one instance of it."
+      },
+      {
+        "start": 1396,
+        "end": 1404,
+        "text": "But you could imagine just having like multiple cloud instances like this. And and then you're just"
+      },
+      {
+        "start": 1404,
+        "end": 1410,
+        "text": "actively working on a bunch of different things at the same time, because you have this like new"
+      },
+      {
+        "start": 1410,
+        "end": 1416,
+        "text": "superpower. The new next level of engineering is really like jumping between cloud instances,"
+      },
+      {
+        "start": 1416,
+        "end": 1423,
+        "text": "and, and really context engineering, that instance, and then getting it good enough to start executing."
+      },
+      {
+        "start": 1423,
+        "end": 1430,
+        "text": "And I keep talking about this, like context, right? And this tip is really around like fresh context,"
+      },
+      {
+        "start": 1430,
+        "end": 1436,
+        "text": "beats like bloated context. I think I kind of covered this throughout this. But that's why you want to"
+      },
+      {
+        "start": 1436,
+        "end": 1442,
+        "text": "start with plan mode, make sure it's good. And then just go and execute instead of like having a bunch of"
+      },
+      {
+        "start": 1442,
+        "end": 1447,
+        "text": "like, try this, and then try that, and then try this, and then try that, like that will just bloat"
+      },
+      {
+        "start": 1447,
+        "end": 1453,
+        "text": "that context. And then the AI will get really confused at some point, because it can't remember"
+      },
+      {
+        "start": 1453,
+        "end": 1459,
+        "text": "what what part of what was good and not good. So that's why you want to spend the time in the"
+      },
+      {
+        "start": 1459,
+        "end": 1464,
+        "text": "beginning, building up the good context, have a good plan doc. So always has something that initially"
+      },
+      {
+        "start": 1464,
+        "end": 1470,
+        "text": "was good to reference, and then it builds little by little, right? So this next one is really around"
+      },
+      {
+        "start": 1470,
+        "end": 1478,
+        "text": "persisting that context. I have a full video on this about like the second brain concept. So I'll"
+      },
+      {
+        "start": 1478,
+        "end": 1483,
+        "text": "link it here. But the idea here is that let's say you've finished something, you could just say,"
+      },
+      {
+        "start": 1483,
+        "end": 1490,
+        "text": "save this to my local claw.md in my projects directory, save the work that we just did. So you"
+      },
+      {
+        "start": 1490,
+        "end": 1496,
+        "text": "could say something like that. And then I essentially have a full workflow for this to manage this. But"
+      },
+      {
+        "start": 1496,
+        "end": 1506,
+        "text": "yeah, you could do that. Load my context from my local projects. So once you have that second brain"
+      },
+      {
+        "start": 1506,
+        "end": 1513,
+        "text": "concept, you could say a command like this, and it will pull that context, and then load it for your"
+      },
+      {
+        "start": 1513,
+        "end": 1519,
+        "text": "new session. So here's a good example, I like to do a lot of my to do's inside of cloud code itself."
+      },
+      {
+        "start": 1519,
+        "end": 1524,
+        "text": "These are kind of the high level things that I still need to do for this next feature that I'm"
+      },
+      {
+        "start": 1524,
+        "end": 1529,
+        "text": "working on. So I'm like working on a widget for this Pomodoro app. And I have like a live activity,"
+      },
+      {
+        "start": 1529,
+        "end": 1534,
+        "text": "for example. And I'm also like deleting all the music stuff, because I don't think it adds value."
+      },
+      {
+        "start": 1535,
+        "end": 1540,
+        "text": "So I have a bunch of stuff that I'm tracking. But because I keep all the to do's in my local"
+      },
+      {
+        "start": 1540,
+        "end": 1545,
+        "text": "index, like that I'm lazy loading, I don't always load it, I only lazy load it when I ask for it,"
+      },
+      {
+        "start": 1545,
+        "end": 1551,
+        "text": "it allows me to like context switch from project to project without like carrying around like complex,"
+      },
+      {
+        "start": 1551,
+        "end": 1556,
+        "text": "I don't know, Asana boards or whatever, I just keep it all in here. And it's this is this works"
+      },
+      {
+        "start": 1556,
+        "end": 1562,
+        "text": "because it's my own project. But you can technically do this with like an MCP with Asana or I don't know,"
+      },
+      {
+        "start": 1562,
+        "end": 1567,
+        "text": "Jira or whatever, as long as you can whatever project management that you can think of. All right,"
+      },
+      {
+        "start": 1567,
+        "end": 1574,
+        "text": "so I think we covered this a little bit. But really think about the build cycle. Like, obviously,"
+      },
+      {
+        "start": 1574,
+        "end": 1580,
+        "text": "if you're mobile, think about x code building the x code. But there's a lot of other workflows that you"
+      },
+      {
+        "start": 1580,
+        "end": 1585,
+        "text": "could think of, like, for example, you could ask cloud code to, like, let's say you're debugging"
+      },
+      {
+        "start": 1585,
+        "end": 1589,
+        "text": "something that's like kind of tricky has like race conditions or things like that, you could ask"
+      },
+      {
+        "start": 1589,
+        "end": 1596,
+        "text": "cloud code to like add debug logs, for example, and then run the app and then have cloud code control"
+      },
+      {
+        "start": 1596,
+        "end": 1601,
+        "text": "the emulator, you could just ask it to do that. And then like do the actions that you're trying to do"
+      },
+      {
+        "start": 1601,
+        "end": 1607,
+        "text": "and then read the logs through a tail log or something, and then debug that way. Or you could use"
+      },
+      {
+        "start": 1607,
+        "end": 1612,
+        "text": "like Profetto or something like that for kind of performance things, you could hook into Profetto"
+      },
+      {
+        "start": 1612,
+        "end": 1618,
+        "text": "MCPs, do a run and then have a read the traces and then see if it can find jank just from like the"
+      },
+      {
+        "start": 1618,
+        "end": 1623,
+        "text": "timings, right? There's just so many validation loops that you could think of, like for web,"
+      },
+      {
+        "start": 1623,
+        "end": 1629,
+        "text": "you could do like puppeteer and have cloud navigated using a slash Chrome command, and then just"
+      },
+      {
+        "start": 1629,
+        "end": 1634,
+        "text": "actually do the navigation or have a right just test or have like integration into an integration"
+      },
+      {
+        "start": 1634,
+        "end": 1639,
+        "text": "test. You know, there's, there's a lot of things that cloud code could do. And it really is up to"
+      },
+      {
+        "start": 1639,
+        "end": 1645,
+        "text": "your imagination. But it's the single most important thing, in my opinion, if you want to have a more"
+      },
+      {
+        "start": 1645,
+        "end": 1652,
+        "text": "automated loop that like generates good code on like the first try. So going back to the slash models,"
+      },
+      {
+        "start": 1652,
+        "end": 1658,
+        "text": "really just consider using Opus if you can afford it. It's just the best way. All of these are a little"
+      },
+      {
+        "start": 1658,
+        "end": 1665,
+        "text": "bit slower. But because the way I work is I have multiple cloud instances, obviously, it's like very"
+      },
+      {
+        "start": 1665,
+        "end": 1672,
+        "text": "small right in here, but I have multiple cloud instances running at all times. And then the way"
+      },
+      {
+        "start": 1672,
+        "end": 1677,
+        "text": "I work is basically just juggling these cloud instances. So even if one of them takes a long"
+      },
+      {
+        "start": 1677,
+        "end": 1683,
+        "text": "time, it doesn't matter because I'm like, I gave the command, and I go to the next one, I'm building"
+      },
+      {
+        "start": 1683,
+        "end": 1690,
+        "text": "the context, I give a command, and I go to the other one. And then I give a command. So, so like"
+      },
+      {
+        "start": 1690,
+        "end": 1696,
+        "text": "you end up like still can get into the zone, but it's like a different style. So I talked a little bit"
+      },
+      {
+        "start": 1696,
+        "end": 1704,
+        "text": "about interrupting earlier. But you really want to, like look out for like assumptions or the keywords"
+      },
+      {
+        "start": 1704,
+        "end": 1709,
+        "text": "are like, Oh, I'm not really sure or you'll see like errors happening. I'm having a hard time like"
+      },
+      {
+        "start": 1709,
+        "end": 1718,
+        "text": "getting it to do this in this example. But just just know that like, when you go and look for the"
+      },
+      {
+        "start": 1718,
+        "end": 1727,
+        "text": "best ways to delete an app, I don't know. I'm just giving it a random prompt is try to make it go off"
+      },
+      {
+        "start": 1727,
+        "end": 1733,
+        "text": "course. But if you see it going and making assumptions about certain things, okay, this time"
+      },
+      {
+        "start": 1733,
+        "end": 1738,
+        "text": "it didn't even because it's just new, but you should just interrupt it like that, you know, and then and"
+      },
+      {
+        "start": 1738,
+        "end": 1743,
+        "text": "then just course corrected. So don't worry about course correcting. Okay, so the next section is"
+      },
+      {
+        "start": 1743,
+        "end": 1749,
+        "text": "around power users, I don't really like to say power users. But most people that I've talked to"
+      },
+      {
+        "start": 1749,
+        "end": 1755,
+        "text": "don't really know, like the differences between a slash command or a skill, they're kind of"
+      },
+      {
+        "start": 1755,
+        "end": 1760,
+        "text": "interchangeable now. And MCPs, sub agents, you know, post hooks, pre hooks, like these kind of primitives"
+      },
+      {
+        "start": 1760,
+        "end": 1767,
+        "text": "that clock code is like, known for and kind of like invented. And we're going to cover some of that and"
+      },
+      {
+        "start": 1767,
+        "end": 1773,
+        "text": "and how this, these are all like composable in nature. Okay, so I call it the composability"
+      },
+      {
+        "start": 1773,
+        "end": 1777,
+        "text": "framework. But it's, I just really wanted to highlight that these are composable more than"
+      },
+      {
+        "start": 1777,
+        "end": 1783,
+        "text": "anything. But there's four primitive, like composable things, all the slash commands are"
+      },
+      {
+        "start": 1783,
+        "end": 1789,
+        "text": "technically composable with each other, not directly each other. But anyways, so we're going to just go"
+      },
+      {
+        "start": 1789,
+        "end": 1796,
+        "text": "over the fact that like, how these are composable. Okay, so let's first talk about skills. All the"
+      },
+      {
+        "start": 1796,
+        "end": 1802,
+        "text": "skill is, is, it's like, you do a workflow. So let's say that I tell cloth"
+      },
+      {
+        "start": 1802,
+        "end": 1810,
+        "text": "go and fetch hacker news for latest iOS news. So let's say I tell it to go and"
+      },
+      {
+        "start": 1810,
+        "end": 1816,
+        "text": "fetch hacker news for the latest iOS news and then and then I tell it to save"
+      },
+      {
+        "start": 1816,
+        "end": 1831,
+        "text": "that. Okay and then save a summary to my local cloud.md cloud directory. Okay I"
+      },
+      {
+        "start": 1831,
+        "end": 1836,
+        "text": "misspelled that but basically let's say that it went and found some and then it's"
+      },
+      {
+        "start": 1836,
+        "end": 1840,
+        "text": "save it into my local directory. Let's say I wanted to build a skill around that."
+      },
+      {
+        "start": 1840,
+        "end": 1845,
+        "text": "So you just saw me do two things. One is fetch something from a source like"
+      },
+      {
+        "start": 1845,
+        "end": 1850,
+        "text": "hacker news and then save that thing to my local directory. That's technically a"
+      },
+      {
+        "start": 1850,
+        "end": 1856,
+        "text": "workflow. So all you have to say do is save what we just did into a new skill"
+      },
+      {
+        "start": 1856,
+        "end": 1861,
+        "text": "called fetch hacker news. And that's basically it to create a skill. It's"
+      },
+      {
+        "start": 1861,
+        "end": 1867,
+        "text": "basically a recurring workflow that you can just tell Claude to remember. And"
+      },
+      {
+        "start": 1867,
+        "end": 1873,
+        "text": "behind the scenes it's actually just an MD file as you can see right here. Oops. And"
+      },
+      {
+        "start": 1873,
+        "end": 1879,
+        "text": "as you can see here it's literally just a system prompt. It's an MD file but Claude"
+      },
+      {
+        "start": 1879,
+        "end": 1885,
+        "text": "has specific directories that is looking for skills and it will be able to infer"
+      },
+      {
+        "start": 1885,
+        "end": 1891,
+        "text": "this next time I say go fetch something from hacker news or use my hacker news skill to fetch"
+      },
+      {
+        "start": 1891,
+        "end": 1897,
+        "text": "articles. Yeah and then commands is basically now interchangeable. It's it's a pretty recent change"
+      },
+      {
+        "start": 1897,
+        "end": 1904,
+        "text": "but you can see that skills is written to the skills documentary and it there's also now a slash"
+      },
+      {
+        "start": 1904,
+        "end": 1909,
+        "text": "command called slash fetch hacker news. This is a very recent change from Anthropic where they kind of"
+      },
+      {
+        "start": 1909,
+        "end": 1916,
+        "text": "like combined commands and skills. But yeah so now you can just do slash hacker news and then now it'll"
+      },
+      {
+        "start": 1916,
+        "end": 1922,
+        "text": "rerun that system prompt for example. It added like an additional like assumption thing. That's pretty cool."
+      },
+      {
+        "start": 1922,
+        "end": 1928,
+        "text": "It's not exactly what I did but it kind of inferred that I would probably want that. So those are the"
+      },
+      {
+        "start": 1928,
+        "end": 1933,
+        "text": "little cool things. And the thing is you could update these anytime you want. You know you could just ask"
+      },
+      {
+        "start": 1933,
+        "end": 1941,
+        "text": "Claude to do something else. All right so like I said you never want to manually create these kind of"
+      },
+      {
+        "start": 1941,
+        "end": 1949,
+        "text": "stuff. You want to get in the habit of asking Claude to update and manage these skills. So we could say"
+      },
+      {
+        "start": 1949,
+        "end": 1957,
+        "text": "why don't you extend this fetch hacker news to fetch Twitter or Apple news. For example now sometimes it"
+      },
+      {
+        "start": 1957,
+        "end": 1963,
+        "text": "won't work 100% exactly right. Okay so you see this it doesn't have Twitter authentication access."
+      },
+      {
+        "start": 1964,
+        "end": 1972,
+        "text": "So it's trying to just do some other ways. Yeah multiple sources. So you can see how it's all updating"
+      },
+      {
+        "start": 1972,
+        "end": 1979,
+        "text": "that system problem that we wrote right. And then fetch hacker news and so forth. You get the idea."
+      },
+      {
+        "start": 1979,
+        "end": 1989,
+        "text": "All right so MCPs I think we covered it a little bit during the the rules but basically MCPs you just"
+      },
+      {
+        "start": 1989,
+        "end": 1996,
+        "text": "want to find MCPs like this right. Like they're just model contexts. But kind of a hack is like you"
+      },
+      {
+        "start": 1996,
+        "end": 2003,
+        "text": "don't actually need to search the web for an MCP. You could just be like find me a good Figma MCP. You"
+      },
+      {
+        "start": 2003,
+        "end": 2009,
+        "text": "could just ask Claude to find it for you. And then most of the time it does a good job. The only thing"
+      },
+      {
+        "start": 2009,
+        "end": 2018,
+        "text": "is like sometimes it's outdated. So it'll like know of one that was popular a little while ago rather"
+      },
+      {
+        "start": 2018,
+        "end": 2022,
+        "text": "than doing a web search. So you just have to be mindful. And that's why I'm saying like for certain"
+      },
+      {
+        "start": 2022,
+        "end": 2029,
+        "text": "actions you want to read how what it's doing and look at the thinking and then cancel it if you want to."
+      },
+      {
+        "start": 2029,
+        "end": 2034,
+        "text": "And you could have Claude also install the MCP so you don't have to like manage like the configs and"
+      },
+      {
+        "start": 2034,
+        "end": 2041,
+        "text": "stuff yourself like you had to with cursor. Yeah so you could ask Claude to install the MCPs. So like"
+      },
+      {
+        "start": 2041,
+        "end": 2046,
+        "text": "right here it says go and do this right. But instead I could just be like why don't you just install this"
+      },
+      {
+        "start": 2046,
+        "end": 2054,
+        "text": "for me for example. And then it will just go and install it for you. All right so in terms of sub agents"
+      },
+      {
+        "start": 2054,
+        "end": 2063,
+        "text": "I don't know if I have one for this. I might have like an iOS I might have one like an iOS like context"
+      },
+      {
+        "start": 2063,
+        "end": 2074,
+        "text": "gathering or like architecture agent. Let me try it. So spawn a iOS architecture agent sub agent and do"
+      },
+      {
+        "start": 2074,
+        "end": 2083,
+        "text": "some investigation on and on my code base and see if it's actually good or not. So you can build sub agents"
+      },
+      {
+        "start": 2083,
+        "end": 2090,
+        "text": "just like you can with slash commands and skills. All you do is just ask it to make a sub agent after"
+      },
+      {
+        "start": 2090,
+        "end": 2100,
+        "text": "you do the work once. The main reason why you want to create a sub agent is really to do parallel work"
+      },
+      {
+        "start": 2100,
+        "end": 2107,
+        "text": "but also it's to protect your context window. So like I said one of the key features of Claude code is to"
+      },
+      {
+        "start": 2107,
+        "end": 2114,
+        "text": "manage your context and do context engineering and sub agent is a huge way. And I think a lot of people"
+      },
+      {
+        "start": 2114,
+        "end": 2120,
+        "text": "are using sub agents incorrectly because they do things like this where you have like an iOS"
+      },
+      {
+        "start": 2120,
+        "end": 2126,
+        "text": "sub agent right by the way it's not triggering the sub agent. I'll just make one after it creates it and"
+      },
+      {
+        "start": 2126,
+        "end": 2131,
+        "text": "show you guys what it looks like. It like highlights it in like a different color. But a lot of them have"
+      },
+      {
+        "start": 2131,
+        "end": 2138,
+        "text": "this like workflow where they'll tell it to go do something that does the context gathering and then"
+      },
+      {
+        "start": 2138,
+        "end": 2144,
+        "text": "they ask to like bring it back. But that part that portion of the context that's bringing brings back"
+      },
+      {
+        "start": 2144,
+        "end": 2150,
+        "text": "from the sub agent it's only like the output it's not like how it got there. So it doesn't have the full context."
+      },
+      {
+        "start": 2150,
+        "end": 2157,
+        "text": "So for those kind of works I usually just keep it within the context window because those are the things that are really good."
+      },
+      {
+        "start": 2157,
+        "end": 2166,
+        "text": "Use what we just did to create a iOS architecture sub agent. But yeah so so oftentimes people mistake that"
+      },
+      {
+        "start": 2166,
+        "end": 2173,
+        "text": "you want to like have a validator agent you want to have like a testing agent and all these kind of"
+      },
+      {
+        "start": 2173,
+        "end": 2180,
+        "text": "things. But I try to keep the all the things that need that context to do its work within the same"
+      },
+      {
+        "start": 2180,
+        "end": 2186,
+        "text": "cloud code session. Because like a good testing agent needs to know about the code that it wrote"
+      },
+      {
+        "start": 2186,
+        "end": 2192,
+        "text": "most of the time in my opinion. Of course sometimes things could live in isolation. So what are really"
+      },
+      {
+        "start": 2192,
+        "end": 2199,
+        "text": "good things for sub agents is really just like things that are atomic in nature that you want to"
+      },
+      {
+        "start": 2199,
+        "end": 2204,
+        "text": "just have it run as side effects and just go and do. But yeah so that's what I use sub agents for. I don't"
+      },
+      {
+        "start": 2204,
+        "end": 2210,
+        "text": "use sub agents that often. I know some people like love using them. But one of the most common like"
+      },
+      {
+        "start": 2210,
+        "end": 2216,
+        "text": "clowny kind of use cases that I've seen is like CEO agent, product agent, design agent, and stuff like"
+      },
+      {
+        "start": 2216,
+        "end": 2221,
+        "text": "that. And I don't really believe in that particular workflow. Like you really want to have this"
+      },
+      {
+        "start": 2221,
+        "end": 2226,
+        "text": "concept of bringing the work to the context rather than trying to spread out the context that gets"
+      },
+      {
+        "start": 2226,
+        "end": 2233,
+        "text": "created. All right so and this kind of ties into it like you want to avoid like having a lot of"
+      },
+      {
+        "start": 2233,
+        "end": 2240,
+        "text": "instructions and overloading the context all the time. You want to keep your context condensed and fresh."
+      },
+      {
+        "start": 2240,
+        "end": 2246,
+        "text": "So that watch my video on the second brain and you like that's it'll teach you a lot about like"
+      },
+      {
+        "start": 2246,
+        "end": 2252,
+        "text": "lazy loading and then having this like ongoing project domain thing that builds over time and you"
+      },
+      {
+        "start": 2252,
+        "end": 2260,
+        "text": "want to essentially use that as your rag system to build like a good context and then be able to just"
+      },
+      {
+        "start": 2260,
+        "end": 2267,
+        "text": "have fresh and good context all the time for your AI to execute on. All right so here is some interesting like"
+      },
+      {
+        "start": 2268,
+        "end": 2274,
+        "text": "advanced workflows and I really think that the big game changer in my opinion for"
+      },
+      {
+        "start": 2275,
+        "end": 2281,
+        "text": "cloud code and why I think cloud code is just so amazing is that you can do a lot of parallel"
+      },
+      {
+        "start": 2281,
+        "end": 2288,
+        "text": "development. This is why I had to like fully change how I work using like terminal and stuff because"
+      },
+      {
+        "start": 2288,
+        "end": 2294,
+        "text": "you could run multiple instances and I already kind of showed you guys this but you could just swap between"
+      },
+      {
+        "start": 2294,
+        "end": 2301,
+        "text": "these and just have like multiple things running at the same time. So I could say start working on my"
+      },
+      {
+        "start": 2301,
+        "end": 2307,
+        "text": "live activities feature so I could just have that obviously I would do it in plan mode but I'm just"
+      },
+      {
+        "start": 2307,
+        "end": 2313,
+        "text": "showing you guys and then over here I could just say all right let's test out this iOS architecture and"
+      },
+      {
+        "start": 2313,
+        "end": 2318,
+        "text": "and then just spawn a sub-agent. So as you can see I'm doing some investigation on one side and then I'm"
+      },
+      {
+        "start": 2318,
+        "end": 2324,
+        "text": "doing live code editing but the thing is I could always just create another one go to like a"
+      },
+      {
+        "start": 2324,
+        "end": 2330,
+        "text": "different project like this and then now I could be saying hey I want to work on a new newsletter"
+      },
+      {
+        "start": 2332,
+        "end": 2339,
+        "text": "for example. So I could be doing a bunch of stuff all at the same time so that's like a really so"
+      },
+      {
+        "start": 2339,
+        "end": 2344,
+        "text": "understanding how to juggle this and doing it effectively I think is like the next step function"
+      },
+      {
+        "start": 2344,
+        "end": 2352,
+        "text": "change and I just want to kind of shout out iterms I think it's like really good because you know you"
+      },
+      {
+        "start": 2352,
+        "end": 2358,
+        "text": "could do command d to create new instances like this right and then you could juggle between the"
+      },
+      {
+        "start": 2358,
+        "end": 2366,
+        "text": "terminals using command the left bracket and right bracket like ignore this like slash it's like I'm just"
+      },
+      {
+        "start": 2366,
+        "end": 2373,
+        "text": "saying oh it's left bracket or right bracket like slash right but yeah so and you could do that you could"
+      },
+      {
+        "start": 2373,
+        "end": 2379,
+        "text": "also if you have multiple tabs like this you can actually swap between it and at work what I do is"
+      },
+      {
+        "start": 2379,
+        "end": 2387,
+        "text": "I rename like what I'm doing in here like I'll say local and maybe here I'll say like remote ssh or"
+      },
+      {
+        "start": 2387,
+        "end": 2393,
+        "text": "something like that and then from the remote ssh I could have cloud like running like this and I could"
+      },
+      {
+        "start": 2393,
+        "end": 2401,
+        "text": "spawn them more you know and then and then I could just be going back and forth here so it really feels like"
+      },
+      {
+        "start": 2401,
+        "end": 2407,
+        "text": "I'm playing Starcraft to some degree, right? And all of these I'm just doing with my keyboard. And"
+      },
+      {
+        "start": 2407,
+        "end": 2413,
+        "text": "when I'm home, I'll just like be in whisper, using whisper, which is like this voice little thing"
+      },
+      {
+        "start": 2413,
+        "end": 2418,
+        "text": "that you see right here. And it just translates speech to text really quickly. Sometimes it's not"
+      },
+      {
+        "start": 2418,
+        "end": 2423,
+        "text": "that accurate. But so I'm just like switching, switching, and I'm just basically talking to it,"
+      },
+      {
+        "start": 2423,
+        "end": 2428,
+        "text": "you know, just literally working as in multiple projects all at the same time. I think my"
+      },
+      {
+        "start": 2428,
+        "end": 2432,
+        "text": "bottleneck right now is really how much context switching I can do in my head. So yeah,"
+      },
+      {
+        "start": 2432,
+        "end": 2437,
+        "text": "another thing is enabling notifications, you could tell clock code to change the notifications, right?"
+      },
+      {
+        "start": 2438,
+        "end": 2443,
+        "text": "You could just say change the notification to ring a little sound when you finish execution,"
+      },
+      {
+        "start": 2443,
+        "end": 2450,
+        "text": "for example. And then when it's now, it will basically ring like a little notification. And"
+      },
+      {
+        "start": 2450,
+        "end": 2458,
+        "text": "you could do a lot of things. At one point I had like, Texas speech, where like reads a summary of"
+      },
+      {
+        "start": 2459,
+        "end": 2464,
+        "text": "one of wherever it finished, it will read the summary. So I could be like, okay, I got to go back to"
+      },
+      {
+        "start": 2464,
+        "end": 2470,
+        "text": "tab two and then go do something. But that was too much. So I disabled it gig work trees is another way"
+      },
+      {
+        "start": 2470,
+        "end": 2475,
+        "text": "to do multiple code execution. So one of the bottlenecks that you'll see is if you have these"
+      },
+      {
+        "start": 2475,
+        "end": 2480,
+        "text": "kind of like bunch of multiple instances, you'll soon realize if you're doing local development,"
+      },
+      {
+        "start": 2480,
+        "end": 2486,
+        "text": "you won't be able to make code edits the same project, unless you use get work trees. And I'll add some"
+      },
+      {
+        "start": 2486,
+        "end": 2491,
+        "text": "descriptions on how to use get work trees. But basically, it's a way to like clone multiple"
+      },
+      {
+        "start": 2491,
+        "end": 2496,
+        "text": "instances of your code base and have like different forking branches. So you could have like, you could"
+      },
+      {
+        "start": 2496,
+        "end": 2502,
+        "text": "work on like code, like executions in the same project. Slash Chrome is actually a really cool"
+      },
+      {
+        "start": 2502,
+        "end": 2510,
+        "text": "tool, in my opinion. So the way you get to it is by just doing slash Chrome like this, and then it'll go to"
+      },
+      {
+        "start": 2510,
+        "end": 2515,
+        "text": "like slash Chrome, and then it will open this thing, you can't see it here. But there's like a little"
+      },
+      {
+        "start": 2515,
+        "end": 2525,
+        "text": "button, and it just opens it and you could actually navigate the browser. So go to tip number 46."
+      },
+      {
+        "start": 2526,
+        "end": 2531,
+        "text": "So what it does is we'll look at the website and we'll and you can approve the plan, you could allow"
+      },
+      {
+        "start": 2531,
+        "end": 2537,
+        "text": "the action. But basically, it will create the plan and they will like, do it, okay, it doesn't it doesn't"
+      },
+      {
+        "start": 2537,
+        "end": 2547,
+        "text": "really know how to do it. So I'll say hit, let's just try YouTube. I think YouTube might be easier."
+      },
+      {
+        "start": 2548,
+        "end": 2559,
+        "text": "Okay, so we'll open YouTube and then say, find a video on cooking, for example. Yep."
+      },
+      {
+        "start": 2559,
+        "end": 2568,
+        "text": "So you can see that it like takes a screenshot, it will like click, it'll type cooking, and then it"
+      },
+      {
+        "start": 2568,
+        "end": 2575,
+        "text": "will like, find cooking videos, for example. And then so I use this whenever I don't have API access"
+      },
+      {
+        "start": 2575,
+        "end": 2583,
+        "text": "to certain things, but I can get there via my web. And because you could control it via slash Chrome,"
+      },
+      {
+        "start": 2583,
+        "end": 2590,
+        "text": "you can have it as part, like I mentioned that all of these are composable. So you can have a command"
+      },
+      {
+        "start": 2590,
+        "end": 2597,
+        "text": "that goes to Chrome, scrapes bunch of stuff, and comes back to you with the data. Okay, so moving on,"
+      },
+      {
+        "start": 2597,
+        "end": 2602,
+        "text": "like I mentioned, it's really good for a powerful, like debugging, right, you can navigate the web with"
+      },
+      {
+        "start": 2602,
+        "end": 2607,
+        "text": "it. That's also part of the validation thing that I was talking about, you can fill out forms and stuff."
+      },
+      {
+        "start": 2607,
+        "end": 2612,
+        "text": "All right, hooks and automation is really just like kind of the cherry on top. And this is very"
+      },
+      {
+        "start": 2612,
+        "end": 2620,
+        "text": "similar to like, get ups, pre hooks, and get ups, like posts, like commit stuff, like recommit stuff."
+      },
+      {
+        "start": 2620,
+        "end": 2628,
+        "text": "So basically, these are hooks. And as you can tell, it's just like, something to do before you start"
+      },
+      {
+        "start": 2628,
+        "end": 2634,
+        "text": "executing or after executing. And after executing fails, like, there's all these things that you can"
+      },
+      {
+        "start": 2634,
+        "end": 2639,
+        "text": "do. And you shouldn't manually do this, you should just ask Claude to, like, add these for you, you"
+      },
+      {
+        "start": 2639,
+        "end": 2645,
+        "text": "know, like, go back to that principle that you're no longer main manually maintaining your work"
+      },
+      {
+        "start": 2645,
+        "end": 2653,
+        "text": "environment. And a good example on what to put here for the post tool use is like, you know, things like"
+      },
+      {
+        "start": 2654,
+        "end": 2660,
+        "text": "arc, like linting and formatting your code and things like that. And I'm not really using this yet. But"
+      },
+      {
+        "start": 2660,
+        "end": 2667,
+        "text": "basically, this is really good if you want to block like, removing your entire like database or"
+      },
+      {
+        "start": 2667,
+        "end": 2673,
+        "text": "something like that. It's just like good, good to prevent very destructive things. I haven't really"
+      },
+      {
+        "start": 2673,
+        "end": 2678,
+        "text": "set it up because, you know, I have like, remote backups. And also, this is like side projects. But"
+      },
+      {
+        "start": 2678,
+        "end": 2685,
+        "text": "for real world, you probably want something. And finally, with that, I think you got the vast majority"
+      },
+      {
+        "start": 2685,
+        "end": 2692,
+        "text": "of like, the best tips that I know for clock code. The last thing I'll leave it with you is to explore"
+      },
+      {
+        "start": 2692,
+        "end": 2699,
+        "text": "the like the plugin ecosystem. All the plugin is, is a just a combination of any of these composable"
+      },
+      {
+        "start": 2699,
+        "end": 2704,
+        "text": "things that I talked about, like a skill that triggers an MCP that triggers like sub agents or"
+      },
+      {
+        "start": 2704,
+        "end": 2710,
+        "text": "something like that. Or maybe there's like a bash script that's attached to a skill that can all be"
+      },
+      {
+        "start": 2710,
+        "end": 2714,
+        "text": "turned into a plugin. And then a lot of people share their plugins online."
+      },
+      {
+        "start": 2714,
+        "end": 2719,
+        "text": "So this is like a really good example, you know, Anthropic has our own like plugins,"
+      },
+      {
+        "start": 2719,
+        "end": 2723,
+        "text": "like structure, and they have a bunch of plugins here that you could download, for example,"
+      },
+      {
+        "start": 2725,
+        "end": 2731,
+        "text": "like Colin ISP and things like that. So that's basically it. And the last thing I want to say"
+      },
+      {
+        "start": 2731,
+        "end": 2738,
+        "text": "is context is king, you got to keep it fresh, keep it relevant, you essentially need to give"
+      },
+      {
+        "start": 2738,
+        "end": 2748,
+        "text": "cod the context that it needs and nothing more. But yeah, so go and build something amazing. I hope this"
+      },
+      {
+        "start": 2748,
+        "end": 2754,
+        "text": "was valuable to you. I hope you learned something, go and build something amazing. And if you're interested"
+      },
+      {
+        "start": 2754,
+        "end": 2760,
+        "text": "in this kind of video on cloud cloud, I did a whole video on like kind of the high level thought process"
+      },
+      {
+        "start": 2760,
+        "end": 2767,
+        "text": "of like AI coding, and and also talked a little bit about my second brain thing, those two videos are"
+      },
+      {
+        "start": 2767,
+        "end": 2772,
+        "text": "right here to go and check it out. But yeah, until I see you guys on the next video. Bye."
+      }
+    ]
+  }
+}
