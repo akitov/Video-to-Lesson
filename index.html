@@ -125,6 +125,7 @@
   .ai-result p { margin-bottom: 8px; }
   .ai-result .ai-placeholder { color: var(--text2); font-style: italic; }
   .ai-result .ai-error { color: #f44; }
+  .ai-search-header { background: var(--accent); color: #fff; font-size: 13px; font-weight: 500; padding: 8px 16px; margin: 0 -16px; text-transform: capitalize; }
   .ai-loading { display: flex; align-items: center; gap: 8px; color: var(--text2); font-size: 13px; }
   .ai-loading .spinner { width: 16px; height: 16px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
 
@@ -836,7 +837,7 @@ class App {
         resultEl.appendChild(msg);
         return;
       }
-      this._renderAiSegments(data.segments, resultEl);
+      this._renderAiSegments(data.segments, resultEl, message);
     } catch (err) {
       loadingEl.remove();
       const errEl = document.createElement('div');
@@ -848,18 +849,21 @@ class App {
     }
   }
 
-  _renderAiSegments(segments, container) {
-    // Append new results — don't clear previous ones
-    const existingCount = container.querySelectorAll('.ai-seg-card').length;
+  _renderAiSegments(segments, container, query) {
+    // Build a group: header + cards
+    const group = document.createDocumentFragment();
 
+    // Search term header in capital case
     const header = document.createElement('div');
-    header.style.cssText = 'padding:8px 0 4px;font-size:11px;color:var(--text2);border-top:1px solid var(--border);margin-top:4px;';
-    if (existingCount === 0) header.style.cssText = 'padding:0 0 4px;font-size:11px;color:var(--text2);';
-    header.textContent = `${segments.length} segment${segments.length > 1 ? 's' : ''} found`;
-    container.appendChild(header);
+    header.className = 'ai-search-header';
+    header.textContent = query;
+    group.appendChild(header);
+
+    // Track where new segments start in the master list
+    const startIdx = this._aiSegments.length;
 
     segments.forEach((seg, i) => {
-      const globalIdx = existingCount + i;
+      const globalIdx = startIdx + i;
       const dur = seg.end - seg.start;
       const shortVideo = seg.videoId === 'vid-1' ? 'Video 1' : 'Video 2';
       const startStr = this._formatTime(seg.start);
@@ -874,7 +878,7 @@ class App {
       card.dataset.aiIndex = globalIdx;
       card.innerHTML = `
         <div class="seg-header">
-          <span class="seg-num">#${globalIdx + 1}</span>
+          <span class="seg-num">#${i + 1}</span>
           <span class="seg-title">${this._escHtml(seg.title)}</span>
         </div>
         <div class="seg-meta">
@@ -883,11 +887,13 @@ class App {
         </div>
         ${bulletsHtml}`;
       card.addEventListener('click', () => this._playAiSegment(globalIdx));
-      container.appendChild(card);
+      group.appendChild(card);
 
-      // Update the master AI segments list
       this._aiSegments.push(seg);
     });
+
+    // Prepend new group above previous results
+    container.insertBefore(group, container.firstChild);
   }
 
   _playAiSegment(idx) {
