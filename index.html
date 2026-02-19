@@ -113,12 +113,12 @@
   .seg-card.hidden { display: none; }
 
   /* AI Search tab */
-  .ai-search-pane { padding: 16px; display: flex; flex-direction: column; gap: 12px; height: 100%; }
-  .ai-search-row { display: flex; gap: 8px; align-items: stretch; }
-  .ai-input { flex: 1; padding: 8px 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; color: var(--text); font-size: 13px; outline: none; resize: vertical; min-height: 60px; font-family: inherit; }
+  .ai-search-pane { padding: 12px 16px; display: flex; flex-direction: column; gap: 10px; height: 100%; }
+  .ai-search-row { display: flex; gap: 8px; align-items: center; }
+  .ai-input { flex: 1; padding: 6px 10px; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; color: var(--text); font-size: 13px; outline: none; font-family: inherit; }
   .ai-input:focus { border-color: var(--accent); }
   .ai-input::placeholder { color: var(--text2); }
-  .ai-send-btn { padding: 8px 16px; background: var(--accent); color: #fff; border: none; border-radius: 6px; font-size: 13px; font-weight: 500; cursor: pointer; white-space: nowrap; }
+  .ai-send-btn { padding: 6px 12px; background: var(--accent); color: #fff; border: none; border-radius: 6px; font-size: 13px; font-weight: 500; cursor: pointer; white-space: nowrap; }
   .ai-send-btn:hover { filter: brightness(1.15); }
   .ai-send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
   .ai-result { flex: 1; overflow-y: auto; font-size: 13px; line-height: 1.6; color: var(--text); min-height: 0; }
@@ -405,7 +405,7 @@ class App {
           <div class="tab-pane" id="tab-ai-search">
             <div class="ai-search-pane">
               <div class="ai-search-row">
-                <textarea class="ai-input" id="ai-input" placeholder="What do you want to learn about?" rows="3"></textarea>
+                <input type="text" class="ai-input" id="ai-input" placeholder="What do you want to learn about?">
                 <button class="ai-send-btn" id="ai-send-btn">Search Video</button>
               </div>
               <div class="ai-result" id="ai-result"></div>
@@ -578,7 +578,7 @@ class App {
     // AI Search
     document.getElementById('ai-send-btn').addEventListener('click', () => this._sendAiQuery());
     document.getElementById('ai-input').addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) this._sendAiQuery();
+      if (e.key === 'Enter') { e.preventDefault(); this._sendAiQuery(); }
     });
 
     // Keyboard
