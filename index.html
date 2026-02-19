@@ -112,6 +112,21 @@
   .seg-card .seg-bullets li::before { content: '·'; position: absolute; left: 2px; color: var(--text2); font-weight: bold; }
   .seg-card.hidden { display: none; }
 
+  /* AI Search tab */
+  .ai-search-pane { padding: 16px; display: flex; flex-direction: column; gap: 12px; height: 100%; }
+  .ai-input { width: 100%; padding: 8px 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; color: var(--text); font-size: 13px; outline: none; resize: vertical; min-height: 60px; font-family: inherit; }
+  .ai-input:focus { border-color: var(--accent); }
+  .ai-input::placeholder { color: var(--text2); }
+  .ai-send-btn { padding: 8px 16px; background: var(--accent); color: #fff; border: none; border-radius: 6px; font-size: 13px; font-weight: 500; cursor: pointer; align-self: flex-start; }
+  .ai-send-btn:hover { filter: brightness(1.15); }
+  .ai-send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .ai-result { flex: 1; overflow-y: auto; font-size: 13px; line-height: 1.6; color: var(--text); min-height: 0; }
+  .ai-result p { margin-bottom: 8px; }
+  .ai-result .ai-placeholder { color: var(--text2); font-style: italic; }
+  .ai-result .ai-error { color: #f44; }
+  .ai-loading { display: flex; align-items: center; gap: 8px; color: var(--text2); font-size: 13px; }
+  .ai-loading .spinner { width: 16px; height: 16px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
+
   /* Scrollbar */
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: transparent; }
@@ -241,6 +256,11 @@ class App {
     this._lastHighlightedSeg = -1;
     this._lastHighlightedTranscript = null;
     this._activeTab = 'segments';
+    this._aiSegments = [];
+    this._aiCurrentSeg = null;
+    this._aiTimeHandler = null;
+    this._aiPlayMode = false;
+    this._aiPlayIndex = 0;
   }
 
   async start() {
@@ -263,7 +283,15 @@ class App {
     });
   }
 
+  _clearAiPlayback() {
+    this._aiCurrentSeg = null;
+    this._aiTimeHandler = null;
+    this._aiPlayMode = false;
+    this._snapbackActive = true;
+  }
+
   async _loadSegment(index, autoPlay) {
+    this._clearAiPlayback();
     const seg = this.engine.goTo(index);
     const ytId = this.engine.getYoutubeId(seg.videoId);
     const needsSwitch = this._currentVideoId !== seg.videoId;
@@ -295,6 +323,12 @@ class App {
 
   _onTimeUpdate(absTime) {
     if (this._seeking || this._switchingVideo) return;
+    // If playing an AI segment, use AI boundary logic
+    if (this._aiCurrentSeg) {
+      this._highlightTranscript(absTime, this._aiCurrentSeg.videoId);
+      if (this._aiTimeHandler) this._aiTimeHandler(absTime);
+      return;
+    }
     const seg = this.engine.current;
     const idx = this.engine.currentIndex;
     if (this._snapbackActive && (absTime < seg.start - 0.5 || absTime > seg.end + 0.5)) { this.adapter.seekTo(seg.start); return; }
@@ -359,6 +393,7 @@ class App {
       <div class="sidebar" id="sidebar">
         <div class="sidebar-tabs">
           <button class="sidebar-tab active" data-tab="segments">Segments</button>
+          <button class="sidebar-tab" data-tab="ai-search">AI Search</button>
           <button class="sidebar-tab" data-tab="transcript">Transcript</button>
         </div>
         <div class="panel-header">
@@ -368,6 +403,15 @@ class App {
           </div>
         </div>
         <div class="tab-content">
+          <div class="tab-pane" id="tab-ai-search">
+            <div class="ai-search-pane">
+              <textarea class="ai-input" id="ai-input" placeholder="Ask anything about the videos..." rows="3"></textarea>
+              <button class="ai-send-btn" id="ai-send-btn">Ask AI</button>
+              <div class="ai-result" id="ai-result">
+                <span class="ai-placeholder">Response will appear here</span>
+              </div>
+            </div>
+          </div>
           <div class="tab-pane" id="tab-transcript">
             <div class="transcript-list" id="transcript-list"></div>
           </div>
@@ -505,10 +549,16 @@ class App {
         tab.classList.add('active');
         document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
         document.getElementById(`tab-${tab.dataset.tab}`).classList.add('active');
-        // Update search placeholder and re-apply
+        // Update search bar visibility and placeholder
         const sb = document.getElementById('search-box');
-        sb.placeholder = this._activeTab === 'transcript' ? 'Search transcript...' : 'Search segments...';
-        this._applySearch(sb.value);
+        const panelHeader = document.querySelector('.panel-header');
+        if (this._activeTab === 'ai-search') {
+          panelHeader.style.display = 'none';
+        } else {
+          panelHeader.style.display = '';
+          sb.placeholder = this._activeTab === 'transcript' ? 'Search transcript...' : 'Search segments...';
+          this._applySearch(sb.value);
+        }
       });
     });
 
@@ -526,9 +576,15 @@ class App {
       searchBox.focus();
     });
 
+    // AI Search
+    document.getElementById('ai-send-btn').addEventListener('click', () => this._sendAiQuery());
+    document.getElementById('ai-input').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) this._sendAiQuery();
+    });
+
     // Keyboard
     document.addEventListener('keydown', (e) => {
-      if (e.target.tagName === 'INPUT') return;
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
       if (e.code === 'Space') { e.preventDefault(); this._togglePlay(); }
       if (e.code === 'ArrowRight' || e.code === 'ArrowLeft') e.preventDefault();
     });
@@ -733,6 +789,151 @@ class App {
       msg.textContent = `No results for "${query}"`;
       document.getElementById('segment-list').appendChild(msg);
     }
+  }
+
+  _buildFullTranscript() {
+    // Build compact transcript string: [vid-1 0:00-0:24] text...
+    let lines = [];
+    for (const vid of this.data.videos) {
+      const chunks = this.data.transcripts[vid.id] || [];
+      lines.push(`--- ${vid.title} (${vid.id}) ---`);
+      for (const c of chunks) {
+        lines.push(`[${vid.id} ${this._formatTime(c.start)}-${this._formatTime(c.end)}] ${c.text}`);
+      }
+    }
+    return lines.join('\n');
+  }
+
+  async _sendAiQuery() {
+    const input = document.getElementById('ai-input');
+    const resultEl = document.getElementById('ai-result');
+    const btn = document.getElementById('ai-send-btn');
+    const message = input.value.trim();
+    if (!message) return;
+
+    const transcript = this._buildFullTranscript();
+
+    btn.disabled = true;
+    resultEl.innerHTML = '<div class="ai-loading"><div class="spinner"></div><span>Searching transcripts...</span></div>';
+
+    try {
+      const resp = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message, transcript }),
+      });
+      const data = await resp.json();
+      if (!resp.ok) throw new Error(data.error || 'Request failed');
+      if (!data.segments || !data.segments.length) {
+        resultEl.innerHTML = '<span class="ai-placeholder">No relevant segments found. Try a different query.</span>';
+        return;
+      }
+      this._aiSegments = data.segments;
+      this._renderAiSegments(data.segments, resultEl);
+    } catch (err) {
+      resultEl.innerHTML = `<span class="ai-error">${this._escHtml(err.message)}</span>`;
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  _renderAiSegments(segments, container) {
+    const playAllBtn = `<div style="padding:0 0 8px 0;display:flex;gap:8px;align-items:center;">
+      <button class="ai-send-btn" id="ai-play-all" style="font-size:12px;padding:6px 12px;">Play All</button>
+      <span style="font-size:12px;color:var(--text2)">${segments.length} segment${segments.length > 1 ? 's' : ''} found</span>
+    </div>`;
+
+    const cards = segments.map((seg, i) => {
+      const dur = seg.end - seg.start;
+      const shortVideo = seg.videoId === 'vid-1' ? 'Video 1' : 'Video 2';
+      const startStr = this._formatTime(seg.start);
+      const endStr = this._formatTime(seg.end);
+      const durStr = this._formatDuration(dur);
+      const bulletsHtml = (seg.bullets && seg.bullets.length)
+        ? `<ul class="seg-bullets">${seg.bullets.map(b => `<li>${this._escHtml(b)}</li>`).join('')}</ul>`
+        : '';
+      return `<div class="seg-card ai-seg-card" data-ai-index="${i}">
+        <div class="seg-header">
+          <span class="seg-num">#${i + 1}</span>
+          <span class="seg-title">${this._escHtml(seg.title)}</span>
+        </div>
+        <div class="seg-meta">
+          <span class="seg-video-tag">${shortVideo}</span>
+          <span>${startStr} – ${endStr} (${durStr})</span>
+        </div>
+        ${bulletsHtml}
+      </div>`;
+    }).join('');
+
+    container.innerHTML = playAllBtn + cards;
+
+    // Bind clicks on AI segment cards
+    container.querySelectorAll('.ai-seg-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const idx = parseInt(card.dataset.aiIndex);
+        this._playAiSegment(idx);
+      });
+    });
+
+    // Play All button
+    document.getElementById('ai-play-all').addEventListener('click', () => {
+      this._aiPlayIndex = 0;
+      this._aiPlayMode = true;
+      this._playAiSegment(0);
+    });
+  }
+
+  _playAiSegment(idx) {
+    const seg = this._aiSegments[idx];
+    if (!seg) return;
+    this._aiPlayIndex = idx;
+
+    // Highlight active AI card
+    document.querySelectorAll('.ai-seg-card').forEach(c => c.classList.remove('active'));
+    const card = document.querySelector(`.ai-seg-card[data-ai-index="${idx}"]`);
+    if (card) card.classList.add('active');
+
+    // Set up a temporary boundary watcher for this AI segment
+    this._aiCurrentSeg = seg;
+    this._snapbackActive = false; // disable normal snapback
+
+    // Find which engine segment this falls into (for video switching)
+    const videoId = seg.videoId;
+    const needsSwitch = this._currentVideoId !== videoId;
+
+    if (needsSwitch) {
+      // Find any engine segment with this videoId to trigger video switch
+      const engineIdx = this.engine.segments.findIndex(s => s.videoId === videoId);
+      if (engineIdx >= 0) {
+        this._loadSegment(engineIdx, false).then(() => {
+          this._snapbackActive = false;
+          this.adapter.seekTo(seg.start);
+          this.adapter.play();
+          this._playing = true;
+          this._updatePlayBtn();
+        });
+      }
+    } else {
+      this.adapter.seekTo(seg.start);
+      this.adapter.play();
+      this._playing = true;
+      this._updatePlayBtn();
+    }
+
+    // Override time update to enforce AI segment boundaries
+    this._aiTimeHandler = (absTime) => {
+      if (!this._aiCurrentSeg) return;
+      if (absTime >= this._aiCurrentSeg.end - 0.15) {
+        if (this._aiPlayMode && this._aiPlayIndex + 1 < this._aiSegments.length) {
+          this._playAiSegment(this._aiPlayIndex + 1);
+        } else {
+          this.adapter.pause();
+          this._playing = false;
+          this._aiPlayMode = false;
+          this._updatePlayBtn();
+        }
+      }
+    };
   }
 
   _showSwitchOverlay(show) {
