@@ -126,7 +126,7 @@
   .ai-result p { margin-bottom: 8px; }
   .ai-result .ai-placeholder { color: var(--text2); font-style: italic; }
   .ai-result .ai-error { color: #f44; }
-  .ai-search-header { background: var(--accent); color: #fff; font-size: 11px; font-weight: 500; padding: 5px 16px; text-transform: capitalize; }
+  .ai-search-header { background: var(--accent); color: #fff; font-size: 11px; font-weight: 500; padding: 5px 16px; text-transform: capitalize; display: flex; justify-content: space-between; align-items: center; }
   .ai-loading { display: flex; align-items: center; gap: 8px; color: var(--text2); font-size: 13px; }
   .ai-loading .spinner { width: 16px; height: 16px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
 
@@ -408,7 +408,7 @@ class App {
             <div class="ai-search-pane">
               <div class="ai-search-row">
                 <input type="text" class="ai-input" id="ai-input" placeholder="What do you want to learn about?">
-                <button class="ai-send-btn" id="ai-send-btn">Search Video</button>
+                <button class="ai-send-btn" id="ai-send-btn">+ Add Topic</button>
               </div>
               <div class="ai-result" id="ai-result"></div>
             </div>
@@ -843,7 +843,7 @@ class App {
       resultEl.insertBefore(errEl, resultEl.firstChild);
     } finally {
       btn.disabled = false;
-      btn.textContent = 'Search Video';
+      btn.textContent = '+ Add Topic';
     }
   }
 
@@ -852,9 +852,10 @@ class App {
     const group = document.createDocumentFragment();
 
     // Search term header in capital case
+    const totalDur = segments.reduce((sum, s) => sum + (s.end - s.start), 0);
     const header = document.createElement('div');
     header.className = 'ai-search-header';
-    header.textContent = query;
+    header.innerHTML = `<span>${this._escHtml(query)}</span><span>${this._formatTime(totalDur)}</span>`;
     group.appendChild(header);
 
     // Track where new segments start in the master list
