@@ -748,7 +748,7 @@ class App {
 
   _filterSegments(query) {
     const q = query.trim();
-    const cards = document.querySelectorAll('.seg-card');
+    const cards = document.querySelectorAll('#tab-segments .seg-card');
     const noResults = document.querySelector('#tab-segments .no-results');
     if (noResults) noResults.remove();
 
@@ -792,13 +792,14 @@ class App {
   }
 
   _buildFullTranscript() {
-    // Build compact transcript string: [vid-1 0:00-0:24] text...
+    // Compact format with integer seconds for easy duration math by the model
+    // Format: [vid-1 0-24] text (seconds, not M:SS)
     let lines = [];
     for (const vid of this.data.videos) {
       const chunks = this.data.transcripts[vid.id] || [];
-      lines.push(`--- ${vid.title} (${vid.id}) ---`);
+      lines.push(`=== ${vid.title} (${vid.id}) ===`);
       for (const c of chunks) {
-        lines.push(`[${vid.id} ${this._formatTime(c.start)}-${this._formatTime(c.end)}] ${c.text}`);
+        lines.push(`[${vid.id} ${Math.round(c.start)}-${Math.round(c.end)}] ${c.text}`);
       }
     }
     return lines.join('\n');

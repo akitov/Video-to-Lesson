@@ -11,20 +11,35 @@ export default async function handler(req, res) {
   try {
     const { message, transcript } = req.body;
 
-    const systemPrompt = `You are a video segment curator for an interactive learning app. You receive the full speech-to-text transcript of two videos about Claude Code, with timestamps and video IDs.
+    // MESSAGE 1: System prompt — behavior, rules, output format
+    // Kept lean and structural. No data here.
+    const systemPrompt = `You are a segment curator for a video learning app. You receive timestamped speech transcripts from two videos and a user query.
 
-Your job: given a user's search query or topic of interest, find the most relevant portions of the transcript and return them as playable segments. Group nearby transcript chunks into coherent segments that cover a single idea or topic.
+YOUR TASK: Find transcript passages relevant to the query and return them as playable video segments.
 
-RULES:
-- Each segment must map to a continuous time range within ONE video (no cross-video segments)
-- Use the actual start time of the first relevant chunk and end time of the last relevant chunk in each group
-- Group chunks that are close together (within ~60s) and on the same topic into one segment
-- Return 1-8 segments, ranked by relevance
-- Each segment needs: a short descriptive title, videoId, start/end times (in seconds), and 2-3 bullet points summarizing what is discussed
-- Bullets should NOT repeat the title
+SEGMENT RULES:
+- Each segment must be from ONE video (never cross videos)
+- MINIMUM duration: 30 seconds. If a relevant mention is brief, EXPAND the segment to include surrounding context (the chunks before and after) so the viewer gets a complete thought
+- MAXIMUM duration: 5 minutes per segment
+- Group adjacent relevant chunks into one segment rather than returning many tiny segments
+- Return 1-6 segments, ranked by relevance (most relevant first)
+- If a topic is discussed in multiple places, return each as a separate segment
 
-IMPORTANT: Respond with ONLY valid JSON, no markdown fences, no explanation. Use this exact format:
-{"segments":[{"title":"...","videoId":"vid-1","start":0,"end":88,"bullets":["...","...","..."]}]}`;
+EXPANSION STRATEGY: When you find a relevant chunk, always look at the 3-5 chunks before and after it. Include them if they provide setup, explanation, or follow-up to the relevant content. The viewer should be able to watch the segment and understand the full context without needing to watch what came before.
+
+OUTPUT FORMAT — respond with ONLY valid JSON, no markdown fences:
+{"segments":[{"title":"Short descriptive title","videoId":"vid-1","start":0,"end":88,"bullets":["First key point (don't repeat title)","Second key point","Third key point"]}]}
+
+Times must be integers (seconds). Use the start time of the first included chunk and end time of the last included chunk.`;
+
+    // MESSAGE 2: Transcript as context (assistant-primed user message)
+    // Structured with seconds for easy math, grouped by video
+    const transcriptMessage = `Here is the full timestamped transcript. Each line is: [videoId startSeconds-endSeconds] spoken text
+
+${transcript}`;
+
+    // MESSAGE 3: The actual user query — clean and separate
+    const userMessage = `Find segments relevant to: "${message}"`;
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
@@ -36,10 +51,11 @@ IMPORTANT: Respond with ONLY valid JSON, no markdown fences, no explanation. Use
         model: 'gpt-4o-mini',
         messages: [
           { role: 'system', content: systemPrompt },
-          { role: 'user', content: `TRANSCRIPT:\n${transcript}\n\nUSER QUERY: ${message}` }
+          { role: 'user', content: transcriptMessage },
+          { role: 'user', content: userMessage }
         ],
         max_tokens: 2048,
-        temperature: 0.3,
+        temperature: 0.2,
       }),
     });
 
