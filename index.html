@@ -62,9 +62,9 @@
   .topnav-arrow-btn svg { width: 16px; height: 16px; stroke: #555; fill: none; }
 
   /* Layout */
-  .app { display: grid; grid-template-columns: 1fr 5px var(--sidebar-width); grid-template-rows: auto 1fr; height: 100vh; }
-  .main { display: flex; flex-direction: column; overflow: hidden; min-height: 0; grid-row: 2; }
-  .sidebar { background: var(--surface); display: flex; flex-direction: column; overflow: hidden; grid-row: 2; }
+  .app { display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr; height: 100vh; }
+  .main { display: flex; flex-direction: column; overflow: hidden; min-height: 0; }
+  .sidebar { background: var(--surface); display: flex; flex-direction: column; overflow: hidden; }
 
   /* Player area — fills remaining space */
   .player-wrap { position: relative; width: 100%; background: #000; flex: 1; min-height: 200px; }
@@ -102,7 +102,7 @@
   .mode-btn.active { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
 
   /* Resize handle — vertical (sidebar width) — own grid column */
-  .resize-handle-v { cursor: ew-resize; background: var(--border); grid-row: 2; }
+  .resize-handle-v { cursor: ew-resize; background: var(--border); }
   .resize-handle-v:hover, .resize-handle-v.dragging { background: var(--accent); }
 
   /* Sidebar tabs */
@@ -179,6 +179,28 @@
   /* Loading state */
   .loading { display: flex; align-items: center; justify-content: center; height: 100vh; flex-direction: column; gap: 16px; }
   .loading .spinner { width: 40px; height: 40px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
+
+  /* Slide system */
+  .slide-container { grid-row: 2; grid-column: 1 / -1; position: relative; overflow: hidden; }
+  .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+  .slide.active { opacity: 1; pointer-events: auto; z-index: 1; }
+  .slide-interactive { display: grid; grid-template-columns: 1fr 5px var(--sidebar-width); }
+  .slide-segment { display: flex; align-items: center; justify-content: center; background: var(--bg); }
+  .slide-content { display: flex; width: 100%; height: 100%; max-width: 1400px; padding: 40px 48px; gap: 40px; }
+  .slide-text-col { width: 30%; display: flex; flex-direction: column; justify-content: center; flex-shrink: 0; }
+  .slide-text-inner { display: flex; flex-direction: column; gap: 16px; }
+  .slide-title { font-size: 28px; font-weight: 700; color: var(--text); line-height: 1.3; }
+  .slide-bullets { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .slide-bullets li { font-size: 15px; color: var(--text2); line-height: 1.6; padding-left: 16px; position: relative; }
+  .slide-bullets li::before { content: '·'; position: absolute; left: 4px; color: var(--accent); font-weight: bold; }
+  .slide-meta { font-size: 13px; color: var(--text2); margin-top: 4px; }
+  .slide-video-col { width: 70%; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .slide-video-wrap { width: 100%; min-width: 640px; aspect-ratio: 16/9; background: #111; border-radius: 8px; overflow: hidden; position: relative; }
+  .slide-video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+  .slide-play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 64px; height: 64px; border-radius: 50%; border: none; background: rgba(124,92,252,0.9); color: #fff; font-size: 28px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 5; transition: opacity 0.2s, transform 0.2s; }
+  .slide-play-btn:hover { transform: translate(-50%, -50%) scale(1.1); background: rgba(124,92,252,1); }
+  .slide-play-btn.hidden { opacity: 0; pointer-events: none; }
+  .slide-video-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #111; color: var(--text2); font-size: 14px; border-radius: 8px; aspect-ratio: 16/9; }
 
   /* Prevent text selection and iframe mouse capture during resize */
   body.resizing { user-select: none; -webkit-user-select: none; }
@@ -284,6 +306,237 @@ class SegmentEngine {
 }
 
 // ============================================================
+// Slide Configuration
+// ============================================================
+const SLIDES = [
+  { type: 'segment', segmentId: 'seg-001' },  // Introduction to Claude Code
+  { type: 'segment', segmentId: 'seg-002' },  // Key Features of Claude Code
+  { type: 'segment', segmentId: 'seg-003' },  // Optimizing Your Setup
+  { type: 'interactive' },                      // Interactive video exploration tool
+  { type: 'segment', segmentId: 'seg-009' },  // Providing Context to Claude
+  { type: 'segment', segmentId: 'seg-010' },  // More Ways to Give Context
+  { type: 'segment', segmentId: 'seg-014' },  // Multi-Claude Parallelization
+  { type: 'segment', segmentId: 'seg-016' },  // Introduction to 50 Claude Code Tips
+  { type: 'segment', segmentId: 'seg-018' },  // Initialize Claude.md
+  { type: 'segment', segmentId: 'seg-021' },  // Build and Validation
+  { type: 'segment', segmentId: 'seg-025' },  // Screenshots and Context
+  { type: 'segment', segmentId: 'seg-030' },  // Utilizing MCP
+  { type: 'segment', segmentId: 'seg-040' },  // Sub Agents
+  { type: 'segment', segmentId: 'seg-045' },  // Git Worktrees
+];
+
+// ============================================================
+// SlideManager
+// ============================================================
+class SlideManager {
+  constructor(slidesConfig, data) {
+    this._config = slidesConfig;
+    this._data = data;
+    this._segMap = {};
+    data.segments.forEach(s => this._segMap[s.id] = s);
+    this._videoMap = {};
+    data.videos.forEach(v => this._videoMap[v.id] = v);
+    this.currentIndex = 0;
+    this._slideAdapter = null;
+    this._slidePollId = null;
+    this._slidePlaying = false;
+    this._app = null; // set after App is created
+    this._container = null;
+  }
+
+  init(appInstance) {
+    this._app = appInstance;
+    this._container = document.querySelector('.slide-container');
+    this._renderStaticSlides();
+    this._wireNavButtons();
+    this._showSlide(0, true);
+  }
+
+  _renderStaticSlides() {
+    for (let i = 0; i < this._config.length; i++) {
+      const cfg = this._config[i];
+      if (cfg.type === 'interactive') continue; // already rendered by App
+      const seg = this._segMap[cfg.segmentId];
+      if (!seg) continue;
+      const vid = this._videoMap[seg.videoId];
+      const dur = seg.end - seg.start;
+      const startStr = this._fmt(seg.start);
+      const endStr = this._fmt(seg.end);
+      const durStr = this._fmtDur(dur);
+      const bulletsHtml = (seg.bullets && seg.bullets.length)
+        ? `<ul class="slide-bullets">${seg.bullets.map(b => `<li>${this._esc(b)}</li>`).join('')}</ul>`
+        : '';
+      const slide = document.createElement('div');
+      slide.className = 'slide slide-segment';
+      slide.dataset.slideIndex = i;
+      slide.innerHTML = `
+        <div class="slide-content">
+          <div class="slide-text-col">
+            <div class="slide-text-inner">
+              <h2 class="slide-title">${this._esc(seg.label)}</h2>
+              ${bulletsHtml}
+              <div class="slide-meta">${startStr} – ${endStr} &middot; ${durStr}</div>
+            </div>
+          </div>
+          <div class="slide-video-col">
+            <div class="slide-video-wrap" id="slide-player-${i}">
+              <div class="slide-video-placeholder">Click play to load video</div>
+            </div>
+            <button class="slide-play-btn" data-slide="${i}">&#9654;</button>
+          </div>
+        </div>`;
+      this._container.appendChild(slide);
+      slide.querySelector('.slide-play-btn').addEventListener('click', () => this._toggleSlidePlay(i));
+    }
+  }
+
+  _wireNavButtons() {
+    const btns = document.querySelectorAll('.topnav-arrow-btn');
+    if (btns.length >= 2) {
+      btns[0].addEventListener('click', () => this.prev());
+      btns[1].addEventListener('click', () => this.next());
+    }
+    document.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      if (e.code === 'ArrowLeft') { e.preventDefault(); this.prev(); }
+      if (e.code === 'ArrowRight') { e.preventDefault(); this.next(); }
+    });
+  }
+
+  prev() { if (this.currentIndex > 0) this._transitionTo(this.currentIndex - 1); }
+  next() { if (this.currentIndex < this._config.length - 1) this._transitionTo(this.currentIndex + 1); }
+
+  _transitionTo(newIndex) {
+    if (newIndex === this.currentIndex) return;
+    const oldIndex = this.currentIndex;
+    const oldCfg = this._config[oldIndex];
+    const newCfg = this._config[newIndex];
+    // Pause interactive app when leaving it
+    if (oldCfg.type === 'interactive' && this._app && this._app.adapter && this._app._playing) {
+      this._app.adapter.pause();
+      this._app._playing = false;
+      this._app._updatePlayBtn();
+    }
+    // Destroy video on old static slide
+    this._destroySlideVideo();
+    // Fade out current
+    const oldSlide = this._container.querySelector(`.slide[data-slide-index="${oldIndex}"]`);
+    const newSlide = this._container.querySelector(`.slide[data-slide-index="${newIndex}"]`);
+    if (oldSlide) oldSlide.classList.remove('active');
+    this.currentIndex = newIndex;
+    // Small delay for fade overlap then activate new
+    setTimeout(() => {
+      if (newSlide) newSlide.classList.add('active');
+    }, 50);
+    this._updateNavSubtitle();
+    // If entering interactive slide for first time, initialize it
+    if (newCfg.type === 'interactive' && this._app && !this._app.adapter) {
+      this._app._loadSegment(0, false);
+    }
+    // Reset play button on new slide
+    const playBtn = newSlide?.querySelector('.slide-play-btn');
+    if (playBtn) playBtn.classList.remove('hidden');
+  }
+
+  _showSlide(index, immediate) {
+    const slide = this._container.querySelector(`.slide[data-slide-index="${index}"]`);
+    if (slide) {
+      if (immediate) {
+        slide.style.transition = 'none';
+        slide.classList.add('active');
+        slide.offsetHeight; // force reflow
+        slide.style.transition = '';
+      } else {
+        slide.classList.add('active');
+      }
+    }
+    this._updateNavSubtitle();
+  }
+
+  _updateNavSubtitle() {
+    const sub = document.querySelector('.topnav-title-sub');
+    if (sub) sub.textContent = `Activity ${this.currentIndex + 1} of ${this._config.length}`;
+    const segs = document.querySelectorAll('#topnav-progress .topnav-progress-seg');
+    segs.forEach((s, i) => {
+      s.style.background = i <= this.currentIndex ? 'var(--accent, #7c5cfc)' : 'rgba(0,0,0,0.1)';
+    });
+  }
+
+  async _toggleSlidePlay(slideIndex) {
+    const cfg = this._config[slideIndex];
+    if (cfg.type !== 'segment') return;
+    const seg = this._segMap[cfg.segmentId];
+    if (!seg) return;
+    const playBtn = this._container.querySelector(`.slide[data-slide-index="${slideIndex}"] .slide-play-btn`);
+
+    if (this._slidePlaying && this._slideAdapter) {
+      this._slideAdapter.pause();
+      this._slidePlaying = false;
+      if (playBtn) { playBtn.classList.remove('hidden'); playBtn.innerHTML = '&#9654;'; }
+      return;
+    }
+
+    // Create adapter if not yet loaded
+    if (!this._slideAdapter) {
+      const ytId = this._videoMap[seg.videoId]?.youtubeId;
+      if (!ytId) return;
+      // Clear placeholder
+      const wrap = document.getElementById(`slide-player-${slideIndex}`);
+      wrap.innerHTML = '';
+      const div = document.createElement('div');
+      div.id = `slide-yt-${slideIndex}`;
+      wrap.appendChild(div);
+      this._slideAdapter = new YouTubeAdapter(`slide-yt-${slideIndex}`, ytId, seg.start);
+      this._slideAdapter.onTimeUpdate(t => this._onSlideTimeUpdate(t, seg, playBtn));
+      this._slideAdapter.onStateChange(s => {
+        if (s === 'playing') { this._slidePlaying = true; if (playBtn) playBtn.classList.add('hidden'); }
+        else if (s === 'paused') { this._slidePlaying = false; if (playBtn) { playBtn.classList.remove('hidden'); playBtn.innerHTML = '&#9654;'; } }
+      });
+      await this._slideAdapter.init();
+      this._slideAdapter.seekTo(seg.start);
+      setTimeout(() => this._slideAdapter.play(), 300);
+    } else {
+      this._slideAdapter.play();
+    }
+    this._slidePlaying = true;
+    if (playBtn) playBtn.classList.add('hidden');
+  }
+
+  _onSlideTimeUpdate(absTime, seg, playBtn) {
+    // Snap-back enforcement
+    if (absTime < seg.start - 0.5 || absTime > seg.end + 0.5) {
+      this._slideAdapter.seekTo(seg.start);
+      return;
+    }
+    // End of segment
+    if (absTime >= seg.end - 0.15) {
+      this._slideAdapter.pause();
+      this._slidePlaying = false;
+      this._slideAdapter.seekTo(seg.start);
+      if (playBtn) { playBtn.classList.remove('hidden'); playBtn.innerHTML = '&#9654;'; }
+    }
+  }
+
+  _destroySlideVideo() {
+    if (this._slideAdapter) {
+      this._slideAdapter.destroy();
+      this._slideAdapter = null;
+      this._slidePlaying = false;
+    }
+    // Restore placeholder on previous slide
+    const cfg = this._config[this.currentIndex];
+    if (cfg && cfg.type === 'segment') {
+      const wrap = document.getElementById(`slide-player-${this.currentIndex}`);
+      if (wrap) wrap.innerHTML = '<div class="slide-video-placeholder">Click play to load video</div>';
+    }
+  }
+
+  _fmt(s) { s = Math.max(0, Math.floor(s)); return Math.floor(s/60) + ':' + String(s%60).padStart(2,'0'); }
+  _fmtDur(s) { s = Math.max(0, Math.floor(s)); const m = Math.floor(s/60); const sec = s%60; if (!m) return sec+'s'; if (!sec) return m+'m'; return m+'m '+sec+'s'; }
+  _esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+}
+
+// ============================================================
 // App
 // ============================================================
 class App {
@@ -305,14 +558,14 @@ class App {
     this._aiPlayIndex = 0;
   }
 
-  async start() {
+  async start(autoPlay = true) {
     this._renderShell();
     this._bindControls();
     this._renderSegmentList();
     this._renderTranscript();
     this._bindResizeHandles();
     await this._loadYTApi();
-    await this._loadSegment(0, true);
+    if (autoPlay) await this._loadSegment(0, true);
   }
 
   _loadYTApi() {
@@ -393,6 +646,7 @@ class App {
   // ---- Rendering ----
 
   _renderShell() {
+    const interactiveIndex = SLIDES.findIndex(s => s.type === 'interactive');
     const app = document.getElementById('app');
     app.className = 'app';
     app.innerHTML = `
@@ -403,13 +657,13 @@ class App {
           </button>
           <div class="topnav-title">
             <div class="topnav-title-main">The Vision for the LLM OS</div>
-            <div class="topnav-title-sub">Chapter 3 &bull; Activity 1 of 2</div>
+            <div class="topnav-title-sub">Activity 1 of ${SLIDES.length}</div>
           </div>
         </div>
         <div class="topnav-center">
           <div class="topnav-center-inner">
-            <div class="topnav-progress">
-              <div class="topnav-progress-seg"></div>
+            <div class="topnav-progress" id="topnav-progress">
+              ${SLIDES.map(() => '<div class="topnav-progress-seg"></div>').join('')}
             </div>
             <div class="topnav-controls-row">
               <button class="topnav-icon-btn topnav-mute-btn" title="Mute">
@@ -448,68 +702,72 @@ class App {
           </div>
         </div>
       </nav>
-      <div class="main">
-        <div class="player-wrap" id="player-wrap">
-          <div id="yt-player" class="yt-placeholder">Loading player...</div>
-          <div class="video-switch-overlay" id="switch-overlay" style="display:none">
-            <div class="spinner"></div>
-            <span>Switching video...</span>
-          </div>
-        </div>
-        <div class="controls">
-          <div class="controls-row">
-            <button class="btn play-btn" id="play-btn" title="Play/Pause">
-              <svg viewBox="0 0 24 24"><polygon points="6,4 20,12 6,20"/></svg>
-            </button>
-            <button class="btn" id="prev-btn" title="Previous segment">
-              <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
-            </button>
-            <button class="btn" id="next-btn" title="Next segment">
-              <svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zm-10 6l8.5 6V6z" transform="scale(-1,1) translate(-24,0)"/></svg>
-            </button>
-            <div class="seekbar-wrap" id="seekbar-wrap">
-              <div class="seekbar-track" id="seekbar-track">
-                <div class="seekbar-fill" id="seekbar-fill"></div>
-                <div class="seekbar-thumb" id="seekbar-thumb"></div>
+      <div class="slide-container">
+        <div class="slide slide-interactive" data-slide-index="${interactiveIndex}">
+          <div class="main">
+            <div class="player-wrap" id="player-wrap">
+              <div id="yt-player" class="yt-placeholder">Loading player...</div>
+              <div class="video-switch-overlay" id="switch-overlay" style="display:none">
+                <div class="spinner"></div>
+                <span>Switching video...</span>
               </div>
             </div>
-            <div class="time-display" id="time-display">0:00 / 0:00</div>
-            <div class="mode-btns">
-              <button class="mode-btn active" id="mode-all">Play All</button>
-              <button class="mode-btn" id="mode-single">Single</button>
-            </div>
-          </div>
-          <div class="segment-label-bar" id="segment-label-bar"></div>
-        </div>
-      </div>
-      <div class="resize-handle-v" id="resize-v"></div>
-      <div class="sidebar" id="sidebar">
-        <div class="sidebar-tabs">
-          <button class="sidebar-tab active" data-tab="segments">Segments</button>
-          <button class="sidebar-tab" data-tab="ai-search">AI Search</button>
-          <button class="sidebar-tab" data-tab="transcript">Transcript</button>
-        </div>
-        <div class="panel-header">
-          <div class="search-wrap" id="search-wrap">
-            <input type="text" class="search-box" id="search-box" placeholder="Search segments...">
-            <button class="search-clear" id="search-clear" title="Clear search">&times;</button>
-          </div>
-        </div>
-        <div class="tab-content">
-          <div class="tab-pane" id="tab-ai-search">
-            <div class="ai-search-pane">
-              <div class="ai-search-row">
-                <input type="text" class="ai-input" id="ai-input" placeholder="What do you want to learn about?">
-                <button class="ai-send-btn" id="ai-send-btn">+ Add Topic</button>
+            <div class="controls">
+              <div class="controls-row">
+                <button class="btn play-btn" id="play-btn" title="Play/Pause">
+                  <svg viewBox="0 0 24 24"><polygon points="6,4 20,12 6,20"/></svg>
+                </button>
+                <button class="btn" id="prev-btn" title="Previous segment">
+                  <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+                </button>
+                <button class="btn" id="next-btn" title="Next segment">
+                  <svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zm-10 6l8.5 6V6z" transform="scale(-1,1) translate(-24,0)"/></svg>
+                </button>
+                <div class="seekbar-wrap" id="seekbar-wrap">
+                  <div class="seekbar-track" id="seekbar-track">
+                    <div class="seekbar-fill" id="seekbar-fill"></div>
+                    <div class="seekbar-thumb" id="seekbar-thumb"></div>
+                  </div>
+                </div>
+                <div class="time-display" id="time-display">0:00 / 0:00</div>
+                <div class="mode-btns">
+                  <button class="mode-btn active" id="mode-all">Play All</button>
+                  <button class="mode-btn" id="mode-single">Single</button>
+                </div>
               </div>
-              <div class="ai-result" id="ai-result"></div>
+              <div class="segment-label-bar" id="segment-label-bar"></div>
             </div>
           </div>
-          <div class="tab-pane" id="tab-transcript">
-            <div class="transcript-list" id="transcript-list"></div>
-          </div>
-          <div class="tab-pane active" id="tab-segments">
-            <div class="segment-list" id="segment-list"></div>
+          <div class="resize-handle-v" id="resize-v"></div>
+          <div class="sidebar" id="sidebar">
+            <div class="sidebar-tabs">
+              <button class="sidebar-tab active" data-tab="segments">Segments</button>
+              <button class="sidebar-tab" data-tab="ai-search">AI Search</button>
+              <button class="sidebar-tab" data-tab="transcript">Transcript</button>
+            </div>
+            <div class="panel-header">
+              <div class="search-wrap" id="search-wrap">
+                <input type="text" class="search-box" id="search-box" placeholder="Search segments...">
+                <button class="search-clear" id="search-clear" title="Clear search">&times;</button>
+              </div>
+            </div>
+            <div class="tab-content">
+              <div class="tab-pane" id="tab-ai-search">
+                <div class="ai-search-pane">
+                  <div class="ai-search-row">
+                    <input type="text" class="ai-input" id="ai-input" placeholder="What do you want to learn about?">
+                    <button class="ai-send-btn" id="ai-send-btn">+ Add Topic</button>
+                  </div>
+                  <div class="ai-result" id="ai-result"></div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tab-transcript">
+                <div class="transcript-list" id="transcript-list"></div>
+              </div>
+              <div class="tab-pane active" id="tab-segments">
+                <div class="segment-list" id="segment-list"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -679,14 +937,13 @@ class App {
     document.addEventListener('keydown', (e) => {
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
       if (e.code === 'Space') { e.preventDefault(); this._togglePlay(); }
-      if (e.code === 'ArrowRight' || e.code === 'ArrowLeft') e.preventDefault();
     });
   }
 
   _bindResizeHandles() {
     // Vertical resize — sidebar width
     const resizeV = document.getElementById('resize-v');
-    const appEl = document.querySelector('.app');
+    const interactiveSlide = document.querySelector('.slide-interactive');
     let startX, startW;
     resizeV.addEventListener('mousedown', (e) => {
       e.preventDefault();
@@ -697,7 +954,7 @@ class App {
       const onMove = (ev) => {
         const delta = startX - ev.clientX;
         const newW = Math.max(250, Math.min(window.innerWidth - 400, startW + delta));
-        appEl.style.gridTemplateColumns = `1fr 5px ${newW}px`;
+        interactiveSlide.style.gridTemplateColumns = `1fr 5px ${newW}px`;
       };
       const onUp = () => {
         document.removeEventListener('mousemove', onMove);
@@ -1076,8 +1333,12 @@ class App {
     const resp = await fetch('topic.json');
     if (!resp.ok) throw new Error('Failed to load topic.json — serve via HTTP (python3 -m http.server)');
     const data = await resp.json();
+    const interactiveIdx = SLIDES.findIndex(s => s.type === 'interactive');
     const app = new App(data);
-    await app.start();
+    const startOnInteractive = interactiveIdx === 0;
+    await app.start(startOnInteractive);
+    const slideManager = new SlideManager(SLIDES, data);
+    slideManager.init(app);
   } catch (err) {
     document.getElementById('app').innerHTML = `
       <div class="loading">
