@@ -1,994 +1,994 @@
-[SPEAKER_00] 0:00 - 0:24
+0:00 - 0:24
  Hello. Hey everyone. I'm Boris. I'm a member of technical staff here at Anthropic and I created
 
-[SPEAKER_00] 0:24 - 0:29
+0:24 - 0:29
  QuadCode. And here to talk to you a little bit about some practical tips and tricks for using
 
-[SPEAKER_00] 0:29 - 0:34
+0:29 - 0:34
  QuadCode. It's going to be very practical. I'm not going to go too much into the history or the
 
-[SPEAKER_00] 0:34 - 0:40
+0:34 - 0:40
  theory or anything like this. And yeah, before we start, actually, can we get a quick show of hands
 
-[SPEAKER_00] 0:40 - 0:47
+0:40 - 0:47
  who has used QuadCode before? Yeah. All right. That's what we like to see. For everyone that
 
-[SPEAKER_00] 0:47 - 0:51
+0:47 - 0:51
  didn't raise your hands, I know you're not supposed to do this while people are talking, but if you
 
-[SPEAKER_00] 0:51 - 1:00
+0:51 - 1:00
  can open your laptop and type this, and this will help you install QuadCode just so you can follow
 
-[SPEAKER_00] 1:00 - 1:10
+1:00 - 1:10
  along for the rest of the talk. All you need is Node.js if you have it. This should work.
 
-[SPEAKER_00] 1:10 - 1:20
+1:10 - 1:20
  Yeah. You don't have to follow along, but if you don't have it yet,
 
-[SPEAKER_00] 1:20 - 1:29
+1:20 - 1:29
  this is your chance to install it so you can follow along. So what is QuadCode? QuadCode is a new kind
 
-[SPEAKER_00] 1:29 - 1:35
+1:29 - 1:35
  of AI assistant. And there's been different generations of AI assistants for coding. Most of
 
-[SPEAKER_00] 1:35 - 1:41
+1:35 - 1:41
  them have been about completing a line at a time, completing a few lines of code at a time. QuadCode
 
-[SPEAKER_00] 1:41 - 1:47
+1:41 - 1:47
  is not for that. It's fully agentic. So it's meant for building features, for writing entire functions,
 
-[SPEAKER_00] 1:47 - 1:55
+1:47 - 1:55
  entire files, fixing entire bugs at the same time. And what's kind of cool about QuadCode is it works
 
-[SPEAKER_00] 1:55 - 1:59
+1:55 - 1:59
  with all of your tools. And you don't have to change out your workflow. You don't have to swap
 
-[SPEAKER_00] 1:59 - 2:06
+1:59 - 2:06
  everything to start using it. So whatever IDE you use, if you use VS Code or if you use Xcode or if you
 
-[SPEAKER_00] 2:06 - 2:12
+2:06 - 2:12
  use JetBrains IDEs, there's some people at Anthropic that you can't pry them from their cold, dead hands.
 
-[SPEAKER_00] 2:12 - 2:18
+2:12 - 2:18
  But they use QuadCode. Because QuadCode works with every single IDE, every terminal out there. It'll
 
-[SPEAKER_00] 2:18 - 2:23
+2:18 - 2:23
  work locally over remote SSH, over Tmux, whatever environment you're in, you can run it.
 
-[SPEAKER_00] 2:27 - 2:32
+2:27 - 2:32
  It's general purpose, and this is something where if you haven't used these kind of free-form coding
 
-[SPEAKER_00] 2:32 - 2:37
+2:32 - 2:37
  assistants in the past, it can be kind of hard to figure out how to get started. Because you open it up
 
-[SPEAKER_00] 2:37 - 2:40
+2:37 - 2:40
  and you just see a prompt bar and you might wonder, like, what do I do with this? What do I type in?
 
-[SPEAKER_00] 2:41 - 2:46
+2:41 - 2:46
  It's a power tool, so you can use it for a lot of things. But also, because it can do so much,
 
-[SPEAKER_00] 2:46 - 2:50
+2:46 - 2:50
  we don't try to guide you towards a particular workflow. Because really, you should be able to
 
-[SPEAKER_00] 2:50 - 2:52
+2:50 - 2:52
  use it however you want as an engineer.
 
-[SPEAKER_00] 2:57 - 3:00
+2:57 - 3:00
  As you open up QuadCode for the first time, there's a few things that we recommend doing
 
-[SPEAKER_00] 3:01 - 3:05
+3:01 - 3:05
  to get your environment set up. And these are pretty straightforward. So run Terminal Setup,
 
-[SPEAKER_00] 3:05 - 3:10
+3:05 - 3:10
  this will give you Shift-Enter for new lines, so you don't have to do backslashes to enter new lines.
 
-[SPEAKER_00] 3:10 - 3:16
+3:10 - 3:16
  This is, you know, it makes it a little bit nicer to use. Do slash theme to set light mode or dark mode
 
-[SPEAKER_00] 3:16 - 3:23
+3:16 - 3:23
  or daltonize themes. You can do slash install GitHub app. So today we announced a GitHub app
 
-[SPEAKER_00] 3:24 - 3:30
+3:24 - 3:30
  where you can mention Cloud on any GitHub issue or pull request. So to install it, just run this command
 
-[SPEAKER_00] 3:30 - 3:36
+3:30 - 3:36
  in your terminal. You can customize the set of allowed tools that you can use so you're not
 
-[SPEAKER_00] 3:36 - 3:40
+3:36 - 3:40
  prompted for it every time. This is pretty convenient. For stuff that I'm prompted about a bunch, I'll
 
-[SPEAKER_00] 3:40 - 3:45
+3:40 - 3:45
  definitely customize it in this way so I don't have to accept it every time. And something that I actually
 
-[SPEAKER_00] 3:45 - 3:51
+3:45 - 3:51
  do is for a lot of my prompts, I won't hand type them into QuadCode. If you're on macOS, you can go into
 
-[SPEAKER_00] 3:51 - 3:57
+3:51 - 3:57
  your system settings under accessibility as dictation, and you can enable it. And so something I do is you just
 
-[SPEAKER_00] 3:57 - 4:03
+3:57 - 4:03
  hit like that dictation key twice, and you can just speak your prompt. And it helps a lot to have
 
-[SPEAKER_00] 4:03 - 4:07
+4:03 - 4:07
  specific prompts. So this is actually pretty awesome. You can just talk to QuadCode and like you would
 
-[SPEAKER_00] 4:07 - 4:16
+4:07 - 4:16
  another engineer, and you don't have to type a lot of code. So when you're starting out with QuadCode,
 
-[SPEAKER_00] 4:16 - 4:21
+4:16 - 4:21
  it's so freeform and it can do everything. What do you start with? The thing I recommend above everything
 
-[SPEAKER_00] 4:21 - 4:27
+4:21 - 4:27
  else is starting with CodeBase Q&A. So just asking questions to your CodeBase. This is something
 
-[SPEAKER_00] 4:27 - 4:32
+4:27 - 4:32
  that we teach new hires at Anthropic. So on the first day in technical onboarding, you learn about
 
-[SPEAKER_00] 4:32 - 4:37
+4:32 - 4:37
  QuadCode, you download it, you get it set up, and then you immediately start asking questions about the
 
-[SPEAKER_00] 4:37 - 4:41
+4:37 - 4:41
  CodeBase. And in the past when you were doing technical onboarding, it's something that taxes the
 
-[SPEAKER_00] 4:41 - 4:47
+4:41 - 4:47
  team a lot. You have to ask other engineers on the team questions, you have to look around the code,
 
-[SPEAKER_00] 4:47 - 4:50
+4:47 - 4:50
  and this takes a while, you have to figure out how to use the tools, this takes a long time.
 
-[SPEAKER_00] 4:52 - 4:56
+4:52 - 4:56
  With QuadCode, you can just ask QuadCode, and it'll explore the code base, it'll answer these kind
 
-[SPEAKER_00] 4:56 - 5:00
+4:56 - 5:00
  of questions. And so at Anthropic, onboarding used to take about two or three weeks for technical
 
-[SPEAKER_00] 5:00 - 5:08
+5:00 - 5:08
  hires. It's now about two or three days. What's also kind of cool about Q&A is we don't do any sort of
 
-[SPEAKER_00] 5:08 - 5:13
+5:08 - 5:13
  indexing. So there's no remote database with your code, we don't upload it anywhere, your code stays
 
-[SPEAKER_00] 5:13 - 5:19
+5:13 - 5:19
  local, we do not train generative models on the code. So it's there, you control it, there's no
 
-[SPEAKER_00] 5:19 - 5:24
+5:19 - 5:24
  indices or anything like this. And what that means is also there's no setup. So you start Quad, you
 
-[SPEAKER_00] 5:24 - 5:27
+5:24 - 5:27
  download it, you start it, there's no indexing, you don't have to wait, you can just use it right away.
 
-[SPEAKER_00] 5:30 - 5:35
+5:30 - 5:35
  This is a technical talk. So I'm going to show some very specific prompts and very specific code
 
-[SPEAKER_00] 5:35 - 5:39
+5:35 - 5:39
  samples that you can use and hopefully improve and up level your QuadCode experience.
 
-[SPEAKER_00] 5:39 - 5:44
+5:39 - 5:44
  So some kind of questions that you can ask is, you know, like how is this particular piece of code
 
-[SPEAKER_00] 5:44 - 5:48
+5:44 - 5:48
  used? Or how do I instantiate this thing? And QuadCode, it won't just do like a text search and try to
 
-[SPEAKER_00] 5:48 - 5:53
+5:48 - 5:53
  answer this. It'll often go a level deeper and it'll try to find examples of how is this class
 
-[SPEAKER_00] 5:53 - 5:58
+5:53 - 5:58
  instantiated? How is it used? And it'll give you a much deeper answer. So something that you would get
 
-[SPEAKER_00] 5:58 - 6:05
+5:58 - 6:05
  out of a wiki or documentation instead of just like command F. Something that I do a lot also is
 
-[SPEAKER_00] 6:05 - 6:11
+6:05 - 6:11
  ask it about Git history. So for example, you know, why does this function have 15 arguments? And why
 
-[SPEAKER_00] 6:11 - 6:16
+6:11 - 6:16
  are the arguments named this weird way? And this is something I bet in all of our code bases, you have
 
-[SPEAKER_00] 6:16 - 6:21
+6:16 - 6:21
  some function like this or some class like this. And QuadCode can look through Git history. And it'll
 
-[SPEAKER_00] 6:21 - 6:25
+6:21 - 6:25
  look to figure out how did these arguments get introduced and who introduced them and what was the
 
-[SPEAKER_00] 6:25 - 6:30
+6:25 - 6:30
  situation? What are the issues that those commits link to? And it'll look through all this and summarize it.
 
-[SPEAKER_00] 6:30 - 6:35
+6:30 - 6:35
  And you don't have to tell it that in all this detail. You just ask it. So just say look through
 
-[SPEAKER_00] 6:35 - 6:40
+6:35 - 6:40
  Git history and it'll know to do this. The reason it knows, by the way, is not because we prompted it
 
-[SPEAKER_00] 6:40 - 6:44
+6:40 - 6:44
  to. There's nothing in the system prompt about looking through Git history. It knows it because the
 
-[SPEAKER_00] 6:44 - 6:50
+6:44 - 6:50
  model is awesome. And if you tell it to use Git, it'll know how to use Git. So we're lucky to be
 
-[SPEAKER_00] 6:50 - 6:58
+6:50 - 6:58
  building on such a good model. I often ask about GitHub issues. So, you know, it can use web fetch and
 
-[SPEAKER_00] 6:58 - 7:01
+6:58 - 7:01
  they can fetch issues and look up context on issues too. And this is pretty awesome.
 
-[SPEAKER_00] 7:03 - 7:08
+7:03 - 7:08
  And this is something that I do every single Monday in our weekly standup is I ask, what did
 
-[SPEAKER_00] 7:08 - 7:12
+7:08 - 7:12
  I ship this week? And QuadCode looks to the log. It knows my username. And it'll just give me a nice
 
-[SPEAKER_00] 7:12 - 7:22
+7:12 - 7:22
  readout of everything I shipped. And I'll just copy and paste that into a docs. So, yeah, that's tip
 
-[SPEAKER_00] 7:22 - 7:26
+7:22 - 7:26
  number one. For people that have not used QuadCode before, if you're just showing it to someone for the
 
-[SPEAKER_00] 7:26 - 7:30
+7:26 - 7:30
  first time, onboarding your team, the thing we definitely recommend is start with codebase Q&A.
 
-[SPEAKER_00] 7:30 - 7:34
+7:30 - 7:34
  Don't start by using fancy tools. Don't start by editing code. Just start by asking questions
 
-[SPEAKER_00] 7:34 - 7:38
+7:34 - 7:38
  about the codebase. And that'll teach people how to prompt. And it'll start teaching them this boundary
 
-[SPEAKER_00] 7:38 - 7:43
+7:38 - 7:43
  of, like, what can QuadCode do? What is it capable of? Versus what do you need to hold its hand with a
 
-[SPEAKER_00] 7:43 - 7:48
+7:43 - 7:48
  little bit more? What can be one-shotted? What can be two-shotted, three-shotted? What do you need to use
 
-[SPEAKER_00] 7:48 - 7:55
+7:48 - 7:55
  interactive mode for in a REPL? Once you're pretty comfortable with Q&A, you can dive into editing
 
-[SPEAKER_00] 7:55 - 8:03
+7:55 - 8:03
  code. This is the next thing. And the cool thing about any sort of agentic, you know, like using
 
-[SPEAKER_00] 8:03 - 8:07
+8:03 - 8:07
  an LM in an agentic way is you give it tools, and it's just, like, magical. It figures out how to use
 
-[SPEAKER_00] 8:07 - 8:12
+8:07 - 8:12
  the tools. And with QuadCode, we give it a pretty small set of tools. It's not a lot. And so it has a
 
-[SPEAKER_00] 8:12 - 8:18
+8:12 - 8:18
  tool to edit files. It has a tool to run bash commands. It has a tool to search files. And it'll
 
-[SPEAKER_00] 8:18 - 8:25
+8:18 - 8:25
  string these together to explore the code, brainstorm, and then finally make edits. And you don't have to
 
-[SPEAKER_00] 8:25 - 8:28
+8:25 - 8:28
  prompt it specifically to use this tool and this tool and this tool. You just say, you know, do this
 
-[SPEAKER_00] 8:28 - 8:31
+8:28 - 8:31
  thing, and it'll figure out how to do it. It'll string it together in the right way. That makes sense
 
-[SPEAKER_00] 8:31 - 8:42
+8:31 - 8:42
  for QuadCode. There's a lot of ways to use this. Something I like to do sometimes is before having
 
-[SPEAKER_00] 8:42 - 8:48
+8:42 - 8:48
  Quad jump in to write code, I'll ask it to brainstorm a little bit or make a plan. This is something we
 
-[SPEAKER_00] 8:48 - 8:53
+8:48 - 8:53
  highly recommend and something I see sometimes is people, you know, they take QuadCode and they
 
-[SPEAKER_00] 8:53 - 8:58
+8:53 - 8:58
  ask it, hey, implement this enormous, like, 3000 line feature. And sometimes it gets this right on
 
-[SPEAKER_00] 8:58 - 9:02
+8:58 - 9:02
  the first shot. But sometimes what happens is the thing that it builds is not at all the thing that
 
-[SPEAKER_00] 9:02 - 9:09
+9:02 - 9:09
  you wanted. And the easiest way to get the result you want is ask it to think first. So brainstorm ideas,
 
-[SPEAKER_00] 9:09 - 9:14
+9:09 - 9:14
  make a plan, run it by me, ask for approval before you write code. And you don't have to use plan
 
-[SPEAKER_00] 9:14 - 9:19
+9:14 - 9:19
  mode, you don't have to use any special tools to do this. All you have to do is ask Quad, and it'll
 
-[SPEAKER_00] 9:19 - 9:26
+9:19 - 9:26
  know to do this. So just say, before you write code, make a plan. That's it. This is also, I want to
 
-[SPEAKER_00] 9:26 - 9:30
+9:26 - 9:30
  think for this one, this commit push PR, this is a really common incantation that I use. There's nothing
 
-[SPEAKER_00] 9:30 - 9:34
+9:30 - 9:34
  special about it, but Quad is kind of smart enough to interpret this, so it'll make a commit, it'll push it
 
-[SPEAKER_00] 9:34 - 9:38
+9:34 - 9:38
  to the branch, make a branch, and then make a pull request for me on GitHub. You don't have to explain anything.
 
-[SPEAKER_00] 9:38 - 9:42
+9:38 - 9:42
  It'll look through the code, it'll look through the history, it'll look through the git log by itself
 
-[SPEAKER_00] 9:42 - 9:46
+9:42 - 9:46
  to figure out the commit format and all the stuff, and it'll make the commit and push it the right way.
 
-[SPEAKER_00] 9:48 - 9:53
+9:48 - 9:53
  Again, we're not system prompting it to do this, it just knows how to do this. The model is good.
 
-[SPEAKER_00] 9:56 - 10:00
+9:56 - 10:00
  As you get a little bit more advanced, you're going to want to start to plug in your team's tools,
 
-[SPEAKER_00] 10:00 - 10:06
+10:00 - 10:06
  and this is where Quad Code starts to really shine.
 
-[SPEAKER_00] 10:02 - 10:04
+10:02 - 10:04
  And there's generally two kinds of tools.
 
-[SPEAKER_00] 10:04 - 10:07
+10:04 - 10:07
  So one is batch tools, and an example of this,
 
-[SPEAKER_00] 10:07 - 10:08
+10:07 - 10:08
  I just made up this like burly CLI,
 
-[SPEAKER_00] 10:08 - 10:10
+10:08 - 10:10
  this isn't a real thing.
 
-[SPEAKER_00] 10:10 - 10:12
+10:10 - 10:12
  But you can say use the CLI to do something.
 
-[SPEAKER_00] 10:12 - 10:14
+10:12 - 10:14
  And you can tell Cloud Code about this.
 
-[SPEAKER_00] 10:14 - 10:16
+10:14 - 10:16
  And you can tell it to use, for example,
 
-[SPEAKER_00] 10:16 - 10:18
+10:16 - 10:18
  like dash dash help to figure out how to use it.
 
-[SPEAKER_00] 10:18 - 10:20
+10:18 - 10:20
  And this is efficient.
 
-[SPEAKER_00] 10:20 - 10:22
+10:20 - 10:22
  If you find yourself using it a lot,
 
-[SPEAKER_00] 10:22 - 10:23
+10:22 - 10:23
  you can also dump this into your Cloud MD,
 
-[SPEAKER_00] 10:23 - 10:25
+10:23 - 10:25
  which we'll talk about in a bit,
 
-[SPEAKER_00] 10:25 - 10:27
+10:25 - 10:27
  so Cloud can remember this across sessions.
 
-[SPEAKER_00] 10:27 - 10:29
+10:27 - 10:29
  But this is a common pattern we follow at Anthropic,
 
-[SPEAKER_00] 10:29 - 10:31
+10:29 - 10:31
  and we see external customers use too.
 
-[SPEAKER_00] 10:32 - 10:34
+10:32 - 10:34
  And same thing with MCP.
 
-[SPEAKER_00] 10:34 - 10:37
+10:34 - 10:37
  Cloud Code can use batch tools, it can use MCP tools.
 
-[SPEAKER_00] 10:37 - 10:38
+10:37 - 10:38
  So just tell it about the tools,
 
-[SPEAKER_00] 10:38 - 10:40
+10:38 - 10:40
  and you can add the MCP tool,
 
-[SPEAKER_00] 10:40 - 10:41
+10:40 - 10:41
  and you can tell it how to use it,
 
-[SPEAKER_00] 10:41 - 10:43
+10:41 - 10:43
  and it'll just start using it.
 
-[SPEAKER_00] 10:44 - 10:46
+10:44 - 10:46
  And this is extremely powerful,
 
-[SPEAKER_00] 10:46 - 10:49
+10:46 - 10:49
  because when you start to use code on a new code base,
 
-[SPEAKER_00] 10:49 - 10:51
+10:49 - 10:51
  you can just give it all of your tools,
 
-[SPEAKER_00] 10:51 - 10:54
+10:51 - 10:54
  all the tools your team already uses for this code base,
 
-[SPEAKER_00] 10:54 - 10:56
+10:54 - 10:56
  and Cloud Code can use it on your behalf.
 
-[SPEAKER_00] 10:56 - 10:58
+10:56 - 10:58
  There's a few common workflows,
 
-[SPEAKER_00] 10:58 - 10:59
+10:58 - 10:59
  and this is the one that I talked about already,
 
-[SPEAKER_00] 10:59 - 11:01
+10:59 - 11:01
  so kind of do a little bit of exploration,
 
-[SPEAKER_00] 11:01 - 11:02
+11:01 - 11:02
  do a little bit of planning,
 
-[SPEAKER_00] 11:02 - 11:05
+11:02 - 11:05
  and ask me for confirmation before you start to write code.
 
-[SPEAKER_00] 11:05 - 11:07
+11:05 - 11:07
  These other two on the right are extremely powerful.
 
-[SPEAKER_00] 11:07 - 11:09
+11:07 - 11:09
  When Cloud has some way to check its work,
 
-[SPEAKER_00] 11:09 - 11:10
+11:09 - 11:10
  so for example, by writing unit tests,
 
-[SPEAKER_00] 11:10 - 11:11
+11:10 - 11:11
  or screenshotting in Puppeteer,
 
-[SPEAKER_00] 11:11 - 11:13
+11:11 - 11:13
  or screenshotting the iOS simulator,
 
-[SPEAKER_00] 11:13 - 11:14
+11:13 - 11:14
  then it can iterate.
 
-[SPEAKER_00] 11:14 - 11:15
+11:14 - 11:15
  And this is incredible
 
-[SPEAKER_00] 11:15 - 11:17
+11:15 - 11:17
  because if you give it, for example, a mock,
 
-[SPEAKER_00] 11:17 - 11:18
+11:17 - 11:18
  and you say build this web UI,
 
-[SPEAKER_00] 11:18 - 11:20
+11:18 - 11:20
  it'll get it pretty good.
 
-[SPEAKER_00] 11:20 - 11:22
+11:20 - 11:22
  But if you edit iterate two or three times,
 
-[SPEAKER_00] 11:22 - 11:24
+11:22 - 11:24
  often it gets it almost perfect.
 
-[SPEAKER_00] 11:24 - 11:25
+11:24 - 11:25
  So the trick is,
 
-[SPEAKER_00] 11:25 - 11:26
+11:25 - 11:26
  give it some sort of tool
 
-[SPEAKER_00] 11:26 - 11:28
+11:26 - 11:28
  that it can use for feedback to check its work,
 
-[SPEAKER_00] 11:28 - 11:31
+11:28 - 11:31
  and then based on that it will give it another quick emoji
 
-[SPEAKER_00] 11:31 - 11:33
+11:31 - 11:33
  and then enter a text into the page.
 
-[SPEAKER_00] 11:33 - 11:35
+11:33 - 11:35
  Like the Help Code Initiative page.
 
-[SPEAKER_00] 11:35 - 11:37
+11:35 - 11:37
  often it gets it almost perfect.
 
-[SPEAKER_00] 11:37 - 11:39
+11:37 - 11:39
  So the trick is give it some sort of tool
 
-[SPEAKER_00] 11:39 - 11:42
+11:39 - 11:42
  that it can use for feedback to check its work,
 
-[SPEAKER_00] 11:42 - 11:44
+11:42 - 11:44
  and then based on that it will iterate by itself
 
-[SPEAKER_00] 11:44 - 11:47
+11:44 - 11:47
  and you're gonna get a much better result.
 
-[SPEAKER_00] 11:47 - 11:48
+11:47 - 11:48
  So whatever your domain is, if it's unit test
 
-[SPEAKER_00] 11:48 - 11:52
+11:48 - 11:52
  or integration test or screenshots for apps or web
 
-[SPEAKER_00] 11:52 - 11:54
+11:52 - 11:54
  or anything, just give it a way to see its result
 
-[SPEAKER_00] 11:54 - 11:55
+11:54 - 11:55
  and it'll iterate and get better.
 
-[SPEAKER_00] 12:00 - 12:01
+12:00 - 12:01
  So these are the next steps.
 
-[SPEAKER_00] 12:01 - 12:02
+12:01 - 12:02
  Teach Cloud how to use your tools
 
-[SPEAKER_00] 12:02 - 12:05
+12:02 - 12:05
  and figure out the right workflow.
 
-[SPEAKER_00] 12:05 - 12:06
+12:05 - 12:06
  If you want Quad to jump into code,
 
-[SPEAKER_00] 12:06 - 12:08
+12:06 - 12:08
  if you want it to brainstorm a little bit, make a plan,
 
-[SPEAKER_00] 12:08 - 12:11
+12:08 - 12:11
  if you want it to iterate, kind of have some sense of that
 
-[SPEAKER_00] 12:11 - 12:13
+12:11 - 12:13
  so you know how to prompt Quad to do what you want.
 
-[SPEAKER_00] 12:17 - 12:19
+12:17 - 12:19
  As you go deeper, beyond tools,
 
-[SPEAKER_00] 12:19 - 12:21
+12:19 - 12:21
  you want to start to give Quad more context.
 
-[SPEAKER_00] 12:21 - 12:24
+12:21 - 12:24
  And the more context, the smarter the decisions will be
 
-[SPEAKER_00] 12:24 - 12:26
+12:24 - 12:26
  because as an engineer working in a codebase,
 
-[SPEAKER_00] 12:26 - 12:28
+12:26 - 12:28
  you have a ton of context in your head about your systems
 
-[SPEAKER_00] 12:28 - 12:30
+12:28 - 12:30
  and all the history and everything else.
 
-[SPEAKER_00] 12:30 - 12:33
+12:30 - 12:33
  So there's different ways to give this to Quad.
 
-[SPEAKER_00] 12:33 - 12:34
+12:33 - 12:34
  And as you give Quad more context,
 
-[SPEAKER_00] 12:34 - 12:35
+12:34 - 12:35
  it'll do better.
 
-[SPEAKER_00] 12:35 - 12:38
+12:35 - 12:38
  There's different ways to do this.
 
-[SPEAKER_00] 12:38 - 12:41
+12:38 - 12:41
  The simplest one is what we call CloudMD.
 
-[SPEAKER_00] 12:41 - 12:43
+12:41 - 12:43
  And Cloud.MD is the special file name.
 
-[SPEAKER_00] 12:43 - 12:47
+12:43 - 12:47
  The simplest place to put it is in the project root.
 
-[SPEAKER_00] 12:47 - 12:49
+12:47 - 12:49
  So the same directory you start Cloud in,
 
-[SPEAKER_00] 12:49 - 12:50
+12:49 - 12:50
  put a CloudMD in there.
 
-[SPEAKER_00] 12:50 - 12:53
+12:50 - 12:53
  And that'll get automatically read into context
 
-[SPEAKER_00] 12:53 - 12:54
+12:53 - 12:54
  at the start of every session.
 
-[SPEAKER_00] 12:54 - 12:57
+12:54 - 12:57
  And essentially the first user turn will include the CloudMD.
 
-[SPEAKER_00] 12:57 - 13:01
+12:57 - 13:01
  You can also have a local CloudMD.
 
-[SPEAKER_00] 13:01 - 13:04
+13:01 - 13:04
  And this one you don't usually check into source control.
 
-[SPEAKER_00] 13:04 - 13:06
+13:04 - 13:06
  So CloudMD, you should check into source control,
 
-[SPEAKER_00] 13:06 - 13:08
+13:06 - 13:08
  share with your team so that you can write it once
 
-[SPEAKER_00] 13:08 - 13:10
+13:08 - 13:10
  and share it with your team.
 
-[SPEAKER_00] 13:10 - 13:12
+13:10 - 13:12
  This one you don't check in.
 
-[SPEAKER_00] 13:12 - 13:13
+13:12 - 13:13
  It's just for you.
 
-[SPEAKER_00] 13:13 - 13:15
+13:13 - 13:15
  The kinds of things you put in CloudMD,
 
-[SPEAKER_00] 13:15 - 13:18
+13:15 - 13:18
  it's like common bash commands, common MCP tools,
 
-[SPEAKER_00] 13:18 - 13:22
+13:18 - 13:22
  architectural decisions, important files, anything that you would
 
-[SPEAKER_00] 13:22 - 13:26
+13:22 - 13:26
  kind of typically need to know in order to work in this codebase.
 
-[SPEAKER_00] 13:26 - 13:28
+13:26 - 13:28
  Try to keep it pretty short, because if it gets too long,
 
-[SPEAKER_00] 13:28 - 13:30
+13:28 - 13:30
  it's just going to use up a bunch of context.
 
-[SPEAKER_00] 13:30 - 13:32
+13:30 - 13:32
  And it's usually not that useful.
 
-[SPEAKER_00] 13:32 - 13:34
+13:32 - 13:34
  So just try to keep it as short as you can.
 
-[SPEAKER_00] 13:34 - 13:36
+13:34 - 13:36
  And for example, in our codebase,
 
-[SPEAKER_00] 13:36 - 13:39
+13:36 - 13:39
  we have common bash commands, we have a style guide,
 
-[SPEAKER_00] 13:39 - 13:42
+13:39 - 13:42
  we have a few core files, kind of things like that.
 
-[SPEAKER_00] 13:42 - 13:45
+13:42 - 13:45
  All the other CloudMDs, you can put them in other nested child
 
-[SPEAKER_00] 13:45 - 13:48
+13:45 - 13:48
  directories, and Cloud will pull them in on demand.
 
-[SPEAKER_00] 13:48 - 13:50
+13:48 - 13:50
  So these are the CloudMDs that will get pulled into the code
 
-[SPEAKER_00] 13:50 - 13:55
+13:50 - 13:55
  automatically, but then also you can put CloudMDs
 
-[SPEAKER_00] 13:55 - 13:58
+13:55 - 13:58
  in nested directories, and those will get automatically pulled
 
-[SPEAKER_00] 13:58 - 14:00
+13:58 - 14:00
  when Cloud works in those directories.
 
-[SPEAKER_00] 14:00 - 14:02
+14:00 - 14:02
  And of course, if you're a company,
 
-[SPEAKER_00] 14:02 - 14:05
+14:02 - 14:05
  maybe you want a CloudMD that's shared across all the different
 
-[SPEAKER_00] 14:05 - 14:08
+14:05 - 14:08
  codebases, and you want to manage it on behalf of your users,
 
-[SPEAKER_00] 14:08 - 14:10
+14:08 - 14:10
  and you can put it in your enterprise route,
 
-[SPEAKER_00] 14:10 - 14:12
+14:10 - 14:12
  and that'll get pulled in automatically.
 
-[SPEAKER_00] 14:12 - 14:15
+14:12 - 14:15
  There's a ton of ways to pull in context.
 
-[SPEAKER_00] 14:15 - 14:17
+14:15 - 14:17
  I actually had a lot of trouble putting this stuff in,
 
-[SPEAKER_00] 14:17 - 14:19
+14:17 - 14:19
  but I'm going to put it in a lot of context.
 
-[SPEAKER_00] 14:19 - 14:21
+14:19 - 14:21
  I'm going to have trouble putting this slide together just to
 
-[SPEAKER_00] 14:21 - 14:23
+14:21 - 14:23
  communicate the breadth of ways you can do this.
 
-[SPEAKER_00] 14:23 - 14:26
+14:23 - 14:26
  But CloudMD is pulled in automatically.
 
-[SPEAKER_00] 14:26 - 14:28
+14:26 - 14:28
  You can also use slash commands.
 
-[SPEAKER_00] 14:28 - 14:30
+14:28 - 14:30
  So this is .cloud slash commands, and this can be in your home
 
-[SPEAKER_00] 14:30 - 14:33
+14:30 - 14:33
  directory, or it can be checked into your project, and this is for
 
-[SPEAKER_00] 14:33 - 14:34
+14:33 - 14:34
  slash commands.
 
-[SPEAKER_00] 14:34 - 14:40
+14:34 - 14:40
  And over here, we have a few examples of the slash commands that
 
-[SPEAKER_00] 14:40 - 14:42
+14:40 - 14:42
  we have in Cloud code itself.
 
-[SPEAKER_00] 14:42 - 14:45
+14:42 - 14:45
  And so for example, if you're in the Cloud code repo, and you see
 
-[SPEAKER_00] 14:45 - 14:48
+14:45 - 14:48
  issues getting labeled, that's actually this workflow running
 
-[SPEAKER_00] 14:48 - 14:49
+14:48 - 14:49
  here.
 
-[SPEAKER_00] 14:49 - 14:51
+14:49 - 14:51
  It's labeled GitHub issues.
 
-[SPEAKER_00] 14:51 - 14:53
+14:51 - 14:53
  And we have a GitHub action running, the same one we talked
 
-[SPEAKER_00] 14:53 - 14:57
+14:53 - 14:57
  about this morning, where Cloud code will run this command,
 
-[SPEAKER_00] 14:57 - 14:58
+14:57 - 14:58
  and it's just a slash command.
 
-[SPEAKER_00] 14:58 - 15:01
+14:58 - 15:01
  It'll run, and it'll label the issues so humans don't have to.
 
-[SPEAKER_00] 15:01 - 15:03
+15:01 - 15:03
  It just saves us a bunch of time.
 
-[SPEAKER_00] 15:03 - 15:06
+15:03 - 15:06
  And of course, you can add mention files to pull them into context.
 
-[SPEAKER_00] 15:06 - 15:11
+15:06 - 15:11
  And like I said before, CloudMDs in a nested directory get pulled
 
-[SPEAKER_00] 15:11 - 15:13
+15:11 - 15:13
  in when Cloud works in that directory.
 
-[SPEAKER_00] 15:17 - 15:21
+15:17 - 15:21
  So give Cloud more context, and it's definitely worth taking the
 
-[SPEAKER_00] 15:21 - 15:22
+15:21 - 15:22
  time to tune context.
 
-[SPEAKER_00] 15:22 - 15:23
+15:22 - 15:23
  You can run it through a prompt improver.
 
-[SPEAKER_00] 15:23 - 15:26
+15:23 - 15:26
  Consider who the context is for.
 
-[SPEAKER_00] 15:26 - 15:28
+15:26 - 15:28
  If you want to pull it in every time, if you want to pull it in on
 
-[SPEAKER_00] 15:28 - 15:31
+15:28 - 15:31
  demand, if you want to share it with a team, if it's a personal
 
-[SPEAKER_00] 15:31 - 15:33
+15:31 - 15:33
  preference, definitely take the time to tune it.
 
-[SPEAKER_00] 15:33 - 15:36
+15:33 - 15:36
  This will improve performance dramatically if you do it right.
 
-[SPEAKER_00] 15:40 - 15:44
+15:40 - 15:44
  As you get more advanced, you're going to want to think about this
 
-[SPEAKER_00] 15:44 - 15:46
+15:44 - 15:46
  a little bit more of this kind of hierarchy of different ways
 
-[SPEAKER_00] 15:46 - 15:47
+15:46 - 15:47
  to pull in everything.
 
-[SPEAKER_00] 15:47 - 15:53
+15:47 - 15:53
  So like not just CloudMD, but also config and kind of everything
 
-[SPEAKER_00] 15:53 - 15:55
+15:53 - 15:55
  about Cloud you can pull in in this hierarchical way.
 
-[SPEAKER_00] 15:55 - 15:59
+15:55 - 15:59
  So projects are specific to your Git repo, and this you can check
 
-[SPEAKER_00] 15:59 - 16:01
+15:59 - 16:01
  in or you can make it just for you.
 
-[SPEAKER_00] 16:01 - 16:05
+16:01 - 16:05
  You can also have global configs that are across all your projects,
 
-[SPEAKER_00] 16:05 - 16:06
+16:05 - 16:06
  or you can have enterprise policies.
 
-[SPEAKER_00] 16:06 - 16:09
+16:06 - 16:09
  And this is essentially a global config that you roll out for all
 
-[SPEAKER_00] 16:09 - 16:11
+16:09 - 16:11
  of your employees, everyone on your team automatically.
 
-[SPEAKER_00] 16:11 - 16:16
+16:11 - 16:16
  And this slide is like pretty information dense, but the point is
 
-[SPEAKER_00] 16:16 - 16:17
+16:16 - 16:17
  this applies to a lot of stuff.
 
-[SPEAKER_00] 16:17 - 16:19
+16:17 - 16:19
  So you can do this for slash commands, you can do it for
 
-[SPEAKER_00] 16:19 - 16:20
+16:19 - 16:20
  permissions.
 
-[SPEAKER_00] 16:20 - 16:23
+16:20 - 16:23
  So for example, if you have a bash command that you would run for
 
-[SPEAKER_00] 16:23 - 16:26
+16:23 - 16:26
  all your employees, like all your employees use this like test
 
-[SPEAKER_00] 16:26 - 16:27
+16:26 - 16:27
  command for example.
 
-[SPEAKER_00] 16:27 - 16:31
+16:27 - 16:31
  You can actually just check it into this enterprise policies file,
 
-[SPEAKER_00] 16:31 - 16:34
+16:31 - 16:34
  and then any employee when they run this command it will be
 
-[SPEAKER_00] 16:34 - 16:36
+16:34 - 16:36
  auto approved, which is pretty convenient.
 
-[SPEAKER_00] 16:36 - 16:38
+16:36 - 16:38
  And you can also use this to block commands.
 
-[SPEAKER_00] 16:38 - 16:40
+16:38 - 16:40
  So for example, let's say there's a URL that should never be
 
-[SPEAKER_00] 16:40 - 16:41
+16:40 - 16:41
  fetched.
 
-[SPEAKER_00] 16:41 - 16:44
+16:41 - 16:44
  Just add it to this config, and that'll make it so an employee
 
-[SPEAKER_00] 16:44 - 16:45
+16:44 - 16:45
  cannot override it.
 
-[SPEAKER_00] 16:45 - 16:48
+16:45 - 16:48
  And that URL can never be fetched.
 
-[SPEAKER_00] 16:48 - 16:50
+16:48 - 16:50
  So pretty convenient both to unblock people and also just to keep
 
-[SPEAKER_00] 16:50 - 16:51
+16:50 - 16:51
  your code base safe.
 
-[SPEAKER_00] 16:51 - 16:53
+16:51 - 16:53
  And then same thing for MCP servers.
 
-[SPEAKER_00] 16:53 - 16:55
+16:53 - 16:55
  Have a MCP JSON file, check it into the code base.
 
-[SPEAKER_00] 16:55 - 16:57
+16:55 - 16:57
  That way any time someone runs quad code in your code base,
 
-[SPEAKER_00] 16:57 - 16:59
+16:57 - 16:59
  they'll be prompted to install the MCP servers and share it with
 
-[SPEAKER_00] 16:59 - 17:00
+16:59 - 17:00
  the team.
 
-[SPEAKER_00] 17:00 - 17:03
+17:00 - 17:03
  If you're not sure which of these to use, this is like kind of an
 
-[SPEAKER_00] 17:03 - 17:05
+17:03 - 17:05
  insane matrix because we support a lot of stuff and engineer
 
-[SPEAKER_00] 17:05 - 17:06
+17:05 - 17:06
  workflows are very flexible and every company is different.
 
-[SPEAKER_00] 17:06 - 17:07
+17:06 - 17:07
  So we kind of want to support everything.
 
-[SPEAKER_00] 17:07 - 17:09
+17:07 - 17:09
  So if you're not sure how to get started, if you're not sure
 
-[SPEAKER_00] 17:09 - 17:11
+17:09 - 17:11
  how to get started, you can use the code base.
 
-[SPEAKER_00] 17:11 - 17:13
+17:11 - 17:13
  So if you're not sure how to get started, you can use
 
-[SPEAKER_00] 17:13 - 17:15
+17:13 - 17:15
  login objects and I think once a month before, you give
 
-[SPEAKER_00] 17:15 - 17:17
+17:15 - 17:17
  uh approximately 1.2 or 3. 4 or around, uh,
 
-[SPEAKER_00] 17:17 - 17:20
+17:17 - 17:20
  communities that have come in there can be stored in theuu
 
-[SPEAKER_00] 17:20 - 17:22
+17:20 - 17:22
  server tester world, new server patient werdears, new server
 
-[SPEAKER_00] 17:22 - 17:23
+17:22 - 17:23
  trying to identify andpe Logicogle. And then you can run
 
-[SPEAKER_00] 17:23 - 17:37
+17:23 - 17:37
  to this website how you
 
-[SPEAKER_00] 17:37 - 17:39
+17:37 - 17:39
  can output interface như tunnels.
 
-[SPEAKER_00] 17:39 - 17:42
+17:39 - 17:42
  So they can already deuil and
 
-[SPEAKER_00] 17:42 - 17:49
+17:42 - 17:49
  So maybe I have an enterprise policy, I have my user memory, I have project quad MD, and then maybe there's a nested quad MD.
 
-[SPEAKER_00] 17:49 - 17:51
+17:49 - 17:51
  That's only pulled in for certain directories.
 
-[SPEAKER_00] 17:53 - 17:57
+17:53 - 17:57
  And then similarly, when you do slash memory, you can edit particular memory files.
 
-[SPEAKER_00] 17:57 - 18:01
+17:57 - 18:01
  When you type pound sign to remember something, you can pick which memory you want it to go to.
 
-[SPEAKER_00] 18:05 - 18:07
+18:05 - 18:07
  So yeah, that's the next step.
 
-[SPEAKER_00] 18:07 - 18:16
+18:07 - 18:16
  Take the time to configure quad MD, MCP servers, all the stuff that your team uses so that you can use it once, configure it once, and then share it with everyone.
 
-[SPEAKER_00] 18:18 - 18:23
+18:18 - 18:23
  An example of this is in our apps repo for Anthropic.
 
-[SPEAKER_00] 18:23 - 18:27
+18:23 - 18:27
  This is like the repo that we have all of our web and apps code in.
 
-[SPEAKER_00] 18:27 - 18:30
+18:27 - 18:30
  There's a Puppeteer MCP server, and we share this with the team.
 
-[SPEAKER_00] 18:30 - 18:32
+18:30 - 18:32
  And there's an MCP JSON checked in.
 
-[SPEAKER_00] 18:32 - 18:40
+18:32 - 18:40
  So any engineer working in that repo can use Puppeteer in order to pilot end-to-end tests and to screenshot automatically and iterate so that every engineer doesn't have to install it themselves.
 
-[SPEAKER_00] 18:45 - 18:46
+18:45 - 18:46
  This is a talk about pro tips.
 
-[SPEAKER_00] 18:47 - 18:51
+18:47 - 18:51
  I just want to take a quick interlude to talk about some common key bindings that people may not know.
 
-[SPEAKER_00] 18:51 - 18:53
+18:51 - 18:53
  It's very hard to build for terminal.
 
-[SPEAKER_00] 18:53 - 18:54
+18:53 - 18:54
  It's also very fun.
 
-[SPEAKER_00] 18:54 - 18:57
+18:54 - 18:57
  It feels like rediscovering this new design language.
 
-[SPEAKER_00] 18:57 - 19:00
+18:57 - 19:00
  But something about terminal is it's extremely minimal.
 
-[SPEAKER_00] 19:00 - 19:03
+19:00 - 19:03
  And so sometimes it's hard to discover these key bindings.
 
-[SPEAKER_00] 19:03 - 19:05
+19:03 - 19:05
  And here's just a quick reference sheet.
 
-[SPEAKER_00] 19:05 - 19:11
+19:05 - 19:11
  So anytime you can hit shift tab to accept edits, and this switches you into auto accept edits mode.
 
-[SPEAKER_00] 19:11 - 19:14
+19:11 - 19:14
  So bash commands still need approval, but edits are auto accepted.
 
-[SPEAKER_00] 19:14 - 19:16
+19:14 - 19:16
  And you can always ask Claude to undo them later.
 
-[SPEAKER_00] 19:17 - 19:22
+19:17 - 19:22
  For example, I'll do this if I know Claude's on the right track or if it's writing unit tests and iterating on tests.
 
-[SPEAKER_00] 19:22 - 19:26
+19:22 - 19:26
  I'll usually just switch into auto accept mode so I don't have to okay every single edit.
 
-[SPEAKER_00] 19:26 - 19:37
+19:26 - 19:37
  Anytime you want Claude to remember something, so for example if it's not using a tool correctly and you wanted to use it correctly from then on, just type the pound sign and then tell it what to remember.
 
-[SPEAKER_00] 19:37 - 19:38
+19:37 - 19:38
  And it'll remember it.
 
-[SPEAKER_00] 19:38 - 19:40
+19:38 - 19:40
  It'll incorporate it into Claude MD automatically.
 
-[SPEAKER_00] 19:41 - 19:47
+19:41 - 19:47
  If you ever want to drop down to bash mode, so just run a bash command, you can hit the exclamation mark and type in your command.
 
-[SPEAKER_00] 19:47 - 19:50
+19:47 - 19:50
  That'll run locally, but that also goes into the context window.
 
-[SPEAKER_00] 19:50 - 19:52
+19:50 - 19:52
  So Claude will see it on the next turn.
 
-[SPEAKER_00] 19:52 - 19:58
+19:52 - 19:58
  And this is pretty good for long running commands if you know exactly what you want to do or any command that you want to get into context.
 
-[SPEAKER_00] 19:58 - 19:59
+19:58 - 19:59
  And Claude will see the...
 
-[SPEAKER_00] 19:59 - 20:00
+19:59 - 20:00
  Thank God we'll see the...
 
 [SPEAKER_01] 20:00 - 20:03
@@ -1291,13 +1291,13 @@
 [SPEAKER_01] 24:56 - 25:02
  And then we have this pretty complex tiered permission system so that you can allow list and block list commands at different levels.
 
-[SPEAKER_00] 25:05 - 25:06
+25:05 - 25:06
  Hi, Boris.
 
-[SPEAKER_00] 25:06 - 25:14
+25:06 - 25:14
  You mentioned giving an image to Cloud Code, which made me wonder if there's some sort of multimodal functionality that I'm not aware of.
 
-[SPEAKER_00] 25:14 - 25:17
+25:14 - 25:17
  Is that, are you just pointing it at an image on the file system or something?
 
 [SPEAKER_01] 25:17 - 25:23
