@@ -36,8 +36,10 @@
   .topnav-progress-seg { flex: 1; height: 100%; border-radius: 2px; background: rgba(0,0,0,0.1); }
   .topnav-controls-row { display: flex; align-items: center; gap: 6px; position: relative; }
   .topnav-playback-group { position: absolute; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 2px; }
-  .topnav-icon-btn { width: 28px; height: 28px; border: none; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; border-radius: 6px; color: #3434DA; flex-shrink: 0; }
-  .topnav-icon-btn:hover { background: #f0f0f0; }
+  .topnav-icon-btn { width: 28px; height: 28px; border: none; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; border-radius: 6px; color: #3434DA; flex-shrink: 0; outline: none; }
+  .topnav-icon-btn:focus-visible { box-shadow: 0 0 0 2px #3434DA; }
+  .topnav-icon-btn:hover:not(:disabled) { background: #f0f0f0; }
+  .topnav-icon-btn:disabled { opacity: 0.3; cursor: default; }
   .topnav-icon-btn svg { width: 20px; height: 20px; fill: currentColor; }
   .topnav-icon-btn.topnav-play-btn { width: 32px; height: 32px; }
   .topnav-icon-btn.topnav-play-btn svg { width: 24px; height: 24px; }
@@ -55,10 +57,12 @@
   .topnav-back-btn { height: 36px; padding: 0 18px; border: 1px solid #d0d0d0; background: #fff; border-radius: 8px; font-size: 13px; font-weight: 700; color: #1a1a1a; cursor: pointer; white-space: nowrap; }
   .topnav-back-btn:hover { background: #f5f5f5; }
   .topnav-nav-btns { display: flex; gap: 0; }
-  .topnav-arrow-btn { width: 36px; height: 36px; border: 1px solid #d0d0d0; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .topnav-arrow-btn { width: 36px; height: 36px; border: 1px solid #d0d0d0; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; outline: none; }
   .topnav-arrow-btn:first-child { border-radius: 8px 0 0 8px; border-right: none; }
   .topnav-arrow-btn:last-child { border-radius: 0 8px 8px 0; }
-  .topnav-arrow-btn:hover { background: #f5f5f5; }
+  .topnav-arrow-btn:hover:not(:disabled) { background: #f5f5f5; }
+  .topnav-arrow-btn:disabled { opacity: 0.3; cursor: default; background: #f9f9f9; border-color: #e8e8e8; }
+  .topnav-arrow-btn:disabled svg { stroke: #bbb; }
   .topnav-arrow-btn svg { width: 16px; height: 16px; stroke: #555; fill: none; }
 
   /* Layout */
@@ -197,9 +201,16 @@
   .slide-video-col { width: 70%; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
   .slide-video-wrap { width: 100%; min-width: 640px; aspect-ratio: 16/9; background: #111; border-radius: 8px; overflow: hidden; position: relative; }
   .slide-video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-  .slide-play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 64px; height: 64px; border-radius: 50%; border: none; background: rgba(124,92,252,0.9); color: #fff; font-size: 28px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 5; transition: opacity 0.2s, transform 0.2s; }
-  .slide-play-btn:hover { transform: translate(-50%, -50%) scale(1.1); background: rgba(124,92,252,1); }
-  .slide-play-btn.hidden { opacity: 0; pointer-events: none; }
+  .slide-expand-btn { position: absolute; bottom: 10px; left: 10px; width: 36px; height: 36px; border-radius: 8px; border: none; background: rgba(124,92,252,0.85); color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; opacity: 0.3; transition: opacity 0.2s; outline: none; }
+  .slide-video-wrap:hover .slide-expand-btn, .slide-video-col:hover .slide-expand-btn { opacity: 1; }
+  .slide-expand-btn:hover { background: rgba(124,92,252,1); }
+  .slide-expand-btn svg { width: 18px; height: 18px; fill: #fff; }
+  .slide-video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 8; cursor: pointer; }
+  .slide-content.expanded .slide-expand-btn { opacity: 0.7; }
+  .slide-content.expanded .slide-video-col:hover .slide-expand-btn { opacity: 1; }
+  .slide-content.expanded .slide-text-col { display: none; }
+  .slide-content.expanded .slide-video-col { width: 100%; }
+  .slide-content.expanded .slide-video-wrap { min-width: unset; width: 100%; height: 100%; aspect-ratio: unset; }
   .slide-video-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #111; color: var(--text2); font-size: 14px; border-radius: 8px; aspect-ratio: 16/9; }
 
   /* Prevent text selection and iframe mouse capture during resize */
@@ -312,7 +323,6 @@ const SLIDES = [
   { type: 'segment', segmentId: 'seg-001' },  // Introduction to Claude Code
   { type: 'segment', segmentId: 'seg-002' },  // Key Features of Claude Code
   { type: 'segment', segmentId: 'seg-003' },  // Optimizing Your Setup
-  { type: 'interactive' },                      // Interactive video exploration tool
   { type: 'segment', segmentId: 'seg-009' },  // Providing Context to Claude
   { type: 'segment', segmentId: 'seg-010' },  // More Ways to Give Context
   { type: 'segment', segmentId: 'seg-014' },  // Multi-Claude Parallelization
@@ -323,6 +333,7 @@ const SLIDES = [
   { type: 'segment', segmentId: 'seg-030' },  // Utilizing MCP
   { type: 'segment', segmentId: 'seg-040' },  // Sub Agents
   { type: 'segment', segmentId: 'seg-045' },  // Git Worktrees
+  { type: 'interactive' },                      // Interactive video exploration tool
 ];
 
 // ============================================================
@@ -381,26 +392,83 @@ class SlideManager {
           <div class="slide-video-col">
             <div class="slide-video-wrap" id="slide-player-${i}">
               <div class="slide-video-placeholder">Click play to load video</div>
+              <div class="slide-video-overlay"></div>
+              <button class="slide-expand-btn" data-slide="${i}" title="Expand video">
+                <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+              </button>
             </div>
-            <button class="slide-play-btn" data-slide="${i}">&#9654;</button>
           </div>
         </div>`;
       this._container.appendChild(slide);
-      slide.querySelector('.slide-play-btn').addEventListener('click', () => this._toggleSlidePlay(i));
+      slide.querySelector('.slide-expand-btn').addEventListener('click', (e) => { e.stopPropagation(); this._toggleExpand(slide, e.currentTarget); });
+      slide.querySelector('.slide-video-overlay').addEventListener('click', (e) => { e.stopPropagation(); this._toggleSlidePlay(i); });
+      slide.querySelector('.slide-video-col').addEventListener('click', (e) => {
+        if (e.target.closest('.slide-expand-btn')) return;
+        this._toggleSlidePlay(i);
+      });
     }
   }
 
   _wireNavButtons() {
-    const btns = document.querySelectorAll('.topnav-arrow-btn');
-    if (btns.length >= 2) {
-      btns[0].addEventListener('click', () => this.prev());
-      btns[1].addEventListener('click', () => this.next());
-    }
+    this._prevBtn = document.getElementById('slide-prev-btn');
+    this._nextBtn = document.getElementById('slide-next-btn');
+    this._mainPlayBtn = document.getElementById('slide-play-btn');
+    if (this._prevBtn) this._prevBtn.addEventListener('click', () => this.prev());
+    if (this._nextBtn) this._nextBtn.addEventListener('click', () => this.next());
+    if (this._mainPlayBtn) this._mainPlayBtn.addEventListener('click', () => this._toggleSlidePlay(this.currentIndex));
     document.addEventListener('keydown', (e) => {
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
       if (e.code === 'ArrowLeft') { e.preventDefault(); this.prev(); }
       if (e.code === 'ArrowRight') { e.preventDefault(); this.next(); }
+      if (e.code === 'Escape') this._collapseExpanded();
+      if (e.code === 'Space') {
+        e.preventDefault();
+        const cfg = this._config[this.currentIndex];
+        if (cfg.type === 'segment') this._toggleSlidePlay(this.currentIndex);
+        else if (cfg.type === 'interactive' && this._app) this._app._togglePlay();
+      }
     });
+    // When iframe steals focus, reclaim it so keyboard shortcuts keep working
+    window.addEventListener('blur', () => {
+      setTimeout(() => { if (document.activeElement?.tagName === 'IFRAME') window.focus(); }, 50);
+    });
+    this._updateNavButtons();
+  }
+
+  _updateNavButtons() {
+    if (this._prevBtn) this._prevBtn.disabled = this.currentIndex === 0;
+    if (this._nextBtn) this._nextBtn.disabled = this.currentIndex === this._config.length - 1;
+    this._updateMainPlayBtn();
+  }
+
+  _updateMainPlayBtn() {
+    if (!this._mainPlayBtn) return;
+    const cfg = this._config[this.currentIndex];
+    // Disable on interactive slide (it has its own controls)
+    if (cfg.type === 'interactive') {
+      this._mainPlayBtn.disabled = true;
+      return;
+    }
+    this._mainPlayBtn.disabled = false;
+    this._mainPlayBtn.innerHTML = this._slidePlaying
+      ? '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><rect x="6" y="4" width="4" height="16" rx="1" fill="currentColor"/><rect x="14" y="4" width="4" height="16" rx="1" fill="currentColor"/></svg>'
+      : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M5 4.99c0-.97 0-1.46.2-1.72a1 1 0 01.74-.12c.34-.02.74.25 1.55.79l10.51 7.01c.67.45 1 .67 1.12.95a1 1 0 010 .77c-.12.28-.45.5-1.12.95L7.49 20.63c-.81.54-1.21.81-1.55.79a1 1 0 01-.74-.13C5 21.03 5 20.54 5 19.57V4.99z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  }
+
+  _toggleExpand(slide, btn) {
+    const content = slide.querySelector('.slide-content');
+    const expanded = content.classList.toggle('expanded');
+    btn.innerHTML = expanded
+      ? '<svg viewBox="0 0 24 24"><path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/></svg>'
+      : '<svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>';
+  }
+
+  _collapseExpanded() {
+    const expanded = this._container.querySelector('.slide-content.expanded');
+    if (!expanded) return;
+    expanded.classList.remove('expanded');
+    const btn = expanded.closest('.slide')?.querySelector('.slide-expand-btn');
+    if (btn) btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>';
   }
 
   prev() { if (this.currentIndex > 0) this._transitionTo(this.currentIndex - 1); }
@@ -433,9 +501,11 @@ class SlideManager {
     if (newCfg.type === 'interactive' && this._app && !this._app.adapter) {
       this._app._loadSegment(0, false);
     }
-    // Reset play button on new slide
-    const playBtn = newSlide?.querySelector('.slide-play-btn');
-    if (playBtn) playBtn.classList.remove('hidden');
+    // Reset play state for new slide
+    this._slidePlaying = false;
+    this._updateNavButtons();
+    // Preload video for segment slides
+    if (newCfg.type === 'segment') this._preloadSlideVideo(newIndex);
   }
 
   _showSlide(index, immediate) {
@@ -451,6 +521,9 @@ class SlideManager {
       }
     }
     this._updateNavSubtitle();
+    // Preload video for initial slide
+    const cfg = this._config[index];
+    if (cfg && cfg.type === 'segment') this._preloadSlideVideo(index);
   }
 
   _updateNavSubtitle() {
@@ -462,47 +535,56 @@ class SlideManager {
     });
   }
 
+  async _preloadSlideVideo(slideIndex) {
+    if (this._slideAdapter) return; // already loaded
+    const cfg = this._config[slideIndex];
+    if (!cfg || cfg.type !== 'segment') return;
+    const seg = this._segMap[cfg.segmentId];
+    if (!seg) return;
+    const ytId = this._videoMap[seg.videoId]?.youtubeId;
+    if (!ytId) return;
+    const wrap = document.getElementById(`slide-player-${slideIndex}`);
+    const overlay = wrap.querySelector('.slide-video-overlay');
+    const expandBtn = wrap.querySelector('.slide-expand-btn');
+    wrap.innerHTML = '';
+    const div = document.createElement('div');
+    div.id = `slide-yt-${slideIndex}`;
+    wrap.appendChild(div);
+    if (overlay) wrap.appendChild(overlay);
+    if (expandBtn) wrap.appendChild(expandBtn);
+    this._slideAdapter = new YouTubeAdapter(`slide-yt-${slideIndex}`, ytId, seg.start);
+    this._slideAdapter.onTimeUpdate(t => this._onSlideTimeUpdate(t, seg));
+    this._slideAdapter.onStateChange(s => {
+      if (s === 'playing') { this._slidePlaying = true; this._updateMainPlayBtn(); }
+      else if (s === 'paused') { this._slidePlaying = false; this._updateMainPlayBtn(); }
+    });
+    await this._slideAdapter.init();
+    this._slideAdapter.seekTo(seg.start);
+  }
+
   async _toggleSlidePlay(slideIndex) {
     const cfg = this._config[slideIndex];
     if (cfg.type !== 'segment') return;
-    const seg = this._segMap[cfg.segmentId];
-    if (!seg) return;
-    const playBtn = this._container.querySelector(`.slide[data-slide-index="${slideIndex}"] .slide-play-btn`);
 
     if (this._slidePlaying && this._slideAdapter) {
       this._slideAdapter.pause();
       this._slidePlaying = false;
-      if (playBtn) { playBtn.classList.remove('hidden'); playBtn.innerHTML = '&#9654;'; }
+      this._updateMainPlayBtn();
       return;
     }
 
-    // Create adapter if not yet loaded
+    // Adapter should already be preloaded, but create if not
     if (!this._slideAdapter) {
-      const ytId = this._videoMap[seg.videoId]?.youtubeId;
-      if (!ytId) return;
-      // Clear placeholder
-      const wrap = document.getElementById(`slide-player-${slideIndex}`);
-      wrap.innerHTML = '';
-      const div = document.createElement('div');
-      div.id = `slide-yt-${slideIndex}`;
-      wrap.appendChild(div);
-      this._slideAdapter = new YouTubeAdapter(`slide-yt-${slideIndex}`, ytId, seg.start);
-      this._slideAdapter.onTimeUpdate(t => this._onSlideTimeUpdate(t, seg, playBtn));
-      this._slideAdapter.onStateChange(s => {
-        if (s === 'playing') { this._slidePlaying = true; if (playBtn) playBtn.classList.add('hidden'); }
-        else if (s === 'paused') { this._slidePlaying = false; if (playBtn) { playBtn.classList.remove('hidden'); playBtn.innerHTML = '&#9654;'; } }
-      });
-      await this._slideAdapter.init();
-      this._slideAdapter.seekTo(seg.start);
-      setTimeout(() => this._slideAdapter.play(), 300);
-    } else {
-      this._slideAdapter.play();
+      await this._preloadSlideVideo(slideIndex);
     }
-    this._slidePlaying = true;
-    if (playBtn) playBtn.classList.add('hidden');
+    if (this._slideAdapter) {
+      this._slideAdapter.play();
+      this._slidePlaying = true;
+      this._updateMainPlayBtn();
+    }
   }
 
-  _onSlideTimeUpdate(absTime, seg, playBtn) {
+  _onSlideTimeUpdate(absTime, seg) {
     // Snap-back enforcement
     if (absTime < seg.start - 0.5 || absTime > seg.end + 0.5) {
       this._slideAdapter.seekTo(seg.start);
@@ -513,7 +595,7 @@ class SlideManager {
       this._slideAdapter.pause();
       this._slidePlaying = false;
       this._slideAdapter.seekTo(seg.start);
-      if (playBtn) { playBtn.classList.remove('hidden'); playBtn.innerHTML = '&#9654;'; }
+      this._updateMainPlayBtn();
     }
   }
 
@@ -527,7 +609,13 @@ class SlideManager {
     const cfg = this._config[this.currentIndex];
     if (cfg && cfg.type === 'segment') {
       const wrap = document.getElementById(`slide-player-${this.currentIndex}`);
-      if (wrap) wrap.innerHTML = '<div class="slide-video-placeholder">Click play to load video</div>';
+      if (wrap) {
+        const overlay = wrap.querySelector('.slide-video-overlay');
+        const expandBtn = wrap.querySelector('.slide-expand-btn');
+        wrap.innerHTML = '<div class="slide-video-placeholder">Click play to load video</div>';
+        if (overlay) wrap.appendChild(overlay);
+        if (expandBtn) wrap.appendChild(expandBtn);
+      }
     }
   }
 
@@ -656,7 +744,7 @@ class App {
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none"><path d="M2.5 10H17.5M2.5 5H17.5M2.5 15H17.5" stroke="#444" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
           <div class="topnav-title">
-            <div class="topnav-title-main">The Vision for the LLM OS</div>
+            <div class="topnav-title-main">Mastering Claude Code in 30 mins</div>
             <div class="topnav-title-sub">Activity 1 of ${SLIDES.length}</div>
           </div>
         </div>
@@ -671,13 +759,13 @@ class App {
               </button>
               <span class="topnav-time">00:01<span class="topnav-time-sep"> / </span>00:22</span>
               <div class="topnav-playback-group">
-                <button class="topnav-icon-btn" title="Previous">
+                <button class="topnav-icon-btn" id="slide-prev-btn" title="Previous slide">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M5 19V5M16.4 6.08L10.56 10.75c-.53.43-.8.64-.9.9a1 1 0 000 .7c.1.26.37.47.9.9l5.84 4.67c.83.67 1.25 1 1.6 1 .3 0 .59-.14.78-.37.22-.27.22-.81.22-1.87V7.33c0-1.07 0-1.6-.22-1.87a1 1 0 00-.78-.37c-.35 0-.77.33-1.6 1z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="currentColor"/></svg>
                 </button>
-                <button class="topnav-icon-btn topnav-play-btn" title="Play">
+                <button class="topnav-icon-btn topnav-play-btn" id="slide-play-btn" title="Play/Pause">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M5 4.99c0-.97 0-1.46.2-1.72a1 1 0 01.74-.12c.34-.02.74.25 1.55.79l10.51 7.01c.67.45 1 .67 1.12.95a1 1 0 010 .77c-.12.28-.45.5-1.12.95L7.49 20.63c-.81.54-1.21.81-1.55.79a1 1 0 01-.74-.13C5 21.03 5 20.54 5 19.57V4.99z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
-                <button class="topnav-icon-btn" title="Next">
+                <button class="topnav-icon-btn" id="slide-next-btn" title="Next slide">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M19 5v14M7.6 17.92l5.84-4.67c.53-.43.8-.64.9-.9a1 1 0 000-.7c-.1-.26-.37-.47-.9-.9L7.6 6.08c-.83-.67-1.25-1-1.6-1a1 1 0 00-.78.37C5 5.73 5 6.26 5 7.33v9.34c0 1.07 0 1.6.22 1.87.19.24.48.38.78.38.35 0 .77-.33 1.6-1z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="currentColor"/></svg>
                 </button>
               </div>
@@ -936,7 +1024,7 @@ class App {
     // Keyboard
     document.addEventListener('keydown', (e) => {
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-      if (e.code === 'Space') { e.preventDefault(); this._togglePlay(); }
+      // Space handled by SlideManager on segment slides
     });
   }
 
