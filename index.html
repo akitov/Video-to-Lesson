@@ -45,8 +45,13 @@
   .topnav-icon-btn.topnav-play-btn svg { width: 24px; height: 24px; }
   .topnav-icon-btn.topnav-mute-btn { color: #888; }
   .topnav-icon-btn.topnav-mute-btn svg { width: 18px; height: 18px; }
-  .topnav-icon-btn.topnav-fullscreen-btn { color: #555; }
-  .topnav-icon-btn.topnav-fullscreen-btn svg { width: 18px; height: 18px; }
+  .topnav-icon-btn.topnav-lock-btn { color: #bbb; position: relative; }
+  .topnav-lock-tooltip { position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: #111; color: #fff; font-size: 11px; font-weight: 500; padding: 5px 10px; border-radius: 6px; white-space: nowrap; pointer-events: none; opacity: 0; transition: opacity 0.15s; z-index: 100; }
+  .topnav-lock-tooltip::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-top-color: #111; }
+  .topnav-icon-btn.topnav-lock-btn:hover .topnav-lock-tooltip { opacity: 1; }
+  .topnav-icon-btn.topnav-lock-btn svg { width: 18px; height: 18px; }
+  .topnav-icon-btn.topnav-lock-btn.lock-on { color: #333; }
+  .topnav-icon-btn.topnav-lock-btn.lock-blocked { color: #e44; }
   .topnav-time { font-size: 12px; color: #aaa; white-space: nowrap; font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
   .topnav-time-sep { margin: 0 2px; }
   .topnav-pill-btn { height: 26px; padding: 0 10px; border: 1px solid #d0d0d0; background: #fff; border-radius: 14px; font-size: 12px; font-weight: 600; color: #555; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 3px; flex-shrink: 0; }
@@ -353,6 +358,8 @@ class SlideManager {
     this._slidePlaying = false;
     this._app = null; // set after App is created
     this._container = null;
+    this._lockMode = false;
+    this._watchedSlides = new Set();
   }
 
   init(appInstance) {
@@ -432,13 +439,44 @@ class SlideManager {
     window.addEventListener('blur', () => {
       setTimeout(() => { if (document.activeElement?.tagName === 'IFRAME') window.focus(); }, 50);
     });
+    // Lock mode toggle
+    this._lockBtn = document.getElementById('topnav-lock-btn');
+    if (this._lockBtn) this._lockBtn.addEventListener('click', () => this._toggleLockMode());
     this._updateNavButtons();
+    this._updateLockBtn();
   }
 
   _updateNavButtons() {
     if (this._prevBtn) this._prevBtn.disabled = this.currentIndex === 0;
-    if (this._nextBtn) this._nextBtn.disabled = this.currentIndex === this._config.length - 1;
+    const atEnd = this.currentIndex === this._config.length - 1;
+    const locked = this._lockMode && !this._watchedSlides.has(this.currentIndex) && this._config[this.currentIndex].type === 'segment';
+    if (this._nextBtn) this._nextBtn.disabled = atEnd || locked;
     this._updateMainPlayBtn();
+    this._updateLockBtn();
+  }
+
+  _toggleLockMode() {
+    this._lockMode = !this._lockMode;
+    this._updateLockBtn();
+    this._updateNavButtons();
+  }
+
+  _updateLockBtn() {
+    if (!this._lockBtn) return;
+    const cfg = this._config[this.currentIndex];
+    const blocked = this._lockMode && cfg.type === 'segment' && !this._watchedSlides.has(this.currentIndex);
+    this._lockBtn.classList.remove('lock-on', 'lock-blocked');
+    if (blocked) this._lockBtn.classList.add('lock-blocked');
+    else if (this._lockMode) this._lockBtn.classList.add('lock-on');
+    const tooltip = document.getElementById('lock-tooltip');
+    if (tooltip) tooltip.textContent = this._lockMode
+      ? 'You need to watch the current clip fully to proceed'
+      : 'You can move freely between slides';
+  }
+
+  _markSlideWatched(slideIndex) {
+    this._watchedSlides.add(slideIndex);
+    this._updateNavButtons();
   }
 
   _updateMainPlayBtn() {
@@ -472,7 +510,12 @@ class SlideManager {
   }
 
   prev() { if (this.currentIndex > 0) this._transitionTo(this.currentIndex - 1); }
-  next() { if (this.currentIndex < this._config.length - 1) this._transitionTo(this.currentIndex + 1); }
+  next() {
+    if (this.currentIndex >= this._config.length - 1) return;
+    const cfg = this._config[this.currentIndex];
+    if (this._lockMode && cfg.type === 'segment' && !this._watchedSlides.has(this.currentIndex)) return;
+    this._transitionTo(this.currentIndex + 1);
+  }
 
   _transitionTo(newIndex) {
     if (newIndex === this.currentIndex) return;
@@ -594,8 +637,12 @@ class SlideManager {
     if (absTime >= seg.end - 0.15) {
       this._slideAdapter.pause();
       this._slidePlaying = false;
-      this._slideAdapter.seekTo(seg.start);
       this._updateMainPlayBtn();
+      this._markSlideWatched(this.currentIndex);
+      // Auto-advance to next slide
+      if (this.currentIndex < this._config.length - 1) {
+        setTimeout(() => this._transitionTo(this.currentIndex + 1), 500);
+      }
     }
   }
 
@@ -772,8 +819,9 @@ class App {
               <div class="topnav-controls-spacer"></div>
               <button class="topnav-pill-btn" title="Speed">1x</button>
               <button class="topnav-pill-btn" title="Captions">CC <svg viewBox="0 0 12 12"><path d="M3 5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-              <button class="topnav-icon-btn topnav-fullscreen-btn" title="Fullscreen">
-                <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+              <button class="topnav-icon-btn topnav-lock-btn" id="topnav-lock-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="11" width="16" height="10" rx="2" fill="none"/><path d="M8 11V7a4 4 0 0 1 8 0v4" fill="none"/><circle cx="12" cy="16" r="1.5" fill="currentColor" stroke="none"/></svg>
+                <span class="topnav-lock-tooltip" id="lock-tooltip">You can move freely between slides</span>
               </button>
             </div>
           </div>
